@@ -43,3 +43,5 @@ console.log( "John BMI 2 =" , john_bmi_2)
 //checking if mark has a higher BMI
 markHigherBMI_2 = mark_bmi_2 > john_bmi_2
 console.log("it is", markHigherBMI_2, "that Mark has a higher BMI than John")
+
+
