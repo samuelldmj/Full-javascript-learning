@@ -1,3 +1,4 @@
+const prompt = require('prompt-sync')();
 //the console was built to execute small pieces of code
 //we can run javascript on a page by linking it to the HTML file with the script tag
 //if we want to output something into the browser console, we use console.log()
@@ -53,9 +54,9 @@ javascriptisFun = "Yes!";
 //console.log(typeof javascriptisFun)
 
 //LET, VAR and CONST
-let age = 30;
+// let age = 30;
 //reassigning age
-age = 31
+//age = 31
 
 //const is an immutable keyword, you can't change it
 const birthYear = 1992;
@@ -70,18 +71,179 @@ const ageDan = now - 2018
 // console.log(now - ageSam > now - ageDan)
 // console.log()
 
+//STRINGS: TEMPlate LITERALS {` `}
+const first_name =  "Samuel";
+const job = 'teacher';
+const birthY = 1997;
+const year = 2037;
+
+const sam =  "I'm " + first_name + ', a ' + job + ',' +  ' my age' + ' is ' + (year - birthY);
+// console.log(sam)
+const samNew = `I'm ${first_name}`
+
+//The if else statement
+const age = 8;
+const isOldenough = age >= 18;
+if(isOldenough){
+    // console.log(`Samuel can obtain his driving license 🚗`)
+}else{
+    // console.log(`Samuel is too young to drive at ${age}`)
+}
+
+//TYPE CONVERSION AND COERCION
+//Type conversion
+//When we manually convert from one data type to another is Type conversion
+//javascript can only convert to 3 data types: a number, string and boolean
+const inputYear = '1991';
+// console.log(Number(inputYear), typeof inputYear)
+// console.log(Number(inputYear))
+// console.log(Number(inputYear) + 18)
+// console.log(inputYear + 18)
+// console.log(Number('Samuel'))
+// console.log(typeof NaN)
+
+//TYPE COERCION
+//it works automatically
+//THIS OCCURS WHENEVER AN OPERATOR IS DEALING WITH TWO VALUES THAT HAVE DIFFERENT DATA TYPES
+//JAVASCRIPT WILL TRY TO CONVERT THE TYPE OF ONE VALUE TO MATCH THE TYPE OF OTHER VALUE
+let sentence = 'I am ' + 23 + ' years old';
+// console.log(typeof sentence);
+// console.log('23' + '10' - 3)
+// console.log('23' - '10' + 3)
+// console.log('23' - '10' - 3)
+//teke note of precedence and associativity
+// console.log('10' - '4' - '3' - 2 + '5')
+// console.log('10' + '4' - '3' - 2 + '5')
+// console.log('s' + '4' - '3' - 2 + '5')
+
+//guess the game
+//due to associativity law
+let n = '1' + 1
+//n = n - 1
+// console.log(n)
+// console.log(n)
+
+//FALSY VALUES: THEY ARE NOT EXACTLY FALSE VALUE BUT WILL RETURN FALSE WHEN CONVERTED TO A BOoLEAN
+//WE have 5 FALSY VALUES: 0, " ", Undefined, NULL, Nan
+//TRUTHY VALUE WILL RETURN TRUE WHEN YOU TRY TO CONVERT THEM TO A BOOLEAN
+// console.log(Boolean(0))
+// console.log(Boolean({}))
+// console.log(Boolean('Samuel'))
+// console.log(Boolean(''))
+// console.log(Boolean(undefined))
+//example falsy
+//javascript will convert money into boolean, 0 is a falsy
+// const money = 0
+const money = 100
+if(money){
+    // console.log("Don't spend all!")
+}else{
+    // console.log("Go get some money buddy!")
+}
+
+//EQUaLITY == VS ===
+//strict operator does not perform type coercion
+const age_1 = 18
+if(age_1 === 18){
+    // console.log('Matured!😉')
+}
+
+//PROMPT
+//USED TO GET A VALUE FROM A WEBPAGE or terminal
+// const favorite = prompt("What is your fovorite number? ")
+// if(favorite == 18) console.log("Cool buuddy!")
+
+//BOOLEAN LOGIC
+//IT USES TRUE AND FALSE VALUES TO SOLVE COMPLEX LOGICAL PROBLEM
+let age_2 = 16
+
+let a = age_2 >= 20 //false
+let b = age_2 < 30 //true
+// console.log(a)
+// console.log(b)
+// //NOT OPERATOR
+// console.log(!a)
+// //and operator
+// let and = a && b
+// console.log(and)
+// //or operator
+// let or = a || b
+// console.log(or)
+// console.log(!a && b)
+// console.log(a || !b)
+a = true
+b = false
+let shouldDrive = a && b
+// if(shouldDrive){
+//     console.log('Dan should drive')
+// }else{
+//     console.log('Dan should not drive')
+// }
+
+let c = true
+if(shouldDrive && !c){
+    // console.log('Dan should drive')
+}else{
+    // console.log('Dan should not drive')
+}
 
 
+//SWITCH STATEMENT
+const day = 'zeh';
+
+// switch (day) {
+//     case "monday":
+//         console.log("organize the structure of the course")
+//         console.log("go for an online meetup")
+//         break;
+
+//     case "tuesday":
+//         console.log("prepare theory for this course")
+//         break
+
+//     case "wednesday":
+//     case "thursday":
+//         console.log('Write code examples')
+//         break
+
+//     case "friday":
+//         console.log("record videos")
+//         break
+
+//     case "saturday":
+//     case "sunday":
+//         console.log("Enjoy the weekend!")
+//         break
 
 
+//     default:
+//         console.log("Not a valid date!")
+// }
+
+//using IF-ELSE statement
+
+// if(day === "monday"){
+//     console.log("organize the structure of the course")
+//     console.log("go for an online meetup")
+// }else if(day === "tuesday"){
+//     console.log("prepare theory for this course")
+// }else if((day === "wednesday") || (day === "thurdays")){
+//     console.log('Write code examples')
+// }else if (day === "friday"){
+//     console.log('Write code examples')
+// }else if((day === "saturday") || (day === "sunday")){
+//     console.log("Enjoy the weekend!")
+// }else{
+//     console.log("Not a valid date!")
+// }
 
 
+//TERNARY OPERATOR
+let LicencsedAge = 20
+LicencsedAge >= 18 ? console.log("you can drink wine 🍷") : console.log('you can drink water 💧')
 
-
-
-
-
-
+const drink = LicencsedAge >= 18 ? "wine 🍷" : "water 💧 "
+// console.log(drink)
 
 
 
