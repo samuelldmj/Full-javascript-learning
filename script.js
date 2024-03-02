@@ -1,3 +1,4 @@
+'use strict';
 const prompt = require('prompt-sync')();
 //the console was built to execute small pieces of code
 //we can run javascript on a page by linking it to the HTML file with the script tag
@@ -239,11 +240,128 @@ const day = 'zeh';
 
 
 //TERNARY OPERATOR
-let LicencsedAge = 20
-LicencsedAge >= 18 ? console.log("you can drink wine 🍷") : console.log('you can drink water 💧')
+// let LicencsedAge = 20
+// LicencsedAge >= 18 ? console.log("you can drink wine 🍷") : console.log('you can drink water 💧')
 
-const drink = LicencsedAge >= 18 ? "wine 🍷" : "water 💧 "
+// const drink = LicencsedAge >= 18 ? "wine 🍷" : "water 💧 "
 // console.log(drink)
+
+
+/*=====================================================================================================================
+SECTION 2
+
+======================================================================================================================
+*/
+
+
+//ACTIVATING STRICT MODE
+//=>tO ACTIVATE strict mode use the below keyword at the top of your Javascript mode.
+//"use strict";
+//using strict mode help us kick against the usage of some word reserved for JS
+
+// let hasDriversLicense = false;
+// const passTest = true;
+// if (passTest) hasDriversLicense = true
+// if(hasDriversLicense) console.log('I can drive 😀');
+
+
+//================
+//FUNCTIONS
+//===============
+function logger(){
+    console.log("My name is Samuel")
+}
+
+//calling===inovking===running
+logger();
+logger();
+logger();
+
+
+//function with parameters
+//the parameters are empty spaces that needs to filled out when writing a function
+function fruitProcessor(oranges,apples){
+    //console.log(oranges, apples);
+    const juice = `Juice with ${oranges} oranges and ${apples} apples.`
+    return juice;
+}
+
+//the values in the function below is called argument
+// const orangeAppleJuice = fruitProcessor(2, 5);
+// console.log(orangeAppleJuice);
+// const appleJuice = fruitProcessor(0, 5);
+// console.log(appleJuice)
+
+//FUCNTION DECLARATION vs EXPRESSION
+
+//Function declaration
+function ageCal1(birthYear){
+    return 2037 - birthYear;
+    
+}
+
+const age1 = ageCal1(1991);
+//console.log(age1);
+
+//==============================
+//EXPRESSION or ANONYMOUS FUCNTION
+//==============================
+//=>can be called before it is defined
+const calAge2 = function (birthYear){
+    return 2037 - birthYear;
+}
+const age2 = calAge2(1997)
+// console.log(age1, age2);
+
+
+//==================
+//ARROW FUNCTION
+//==================
+
+const calAge3 = birthYear => 2037 - birthYear;
+const age3 = calAge3(1991)
+console.log(age3);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
