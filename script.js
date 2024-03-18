@@ -1,5 +1,5 @@
 'use strict';
-const prompt = require('prompt-sync')();
+//const prompt = require('prompt-sync')();
 //the console was built to execute small pieces of code
 //we can run javascript on a page by linking it to the HTML file with the script tag
 //if we want to output something into the browser console, we use console.log()
@@ -273,18 +273,18 @@ function logger(){
 }
 
 //calling===inovking===running
-logger();
-logger();
-logger();
+// logger();
+// logger();
+// logger();
 
 
 //function with parameters
 //the parameters are empty spaces that needs to filled out when writing a function
-function fruitProcessor(oranges,apples){
-    //console.log(oranges, apples);
-    const juice = `Juice with ${oranges} oranges and ${apples} apples.`
-    return juice;
-}
+// function fruitProcessor(oranges,apples){
+//     //console.log(oranges, apples);
+//     const juice = `Juice with ${oranges} oranges and ${apples} apples.`
+//     return juice;
+// }
 
 //the values in the function below is called argument
 // const orangeAppleJuice = fruitProcessor(2, 5);
@@ -295,22 +295,22 @@ function fruitProcessor(oranges,apples){
 //FUCNTION DECLARATION vs EXPRESSION
 
 //Function declaration
-function ageCal1(birthYear){
-    return 2037 - birthYear;
+// function ageCal1(birthYear){
+//     return 2037 - birthYear;
     
-}
+// }
 
-const age1 = ageCal1(1991);
+// const age1 = ageCal1(1991);
 //console.log(age1);
 
 //==============================
 //EXPRESSION or ANONYMOUS FUCNTION
 //==============================
 //=>can be called before it is defined
-const calAge2 = function (birthYear){
-    return 2037 - birthYear;
-}
-const age2 = calAge2(1997)
+// const calAge2 = function (birthYear){
+//     return 2037 - birthYear;
+// }
+// const age2 = calAge2(1997)
 // console.log(age1, age2);
 
 
@@ -318,9 +318,368 @@ const age2 = calAge2(1997)
 //ARROW FUNCTION
 //==================
 
-const calAge3 = birthYear => 2037 - birthYear;
-const age3 = calAge3(1991)
-console.log(age3);
+const calAge3 = (birthYear) => 2037 - birthYear;
+// const age3 = calAge3(1991)
+// console.log(age3);
+
+//requiring multiple line of codes
+const yearUntilnextRetirement = (birthYear, firstName) => {
+    const age4 = 2037 - birthYear;
+    const retirement = 65 - age4;
+    //return retirement;
+    return `${firstName} retires in ${retirement} years`
+}
+
+// console.log(yearUntilnextRetirement(1991, 'Samuel'))
+// console.log(yearUntilnextRetirement(1991, 'Samuel'))
+// console.log(yearUntilnextRetirement(1980, 'Bob'))
+
+
+//==================
+//functions calling other functions
+//=================
+function fruitSlicer(fruit){
+    return fruit * 4;
+}
+
+function fruitProcessor(oranges,apples){
+   const orangesSlices = fruitSlicer(oranges);
+   const appleSlices = fruitSlicer(apples);
+    const juice = `Here is your Juice with ${orangesSlices} slices of oranges and ${appleSlices} slices of apples`
+    return juice;
+}
+
+// console.log(fruitProcessor(2,3));
+
+
+//==================
+//ARRAYS
+//=================
+// const friends =  ['Samuel', 'lemuel', 'Daniel']
+// console.log(friends)
+// console.log(friends[0])
+// console.log(friends[1])
+
+//getting element from the back
+// console.log(friends[friends.length - 1])
+
+//length of an array
+// console.log(friends.length)
+
+//another method set an array
+// const years = new Array(1991, 1992, 1993);
+// console.log(years)
+// console.log(years.length)
+
+//mutating array
+// friends[2] = 'jay'
+// console.log(friends)
+
+// const firstName = 'Samuel';
+//const items = [firstName, 2037 - 1991, friends, 'tutor']
+// console.log(items)
+// console.log(items.length)
+
+
+const calAge2 = function (birthYear){
+    return 2037 - birthYear;
+}
+let years = [1990, 1991, 1992, 1993]
+const age1 = calAge2(years[0])
+const age2 = calAge2(years[1])
+const age3 = calAge2(years[years.length - 1])
+// console.log(age1, age2, age3)
+//array of ages
+let arrayOfAges = [age1, age2, age3];
+// console.log(arrayOfAges);
+
+
+//================
+//ARRAY METHODS
+//==============
+
+const friends =  ['Samuel', 'lemuel', 'Daniel']
+//add element
+// const newLenght = friends.push('Tosin')
+// console.log(friends);
+// console.log(newLenght);
+
+//adding to the first of an array
+friends.unshift('Moyin')
+// console.log(friends)
+
+//remove element last element
+// friends.pop()
+// console.log(friends);
+
+
+//remove first element
+// friends.shift()
+// console.log(friends);
+
+//getting the index of an array
+// console.log(friends.indexOf('Moyin'))
+// console.log(friends.indexOf('Tosin'))
+
+
+//================
+//OBJECTS
+//==============
+const userInfo = 
+{
+    firstName: 'Sam',
+    lastName:'Akin',
+    age: 2037 - 1997,
+    job: "Teacher",
+    friends: ['Moyin', 'Tosin', 'Elizabeth']
+}
+
+console.log(userInfo);
+
+//accessing a particular property
+// console.log(userInfo.firstName);
+// console.log(userInfo['lastName']);
+
+// const nameKey = 'Name';
+// console.log(userInfo['first' + nameKey])
+// console.log(userInfo['last' + nameKey])
+
+//const interestedIn = prompt('what are you interested in knowing about the user?')
+// console.log(userInfo[interestedIn]);
+
+//challenge
+//dynamically output: "userInfo has 3 friends, and his best friend is Tosin.
+
+const dynamic = `${userInfo.firstName} has ${userInfo['friends'].length} friends, and his best friend is ${userInfo["friends"][1]}`
+console.log(dynamic)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
