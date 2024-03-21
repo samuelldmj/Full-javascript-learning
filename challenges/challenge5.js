@@ -52,6 +52,7 @@ dolAvg = calcAverage(85, 54, 41)
 kaoAvg = calcAverage(23,34,27)
 console.log(`Dolphins average score is ${dolAvg}, while Kaolas average score is ${kaoAvg}`)
 console.log(checkWinner(dolAvg, kaoAvg))
+console.log(checkWinner(576, 111))
 
 
 
