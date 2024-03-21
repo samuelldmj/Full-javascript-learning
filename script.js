@@ -29,8 +29,8 @@ let currentJob = 'Teacher';
 
 
 //DATA TYPES
-//value is either an object or primitive 
-//there are 7 primitive data types (strings, boolean, number, null, big int, undefined and symbol )   
+//value is either an object or primitive
+//there are 7 primitive data types (strings, boolean, number, null, big int, undefined and symbol )
 //Number: this include integers and decimals
 //String: text value, put them in quotes
 //boolean: True, False
@@ -60,7 +60,7 @@ javascriptisFun = "Yes!";
 //age = 31
 
 //const is an immutable keyword, you can't change it
-const birthYear = 1992;
+// const birthYear = 1992;
 //console.log(birthYear)
 
 //OPERATORS (*, -, /, +, **)
@@ -297,7 +297,7 @@ function logger(){
 //Function declaration
 // function ageCal1(birthYear){
 //     return 2037 - birthYear;
-    
+
 // }
 
 // const age1 = ageCal1(1991);
@@ -381,16 +381,16 @@ function fruitProcessor(oranges,apples){
 // console.log(items.length)
 
 
-const calAge2 = function (birthYear){
-    return 2037 - birthYear;
-}
-let years = [1990, 1991, 1992, 1993]
-const age1 = calAge2(years[0])
-const age2 = calAge2(years[1])
-const age3 = calAge2(years[years.length - 1])
+// const calAge2 = function (birthYear){
+//     return 2037 - birthYear;
+// }
+// let years = [1990, 1991, 1992, 1993]
+// const age1 = calAge2(years[0])
+// const age2 = calAge2(years[1])
+// const age3 = calAge2(years[years.length - 1])
 // console.log(age1, age2, age3)
 //array of ages
-let arrayOfAges = [age1, age2, age3];
+// let arrayOfAges = [age1, age2, age3];
 // console.log(arrayOfAges);
 
 
@@ -425,16 +425,32 @@ friends.unshift('Moyin')
 //================
 //OBJECTS
 //==============
-const userInfo = 
+const userInfo =
 {
     firstName: 'Sam',
     lastName:'Akin',
-    age: 2037 - 1997,
+    // age: 2037 - 1997,
+    birthYear: 1997,
     job: "Teacher",
-    friends: ['Moyin', 'Tosin', 'Elizabeth']
+    friends: ['Moyin', 'Tosin', 'Elizabeth'],
+    driversLicense: false,
+    check :  function () {
+        this.license = this.driversLicense  ? 'a' : 'no';
+        return this.license;
+    } ,
+    // calAge2 : function (birthYear){
+    //     return 2037 - birthYear;
+    // }
+    // calAge2 : function ( ){
+    //     return 2037 - this.birthYear;
+    // }
+    calAge2 : function ( ){
+        this.age =  2037 - this.birthYear;
+        return this.age;
+    }
 }
 
-console.log(userInfo);
+// console.log(userInfo);
 
 //accessing a particular property
 // console.log(userInfo.firstName);
@@ -451,7 +467,22 @@ console.log(userInfo);
 //dynamically output: "userInfo has 3 friends, and his best friend is Tosin.
 
 const dynamic = `${userInfo.firstName} has ${userInfo['friends'].length} friends, and his best friend is ${userInfo["friends"][1]}`
-console.log(dynamic)
+// console.log(dynamic)
+
+// console.log(userInfo.calAge2(1991))
+// console.log(userInfo["calAge2"](1991))
+// console.log(userInfo.calAge2())
+
+// console.log(userInfo.age)
+// console.log(userInfo.age)
+// console.log(userInfo.age)
+
+//challenge
+// let check = userInfo.driversLicense === true ? 'a' : 'no';
+let thisUSer = `${userInfo.firstName} is ${userInfo.calAge2()}-years old ${userInfo.job}, and he has ${userInfo.check()} driver's license`;
+console.log(thisUSer);
+
+
 
 
 
