@@ -480,7 +480,640 @@ const dynamic = `${userInfo.firstName} has ${userInfo['friends'].length} friends
 //challenge
 // let check = userInfo.driversLicense === true ? 'a' : 'no';
 let thisUSer = `${userInfo.firstName} is ${userInfo.calAge2()}-years old ${userInfo.job}, and he has ${userInfo.check()} driver's license`;
-console.log(thisUSer);
+// console.log(thisUSer);
+
+
+
+//==================
+//LOOPS
+//==================
+
+//for loop
+
+for(let rep = 1; rep <= 10; rep++)
+{
+    // console.log(`I can lift the weight ${rep} times`)
+}
+
+//more on for loops
+
+// const info1 = [
+//     'Sam',
+//     'Akin',
+//     2037 - 1997,
+//     "Teacher",
+//     ['Moyin', 'Tosin', 'Elizabeth'],
+//     false,
+// ]
+
+let dataVal = [];
+// for( let item = 0; item < info1.length; item++)
+// {
+//     //console.log(typeof info1[item], info1[item])
+
+//     //dataVal[item] = typeof info1[item] 
+//     //dataVal.push(typeof info1[item]);
+    
+// //console.log(dataVal);
+// }
+
+// console.log(dataVal);
+
+
+let years = [1990, 1995, 1997, 2000, 2005, 2007];
+let ages5 = [];
+
+// for( let item = 0; item < years.length; item++)
+// {
+//     ages5.push(2037 - years[item]);
+// }
+// console.log(ages5);
+
+
+//continue and break
+
+// for( let item = 0; item < info1.length; item++)
+// {
+//     if(typeof info1[item] !== 'string') continue;
+//     // console.log(info1[item]);
+// }
+
+
+// for( let item = 0; item < info1.length; item++)
+// {
+//     if(typeof info1[item] == 'object') break;
+//     // console.log(info1[item]);
+// }
+
+
+//Looping Backwards and Loops in Loops
+const info1 = [
+    'Sam',
+    'Akin',
+    2037 - 1997,
+    "Teacher",
+    ['Moyin', 'Tosin', 'Elizabeth'],
+    false,
+]
+
+// for( let item = info1.length - 1; item  >= 0 ; item--)
+// {
+//     // console.log(info1[item])
+// }
+
+//loop loop
+
+// for( let exercise = 1; exercise < 4 ; exercise++)
+// {
+//     console.log(`==========Exercise ${exercise}`)
+
+//     for(let rep = 1; rep <= 10; rep++)
+//     {
+//         console.log(`lifting weight`)
+//         console.log(`push ups`)
+//     }
+// }
+
+
+//while loop
+
+let rep = 1;
+while( rep <= 10){
+    // console.log(`${rep}: lifting weight`)
+    // console.log(`push ups`)
+    rep++;
+}
+
+//dice rollinging
+let dice = Math.trunc((Math.random() * 6) + 1);
+//console.log(dice)
+
+while(dice !==6)
+{
+    console.log(`You rolled a dice number ${dice}`);
+    dice = Math.trunc((Math.random() * 6) + 1);
+    if(dice === 6)console.log(`You rolled ${dice}`)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
