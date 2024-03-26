@@ -31,21 +31,19 @@ let billsArray = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
 let tips = [];
 let total = [];
 
-const calcTip = (billVal) => 
-{
+const calcTip = (billVal) => {
     let tipCalc = ((billVal >= 50) && (billVal <= 300)) ? billVal * 0.15 : billVal * 0.2
     return tipCalc;
 }
 
-for(let i = 0; i < billsArray.length; i++)
-{
-    
+for (let i = 0; i < billsArray.length; i++) {
+
     tips.push(calcTip(billsArray[i]));
     total.push(billsArray[i] + tips[i]);
 }
 
-console.log(tips);
-console.log(total);
+console.log(billsArray, tips, total);
+
 
 //Bonus:
 function calcAverage(arr) {
@@ -63,9 +61,11 @@ function calcAverage(arr) {
 }
 
 // Example usage:
-let totals = [10, 20, 30, 40, 50];
+//let totals = [10, 20, 30, 40, 50];
+let totals = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
 let average = calcAverage(totals);
 console.log("Average:", average); // Output the calculated average
+console.log(calcAverage(tips), calcAverage(total));
 
 
 
