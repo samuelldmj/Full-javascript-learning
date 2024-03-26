@@ -1,5 +1,5 @@
-'use strict';
-//const prompt = require('prompt-sync')();
+// 'use strict';
+// const prompt = require('prompt-sync')();
 //the console was built to execute small pieces of code
 //we can run javascript on a page by linking it to the HTML file with the script tag
 //if we want to output something into the browser console, we use console.log()
@@ -67,27 +67,27 @@ javascriptisFun = "Yes!";
 //COMPARISON OPERATORS(<, >, >=, <=)
 //OPERATOR PRECEDENCE -> consult MDN precedence operator
 const now = 2037
-const ageSam =  now - 1991
+const ageSam = now - 1991
 const ageDan = now - 2018
 // console.log(now - ageSam > now - ageDan)
 // console.log()
 
 //STRINGS: TEMPlate LITERALS {` `}
-const first_name =  "Samuel";
+const first_name = "Samuel";
 const job = 'teacher';
 const birthY = 1997;
 const year = 2037;
 
-const sam =  "I'm " + first_name + ', a ' + job + ',' +  ' my age' + ' is ' + (year - birthY);
+const sam = "I'm " + first_name + ', a ' + job + ',' + ' my age' + ' is ' + (year - birthY);
 // console.log(sam)
 const samNew = `I'm ${first_name}`
 
 //The if else statement
 const age = 8;
 const isOldenough = age >= 18;
-if(isOldenough){
+if (isOldenough) {
     // console.log(`Samuel can obtain his driving license 🚗`)
-}else{
+} else {
     // console.log(`Samuel is too young to drive at ${age}`)
 }
 
@@ -136,16 +136,16 @@ let n = '1' + 1
 //javascript will convert money into boolean, 0 is a falsy
 // const money = 0
 const money = 100
-if(money){
+if (money) {
     // console.log("Don't spend all!")
-}else{
+} else {
     // console.log("Go get some money buddy!")
 }
 
 //EQUaLITY == VS ===
 //strict operator does not perform type coercion
 const age_1 = 18
-if(age_1 === 18){
+if (age_1 === 18) {
     // console.log('Matured!😉')
 }
 
@@ -182,9 +182,9 @@ let shouldDrive = a && b
 // }
 
 let c = true
-if(shouldDrive && !c){
+if (shouldDrive && !c) {
     // console.log('Dan should drive')
-}else{
+} else {
     // console.log('Dan should not drive')
 }
 
@@ -268,7 +268,7 @@ SECTION 2
 //================
 //FUNCTIONS
 //===============
-function logger(){
+function logger() {
     console.log("My name is Samuel")
 }
 
@@ -338,13 +338,13 @@ const yearUntilnextRetirement = (birthYear, firstName) => {
 //==================
 //functions calling other functions
 //=================
-function fruitSlicer(fruit){
+function fruitSlicer(fruit) {
     return fruit * 4;
 }
 
-function fruitProcessor(oranges,apples){
-   const orangesSlices = fruitSlicer(oranges);
-   const appleSlices = fruitSlicer(apples);
+function fruitProcessor(oranges, apples) {
+    const orangesSlices = fruitSlicer(oranges);
+    const appleSlices = fruitSlicer(apples);
     const juice = `Here is your Juice with ${orangesSlices} slices of oranges and ${appleSlices} slices of apples`
     return juice;
 }
@@ -398,7 +398,7 @@ function fruitProcessor(oranges,apples){
 //ARRAY METHODS
 //==============
 
-const friends =  ['Samuel', 'lemuel', 'Daniel']
+const friends = ['Samuel', 'lemuel', 'Daniel']
 //add element
 // const newLenght = friends.push('Tosin')
 // console.log(friends);
@@ -428,24 +428,24 @@ friends.unshift('Moyin')
 const userInfo =
 {
     firstName: 'Sam',
-    lastName:'Akin',
+    lastName: 'Akin',
     // age: 2037 - 1997,
     birthYear: 1997,
     job: "Teacher",
     friends: ['Moyin', 'Tosin', 'Elizabeth'],
     driversLicense: false,
-    check :  function () {
-        this.license = this.driversLicense  ? 'a' : 'no';
+    check: function () {
+        this.license = this.driversLicense ? 'a' : 'no';
         return this.license;
-    } ,
+    },
     // calAge2 : function (birthYear){
     //     return 2037 - birthYear;
     // }
     // calAge2 : function ( ){
     //     return 2037 - this.birthYear;
     // }
-    calAge2 : function ( ){
-        this.age =  2037 - this.birthYear;
+    calAge2: function () {
+        this.age = 2037 - this.birthYear;
         return this.age;
     }
 }
@@ -490,8 +490,7 @@ let thisUSer = `${userInfo.firstName} is ${userInfo.calAge2()}-years old ${userI
 
 //for loop
 
-for(let rep = 1; rep <= 10; rep++)
-{
+for (let rep = 1; rep <= 10; rep++) {
     // console.log(`I can lift the weight ${rep} times`)
 }
 
@@ -513,7 +512,7 @@ let dataVal = [];
 
 //     //dataVal[item] = typeof info1[item] 
 //     //dataVal.push(typeof info1[item]);
-    
+
 // //console.log(dataVal);
 // }
 
@@ -577,45 +576,126 @@ const info1 = [
 
 //while loop
 
-let rep = 1;
-while( rep <= 10){
-    // console.log(`${rep}: lifting weight`)
-    // console.log(`push ups`)
-    rep++;
-}
+// let rep = 1;
+// while (rep <= 10) {
+//     // console.log(`${rep}: lifting weight`)
+//     // console.log(`push ups`)
+//     rep++;
+// }
 
 //dice rollinging
-let dice = Math.trunc((Math.random() * 6) + 1);
+// let dice = Math.trunc((Math.random() * 6) + 1);
 //console.log(dice)
 
-while(dice !==6)
-{
-    console.log(`You rolled a dice number ${dice}`);
-    dice = Math.trunc((Math.random() * 6) + 1);
-    if(dice === 6)console.log(`You rolled ${dice}`)
+// while (dice !== 6) {
+//     console.log(`You rolled a dice number ${dice}`);
+//     dice = Math.trunc((Math.random() * 6) + 1);
+//     if (dice === 6) console.log(`You rolled ${dice}`)
+// }
+
+
+//challenge
+/*
+    We work for a company building a smart home thermometer. Our most recent task is this: "Given an array of temperature of one day, claculate
+    the temperature amplitude, keep in mind but sometimes there mights be sensor error"
+*/
+const temperature = [3, -2, -1, -6, "error", 9, 17, 15, 14, 9, 5]
+
+
+// const tempCalculator = function (temps) {
+
+//     let minTemp = temps[0]
+//     let maxTemp = temps[0]
+
+//     for (let i = 0; i < temps.length; i++) {
+//         if (typeof temps[i] !== 'number') continue;
+//         if (temps[i] < minTemp) minTemp = temps[i];
+//         if (temps[i] > maxTemp) maxTemp = temps[i];
+
+//     }
+//     console.log(minTemp, maxTemp);
+//     let amplitude = maxTemp - minTemp;
+//     return amplitude;
+// }
+
+// console.log(tempCalculator(temperature));
+
+//problem 2
+/*Should receive two temperature arrays as argument but the logic should not change*/
+
+// const ampCalculatorFor2arrays = function (t1, t2) {
+
+//     let arr1 = t1;
+//     let arr2 = t2
+
+//     let temps = arr1.concat(arr2)
+//     console.log(temps);
+//     let minTemp = temps[0]
+//     let maxTemp = temps[0]
+
+//     for (let i = 0; i < temps.length; i++) {
+//         if (typeof temps[i] !== 'number') continue;
+//         if (temps[i] < minTemp) minTemp = temps[i];
+//         if (temps[i] > maxTemp) maxTemp = temps[i];
+
+//     }
+//     console.log(minTemp, maxTemp);
+//     let amplitude = maxTemp - minTemp;
+//     return amplitude;
+// }
+
+
+// let ampsamp = ampCalculatorFor2arrays([3, 5, 1], [9, 0, 5])
+// console.log(ampsamp)
+// ampCalculatorFor2arrays(temperature,)
+
+
+/*
+===================
+DEBUGGING
+===================
+*/
+// you can use the "debugger" keyword in the script to breakpoint
+
+const measureKelvin = function () {
+    const measurement = {
+        type: 'temp',
+        unit: 'celsius',
+        //FIX THE BUG: CONVERT TO NUMBER
+        value: Number(prompt('Degree Celsius: '))
+    };
+
+    //FIND THE BUG
+    console.table(measurement);
+
+    const kelvin = measurement.value + 273;
+    return kelvin;
 }
 
+//IDENTIFY THE BUG
+// console.log(measureKelvin());
+
+const ampCalculatorFor2arrays = function (t1, t2) {
 
 
+    let temps = t1.concat(t2)
+    console.log(temps);
+    let minTemp = 0
+    let maxTemp = 0
 
+    for (let i = 0; i < temps.length; i++) {
+        if (typeof temps[i] !== 'number') continue;
+        if (temps[i] < minTemp) minTemp = temps[i];
+        if (temps[i] > maxTemp) maxTemp = temps[i];
 
+    }
+    console.log(minTemp, maxTemp);
+    let amplitude = maxTemp - minTemp;
+    return amplitude;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+let ampsamp = ampCalculatorFor2arrays([3, 5, 1], [9, 0, 5])
+console.log(ampsamp)
 
 
 
