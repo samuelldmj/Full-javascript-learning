@@ -576,12 +576,12 @@ const info1 = [
 
 //while loop
 
-// let rep = 1;
-// while (rep <= 10) {
-//     // console.log(`${rep}: lifting weight`)
-//     // console.log(`push ups`)
-//     rep++;
-// }
+let rep = 1;
+while (rep <= 10) {
+    console.log(`${rep}: lifting weight`)
+    console.log(`push ups`)
+    rep++;
+}
 
 //dice rollinging
 // let dice = Math.trunc((Math.random() * 6) + 1);
