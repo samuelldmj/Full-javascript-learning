@@ -700,6 +700,7 @@ console.log(ampsamp)
 
 
 
+//Scoping in javascript
 
 
 
