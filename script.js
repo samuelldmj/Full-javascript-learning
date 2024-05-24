@@ -578,8 +578,8 @@ const info1 = [
 
 let rep = 1;
 while (rep <= 10) {
-    console.log(`${rep}: lifting weight`)
-    console.log(`push ups`)
+    // console.log(`${rep}: lifting weight`)
+    // console.log(`push ups`)
     rep++;
 }
 
@@ -657,79 +657,200 @@ DEBUGGING
 */
 // you can use the "debugger" keyword in the script to breakpoint
 
-const measureKelvin = function () {
-    const measurement = {
-        type: 'temp',
-        unit: 'celsius',
-        //FIX THE BUG: CONVERT TO NUMBER
-        value: Number(prompt('Degree Celsius: '))
-    };
+// const measureKelvin = function () {
+//     const measurement = {
+//         type: 'temp',
+//         unit: 'celsius',
+//         //FIX THE BUG: CONVERT TO NUMBER
+//         value: Number(prompt('Degree Celsius: '))
+//     };
 
-    //FIND THE BUG
-    console.table(measurement);
+//     //FIND THE BUG
+//     // console.table(measurement);
 
-    const kelvin = measurement.value + 273;
-    return kelvin;
-}
+//     const kelvin = measurement.value + 273;
+//     return kelvin;
+// }
 
 //IDENTIFY THE BUG
 // console.log(measureKelvin());
 
-const ampCalculatorFor2arrays = function (t1, t2) {
+// const ampCalculatorFor2arrays = function (t1, t2) {
 
 
-    let temps = t1.concat(t2)
-    console.log(temps);
-    let minTemp = 0
-    let maxTemp = 0
+//     let temps = t1.concat(t2)
+//     // console.log(temps);
+//     let minTemp = 0
+//     let maxTemp = 0
 
-    for (let i = 0; i < temps.length; i++) {
-        if (typeof temps[i] !== 'number') continue;
-        if (temps[i] < minTemp) minTemp = temps[i];
-        if (temps[i] > maxTemp) maxTemp = temps[i];
+//     for (let i = 0; i < temps.length; i++) {
+//         if (typeof temps[i] !== 'number') continue;
+//         if (temps[i] < minTemp) minTemp = temps[i];
+//         if (temps[i] > maxTemp) maxTemp = temps[i];
 
-    }
-    console.log(minTemp, maxTemp);
-    let amplitude = maxTemp - minTemp;
-    return amplitude;
-}
+//     }
+//     console.log(minTemp, maxTemp);
+//     let amplitude = maxTemp - minTemp;
+//     return amplitude;
+// }
 
-let ampsamp = ampCalculatorFor2arrays([3, 5, 1], [9, 0, 5])
-console.log(ampsamp)
-
-
-
+// let ampsamp = ampCalculatorFor2arrays([3, 5, 1], [9, 0, 5])
+// console.log(ampsamp)
 
 //Scoping in javascript
+/*
+===================
+Scoping
+==================
+*/
+
+// function calcAge(birthyear) {
+//     const age = 2037 - birthyear
+//     // console.log(firstName);
+//     function printAge() {
+//         const output = `${firstName}, you are ${age}, born in ${birthyear}`
+//         // console.log(output);
+//     }
+//     printAge();
+//     return age;
+// }
+
+// const firstName = "Samuel";
+// calcAge(1997);
+
+/*
+===================
+Hoisting
+==================
+*/
+
+// console.log(me);
+// console.log(job1);
+// console.log(year1);
+
+var me = "Samuel";
+let job1 = "Teacher";
+const year1 = 25;
+
+//function
+
+// console.log(addDecl(2, 3));
+// console.log(addExp(2, 3));
+// console.log(addArrow(2, 3));
+
+function addDecl(a, b) {
+    return a + b;
+}
+
+const addExp = function (a, b) {
+    return a + b
+}
+
+let addArrow = (a, b) => a + b;
+
+//Example
+//remember undefined is a falsy value
+// if (!numsProduct) console.log(deleteProduct());
+// console.log(numsProduct);
+var numsProduct = 10;
+
+function deleteProduct() {
+    // console.log('Product deleted');
+}
 
 
+/*
+===================
+Regular function vs Arrow function
+==================
+*/
+//make use of the regular function inside objects if the this keyword is going to be used later
+//never use arrow function as a method
 
+const user1 = {
+    first_name: "Samuel",
+    Year: 1991,
+    calAge4: function () {
+// return 2037 - this.Year;
 
+        //declaring and calling function in an objects
+        //this shoud throw an error, use the below
+        //solution 1
+        // const self = this;
+        // const isMille = function () {
+        //     // console.log(this.Year >= 1981 && this.Year <= 1996);
+        //     console.log(self.Year >= 1981 && self.Year <= 1996);
+        // }
 
+        //solution 2
+        const isMille = () => {
+            // console.log(this.Year >= 1981 && this.Year <= 1996);
+        }
 
+        isMille();
+    },
+    //arrow function does not get to use its own this keyword, it uses the this keyword from the global scope
+    greet: () => `Hey! + ${this.first_name}`
+}
 
+user1.calAge4();
+// console.log(user1.greet());
 
+/* =====================
+/ primitive and objects
+======================
+*/
 
+let lastName = "Williams"
+let oldLastName = lastName
+lastName = "Davis"
 
+// console.log(lastName);
+// console.log(oldLastName);
 
+const user2 = {
+    firstName: "jessica",
+    lastName: "Williams",
+    age: 27
+}
 
+const user3 = user2
+user2.lastName = "Davis"
 
+/*
+Data structures, Modern operators and strings
+*/
 
+//Destruction arrays
 
+const restaurant = {
+    name: "Classico Italiano",
+    location: "Via Angelino 23, Firenze italy ",
+    categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
+    starterMenu: ["Foccasia", "Brusheta", "Garlic", "Bread", "Caprese salad"],
+    mainMenu: ['Pizza', "pasta", "Rissito"],
+    order: function (starterMenuIndex, mainMenuIndex) {
+        //return an array of the item selected from the both properties in the object
+        return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
+    }
+}
 
+// const [first, second] = restaurant.categories
+let [first, , third] = restaurant.categories;
+// console.log(first, second);
+// console.log(first, third);
 
+//switching the 3rd to first
+// const temp = first;
+// first = third;
+// third = temp;
+// console.log(first, third);
 
+//switching values using destructuring
+[first, third] = [third, first];
+console.log(first, third);
 
-
-
-
-
-
-
-
-
-
-
+//calling the methods of the ordered menu
 
 
 

@@ -46,25 +46,6 @@ const printForecast = function (arr) {
 // printForecast([12, 5, -5, 0, 4])
 
 
-/*
-===================
-Scoping
-==================
-*/
-
-function calcAge(birthyear) {
-    const age = 2037 - birthyear
-    // console.log(firstName);
-    function printAge() {
-        const output = `${firstName}, you are ${age}, born in ${birthyear}`
-        console.log(output);
-    }
-    printAge();
-    return age;
-}
-
-const firstName = "Samuel";
-calcAge(1997);
 
 
 
