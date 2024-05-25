@@ -821,22 +821,25 @@ user2.lastName = "Davis"
 Data structures, Modern operators and strings
 */
 
-//Destruction arrays
+/*
+Destruction arrays
+since the order matters, we need to make spaces(if we want to unpack or assign more than one values to various variables)
+*/
 
-const restaurant = {
-    name: "Classico Italiano",
-    location: "Via Angelino 23, Firenze italy ",
-    categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
-    starterMenu: ["Foccasia", "Brusheta", "Garlic", "Bread", "Caprese salad"],
-    mainMenu: ['Pizza', "pasta", "Rissito"],
-    order: function (starterMenuIndex, mainMenuIndex) {
-        //return an array of the item selected from the both properties in the object
-        return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
-    }
-}
+// const restaurant = {
+//     name: "Classico Italiano",
+//     location: "Via Angelino 23, Firenze italy ",
+//     categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
+//     starterMenu: ["Foccasia", "Brusheta", "Garlic Bread", "Caprese salad"],
+//     mainMenu: ['Pizza', "pasta", "Rissito"],
+//     order: function (starterMenuIndex, mainMenuIndex) {
+//         //return an array of the item selected from the both properties in the object
+//         return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
+//     }
+// }
 
 // const [first, second] = restaurant.categories
-let [first, , third] = restaurant.categories;
+// let [first, , third] = restaurant.categories;
 // console.log(first, second);
 // console.log(first, third);
 
@@ -847,17 +850,105 @@ let [first, , third] = restaurant.categories;
 // console.log(first, third);
 
 //switching values using destructuring
-[first, third] = [third, first];
-console.log(first, third);
+// [first, third] = [third, first];
+// console.log(first, third);
 
 //calling the methods of the ordered menu
+// console.log(restaurant.order(2, 0));
+// const [starter, mainCourse] = restaurant.order(2, 0);
+// console.log(starter, mainCourse);
 
+//nested arrays
+const nested = [1, 2, [3, 4]];
+[i, , j] = nested;
+// console.log(i, j);
 
+[k, , [n, o]] = nested;
+console.log(k, n, o);
+console.log(n, k, o);
+console.log(k, n);
 
+//default values
+// const [x, y, z] = [1, 2]
+// console.log(x, y, z);
+const [x = 1, y = 1, z = 1] = [2]
+// console.log(x, y, z);
 
+/*
+DEstructuring OBJECT
+you use a curly bracket to destructure objects
+the variable must match the property you want to unpack
+since the order does not matter, we don't need to skip by making spaces but we need the properties to unpack.
+*/
 
+const restaurant = {
+    name: "Classico Italiano",
+    location: "Via Angelino 23, Firenze italy ",
+    categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
+    starterMenu: ["Foccasia", "Brusheta", "Garlic Bread", "Caprese salad"],
+    mainMenu: ['Pizza', "pasta", "Rissito"],
+    order: function (starterMenuIndex, mainMenuIndex) {
+        //return an array of the item selected from the both properties in the object
+        return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
+    },
+    openingHour: {
+        thu: {
+            open: 12,
+            close: 22
+        },
 
+        fri: {
+            open: 11,
+            close: 23
+        },
 
+        sat: {
+            open: 0,
+            close: 24
+        }
+    },
+    //parameter as objects, use curly brackets in the function to destructure.
+    orderDelivery: function ({ starterIndex, mainIndex, time, address }) {
+        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
+    }
+
+};
+
+restaurant.orderDelivery({
+    time: '22:30',
+    address: 'via del solte, 33.',
+    mainIndex: 2,
+    starterIndex: 2
+});
+
+const { name, openingHour, categories } = restaurant;
+// console.log(name, openingHour, categories);
+
+//making the variables name different from the properties name
+const { name: restaurantName, openingHour: hours, categories: tags } = restaurant;
+// console.log(restaurantName, hours, tags);
+
+//default values
+//if the property before the value is not available the default value will be called
+const { menu = [], starterMenu: starters = [] } = restaurant;
+// console.log(menu, starters);
+
+//mutating values
+let ab = 111;
+let ba = 999;
+
+const obj = { ab: 23, ba: 7, cb: 14 };
+//need to put in a parenthesis if the variable has been declared before, and you intend to use the same variable name
+({ ab, ba } = obj);
+// console.log(ab, ba);
+
+//nested object
+// const { fri } = openingHour;
+// console.log(fri);
+// const { fri: { open, close } } = openingHour;
+// console.log(open, close);
+const { fri: { open: op, close: ce } } = openingHour;
+console.log(op, ce);
 
 
 
