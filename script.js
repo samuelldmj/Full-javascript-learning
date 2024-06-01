@@ -1,5 +1,6 @@
 // 'use strict';
 // const prompt = require('prompt-sync')();
+
 //the console was built to execute small pieces of code
 //we can run javascript on a page by linking it to the HTML file with the script tag
 //if we want to output something into the browser console, we use console.log()
@@ -864,9 +865,9 @@ const nested = [1, 2, [3, 4]];
 // console.log(i, j);
 
 [k, , [n, o]] = nested;
-console.log(k, n, o);
-console.log(n, k, o);
-console.log(k, n);
+// console.log(k, n, o);
+// console.log(n, k, o);
+// console.log(k, n);
 
 //default values
 // const [x, y, z] = [1, 2]
@@ -908,18 +909,34 @@ const restaurant = {
         }
     },
     //parameter as objects, use curly brackets in the function to destructure.
-    orderDelivery: function ({ starterIndex, mainIndex, time, address }) {
+    //destructuring inside the objects using functions
+    orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = "00:00", address = 'Office' }) {
         console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
+    },
+
+    orderPasta: function (ing1, ing2, ing3) {
+        console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
+    },
+
+    orderPizza: function (mainIngredient, ...otherIngredients) {
+        console.log(mainIngredient, otherIngredients);
     }
 
 };
 
-restaurant.orderDelivery({
-    time: '22:30',
-    address: 'via del solte, 33.',
-    mainIndex: 2,
-    starterIndex: 2
-});
+
+// restaurant.orderDelivery({
+//     time: '22:30',
+//     address: 'via del solte, 33.',
+//     mainIndex: 2,
+//     starterIndex: 2
+// });
+
+//for default values
+// restaurant.orderDelivery({
+
+// });
+
 
 const { name, openingHour, categories } = restaurant;
 // console.log(name, openingHour, categories);
@@ -948,18 +965,99 @@ const obj = { ab: 23, ba: 7, cb: 14 };
 // const { fri: { open, close } } = openingHour;
 // console.log(open, close);
 const { fri: { open: op, close: ce } } = openingHour;
-console.log(op, ce);
+// console.log(op, ce);
 
 
 
+/*
+SPREAD OPERTOR
+=>when you want the element of the array individually use spread operator.
+=>it takes all the element in an array, and does not create variables.
+iterables are: arrays, maps, strings and set but not objects
+*/
+
+const arr = [7, 6, 8]
+const badNewarray = [1, 2, 3, arr[0], arr[1], arr[2]];
+// console.log(badNewarray);
+
+const goodarr = [1, 2, 3, ...arr];
+// console.log(goodarr);
+
+const newMenu = [...restaurant.mainMenu, "Fried rice"];
+// console.log(newMenu);
+
+//shallow copy array
+const mainMenuCopy = [...restaurant.mainMenu];
+
+//joining 2 arrays
+const CompleteMenu = [...restaurant.starterMenu, ...mainMenuCopy];
+// console.log(CompleteMenu);
+
+//expanding strings
+let str1 = 'Samuel';
+// console.log(...str1);
+
+//spread operator operation
+// const ingredients = [prompt(' let\'s make pasta! ingredient 1?'), prompt(' let\'s make pasta! ingredient 2?'),
+// prompt(' let\'s make pasta! ingredient 3?')]
+//method 1
+// restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+//spread method
+// restaurant.orderPasta(...ingredients);
+
+//spread operation on objects
+const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
+// console.log(newRestaurants);
+
+//shallow copying
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Sam Bol';
+// console.log(restaurant.name);
+// console.log(restaurantCopy.name);
 
 
+//next
+const add = function (...numbers) {
+    let count = 0
+    for (let i = 0; i < numbers.length; i++) {
+        count += numbers[i];
+    }
+    console.log(count);
+}
+
+add(1, 2, 3);
+add(4, 5, 6, 7, 8);
+add(9, 10, 11, 12, 13, 14, 15);
+
+//using spread operator
+let xl = [3, 27, 97];
+add(...xl);
 
 
+/*
+REST PATTERNS AND PARAMETERS
+=>it collect multiple elements and condensed them into an array.
+*/
+
+const [e, d, ...others] = [1, 2, 3, 4, 5]
+console.log(e, d, others);
+
+//spread and rest pattern on array.
+const [pizza, , rissito, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// console.log(pizza, rissito, otherFood);
+
+//spread and rest pattern on object.
+const { sat, ...otherweekdays } = restaurant.openingHour;
+// console.log(sat, otherweekdays);
+
+//functions
+// const add = function (...numbers) {
+//     console.log(numbers);
+// }
 
 
-
-
+//rest parameter
+let user_1_Order = restaurant.orderPizza('Onions', 'Spinach', 'Broccolli', 'Cabbage');
 
 
 
