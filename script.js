@@ -721,7 +721,7 @@ Scoping
 
 /*
 ===================
-Hoisting
+Hoisting: this is when some type of variables are accessible or available for use before they are actually declared
 ==================
 */
 
@@ -760,9 +760,13 @@ function deleteProduct() {
 }
 
 
+
+
 /*
 ===================
 Regular function vs Arrow function
+this keyword: special value created for every execution context(every function).
+Takes the values of or points to the owner of the function in which the this keyword is used.
 ==================
 */
 //make use of the regular function inside objects if the this keyword is going to be used later
@@ -782,6 +786,8 @@ const user1 = {
         //     // console.log(this.Year >= 1981 && this.Year <= 1996);
         //     console.log(self.Year >= 1981 && self.Year <= 1996);
         // }
+        console.log(this);
+        console.log(2037 - this.Year);
 
         //solution 2
         const isMille = () => {
@@ -793,6 +799,8 @@ const user1 = {
     //arrow function does not get to use its own this keyword, it uses the this keyword from the global scope
     greet: () => `Hey! + ${this.first_name}`
 }
+
+const f = user1.calAge4;
 
 user1.calAge4();
 // console.log(user1.greet());
@@ -911,15 +919,15 @@ const restaurant = {
     //parameter as objects, use curly brackets in the function to destructure.
     //destructuring inside the objects using functions
     orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = "00:00", address = 'Office' }) {
-        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
+        // console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
     },
 
     orderPasta: function (ing1, ing2, ing3) {
-        console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
+        // console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
     },
 
     orderPizza: function (mainIngredient, ...otherIngredients) {
-        console.log(mainIngredient, otherIngredients);
+        // console.log(mainIngredient, otherIngredients);
     }
 
 };
@@ -1022,7 +1030,7 @@ const add = function (...numbers) {
     for (let i = 0; i < numbers.length; i++) {
         count += numbers[i];
     }
-    console.log(count);
+    // console.log(count);
 }
 
 add(1, 2, 3);
@@ -1040,7 +1048,7 @@ REST PATTERNS AND PARAMETERS
 */
 
 const [e, d, ...others] = [1, 2, 3, 4, 5]
-console.log(e, d, others);
+// console.log(e, d, others);
 
 //spread and rest pattern on array.
 const [pizza, , rissito, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
@@ -1060,6 +1068,17 @@ const { sat, ...otherweekdays } = restaurant.openingHour;
 let user_1_Order = restaurant.orderPizza('Onions', 'Spinach', 'Broccolli', 'Cabbage');
 
 
+/*
+Short circuit
+=> This return the first truthy value when used with the or || logical operator
+*/
+// console.log(3 || 'Samu');
+// console.log('' || 'Samuel');
+// console.log(true || 0);
+// console.log(undefined || null);
+// console.log('' || 'Samuel');
+
+// console.log(window);
 
 
 
