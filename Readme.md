@@ -43,6 +43,6 @@ JS engine[heap and call stack], c++ bindings, callback Queue(timer, data).
 ## this keyword: special value created for every execution context(every function).
 ## Takes the values of or points to the owner of the function in which the this keyword is used.
 ## * this with methods = calling the object in which a method is defined.
-## * this with function = calling the function in strict mode, calling undefined in loose mode.
+## * this with function = calling the function in strict mode executes undefine, calling in loose mode execute the global window.
 ## * this with arrow function = calling the surrounding function
 ## * this with event listener = dom element thst the handler is attached to.

@@ -786,8 +786,8 @@ const user1 = {
         //     // console.log(this.Year >= 1981 && this.Year <= 1996);
         //     console.log(self.Year >= 1981 && self.Year <= 1996);
         // }
-        console.log(this);
-        console.log(2037 - this.Year);
+        // console.log(this);
+        // console.log(2037 - this.Year);
 
         //solution 2
         const isMille = () => {
@@ -800,7 +800,7 @@ const user1 = {
     greet: () => `Hey! + ${this.first_name}`
 }
 
-const f = user1.calAge4;
+// const f = user1.calAge4;
 
 user1.calAge4();
 // console.log(user1.greet());
