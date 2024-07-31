@@ -46,3 +46,11 @@ JS engine[heap and call stack], c++ bindings, callback Queue(timer, data).
 ## * this with function = calling the function in strict mode executes undefine, calling in loose mode execute the global window.
 ## * this with arrow function = calling the surrounding function
 ## * this with event listener = dom element thst the handler is attached to.
+
+## Destructuring:
+## * You can unpack element from an array
+## * You can switch element postion in an array
+## DEstructuring OBJECT
+## * you use a curly bracket to destructure objects
+## * the variable must match the property you want to unpack
+## * since the order does not matter, we don't need to skip by making spaces but we need the properties to unpack.

@@ -835,21 +835,21 @@ Destruction arrays
 since the order matters, we need to make spaces(if we want to unpack or assign more than one values to various variables)
 */
 
-// const restaurant = {
-//     name: "Classico Italiano",
-//     location: "Via Angelino 23, Firenze italy ",
-//     categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
-//     starterMenu: ["Foccasia", "Brusheta", "Garlic Bread", "Caprese salad"],
-//     mainMenu: ['Pizza', "pasta", "Rissito"],
-//     order: function (starterMenuIndex, mainMenuIndex) {
-//         //return an array of the item selected from the both properties in the object
-//         return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
-//     }
-// }
+const restaurant = {
+    name: "Classico Italiano",
+    location: "Via Angelino 23, Firenze italy ",
+    categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
+    starterMenu: ["Foccasia", "Brusheta", "Garlic-Bread", "Caprese salad"],
+    mainMenu: ['Pizza', "pasta", "Rissito"],
+    order: function (starterMenuIndex, mainMenuIndex) {
+        //return an array of the item selected from the both properties in the object
+        return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
+    }
+}
 
 // const [first, second] = restaurant.categories
-// let [first, , third] = restaurant.categories;
 // console.log(first, second);
+// let [first, , third] = restaurant.categories;
 // console.log(first, third);
 
 //switching the 3rd to first
@@ -868,11 +868,11 @@ since the order matters, we need to make spaces(if we want to unpack or assign m
 // console.log(starter, mainCourse);
 
 //nested arrays
-const nested = [1, 2, [3, 4]];
-[i, , j] = nested;
-// console.log(i, j);
+// const nested = [1, 2, [3, 4]];
+// [i, , j] = nested;
+// // console.log(i, j);
 
-[k, , [n, o]] = nested;
+// [k, , [n, o]] = nested;
 // console.log(k, n, o);
 // console.log(n, k, o);
 // console.log(k, n);
@@ -890,47 +890,47 @@ the variable must match the property you want to unpack
 since the order does not matter, we don't need to skip by making spaces but we need the properties to unpack.
 */
 
-const restaurant = {
-    name: "Classico Italiano",
-    location: "Via Angelino 23, Firenze italy ",
-    categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
-    starterMenu: ["Foccasia", "Brusheta", "Garlic Bread", "Caprese salad"],
-    mainMenu: ['Pizza', "pasta", "Rissito"],
-    order: function (starterMenuIndex, mainMenuIndex) {
-        //return an array of the item selected from the both properties in the object
-        return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
-    },
-    openingHour: {
-        thu: {
-            open: 12,
-            close: 22
-        },
+// const restaurant = {
+//     name: "Classico Italiano",
+//     location: "Via Angelino 23, Firenze italy ",
+//     categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
+//     starterMenu: ["Foccasia", "Brusheta", "Garlic Bread", "Caprese salad"],
+//     mainMenu: ['Pizza', "pasta", "Rissito"],
+//     order: function (starterMenuIndex, mainMenuIndex) {
+//         //return an array of the item selected from the both properties in the object
+//         return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
+//     },
+//     openingHour: {
+//         thu: {
+//             open: 12,
+//             close: 22
+//         },
 
-        fri: {
-            open: 11,
-            close: 23
-        },
+//         fri: {
+//             open: 11,
+//             close: 23
+//         },
 
-        sat: {
-            open: 0,
-            close: 24
-        }
-    },
-    //parameter as objects, use curly brackets in the function to destructure.
-    //destructuring inside the objects using functions
-    orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = "00:00", address = 'Office' }) {
-        // console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
-    },
+//         sat: {
+//             open: 0,
+//             close: 24
+//         }
+//     },
+//     //parameter as objects, use curly brackets in the function to destructure.
+//     //destructuring inside the objects using functions
+//     orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = "00:00", address = 'Office' }) {
+//         // console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
+//     },
 
-    orderPasta: function (ing1, ing2, ing3) {
-        // console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
-    },
+//     orderPasta: function (ing1, ing2, ing3) {
+//         // console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
+//     },
 
-    orderPizza: function (mainIngredient, ...otherIngredients) {
-        // console.log(mainIngredient, otherIngredients);
-    }
+//     orderPizza: function (mainIngredient, ...otherIngredients) {
+//         // console.log(mainIngredient, otherIngredients);
+//     }
 
-};
+// };
 
 
 // restaurant.orderDelivery({
@@ -946,139 +946,139 @@ const restaurant = {
 // });
 
 
-const { name, openingHour, categories } = restaurant;
-// console.log(name, openingHour, categories);
+// const { name, openingHour, categories } = restaurant;
+// // console.log(name, openingHour, categories);
 
-//making the variables name different from the properties name
-const { name: restaurantName, openingHour: hours, categories: tags } = restaurant;
-// console.log(restaurantName, hours, tags);
+// //making the variables name different from the properties name
+// const { name: restaurantName, openingHour: hours, categories: tags } = restaurant;
+// // console.log(restaurantName, hours, tags);
 
-//default values
-//if the property before the value is not available the default value will be called
-const { menu = [], starterMenu: starters = [] } = restaurant;
-// console.log(menu, starters);
+// //default values
+// //if the property before the value is not available the default value will be called
+// const { menu = [], starterMenu: starters = [] } = restaurant;
+// // console.log(menu, starters);
 
-//mutating values
-let ab = 111;
-let ba = 999;
+// //mutating values
+// let ab = 111;
+// let ba = 999;
 
-const obj = { ab: 23, ba: 7, cb: 14 };
-//need to put in a parenthesis if the variable has been declared before, and you intend to use the same variable name
-({ ab, ba } = obj);
-// console.log(ab, ba);
+// const obj = { ab: 23, ba: 7, cb: 14 };
+// //need to put in a parenthesis if the variable has been declared before, and you intend to use the same variable name
+// ({ ab, ba } = obj);
+// // console.log(ab, ba);
 
-//nested object
-// const { fri } = openingHour;
-// console.log(fri);
-// const { fri: { open, close } } = openingHour;
-// console.log(open, close);
-const { fri: { open: op, close: ce } } = openingHour;
-// console.log(op, ce);
-
-
-
-/*
-SPREAD OPERTOR
-=>when you want the element of the array individually use spread operator.
-=>it takes all the element in an array, and does not create variables.
-iterables are: arrays, maps, strings and set but not objects
-*/
-
-const arr = [7, 6, 8]
-const badNewarray = [1, 2, 3, arr[0], arr[1], arr[2]];
-// console.log(badNewarray);
-
-const goodarr = [1, 2, 3, ...arr];
-// console.log(goodarr);
-
-const newMenu = [...restaurant.mainMenu, "Fried rice"];
-// console.log(newMenu);
-
-//shallow copy array
-const mainMenuCopy = [...restaurant.mainMenu];
-
-//joining 2 arrays
-const CompleteMenu = [...restaurant.starterMenu, ...mainMenuCopy];
-// console.log(CompleteMenu);
-
-//expanding strings
-let str1 = 'Samuel';
-// console.log(...str1);
-
-//spread operator operation
-// const ingredients = [prompt(' let\'s make pasta! ingredient 1?'), prompt(' let\'s make pasta! ingredient 2?'),
-// prompt(' let\'s make pasta! ingredient 3?')]
-//method 1
-// restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
-//spread method
-// restaurant.orderPasta(...ingredients);
-
-//spread operation on objects
-const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
-// console.log(newRestaurants);
-
-//shallow copying
-const restaurantCopy = { ...restaurant };
-restaurantCopy.name = 'Sam Bol';
-// console.log(restaurant.name);
-// console.log(restaurantCopy.name);
+// //nested object
+// // const { fri } = openingHour;
+// // console.log(fri);
+// // const { fri: { open, close } } = openingHour;
+// // console.log(open, close);
+// const { fri: { open: op, close: ce } } = openingHour;
+// // console.log(op, ce);
 
 
-//next
-const add = function (...numbers) {
-    let count = 0
-    for (let i = 0; i < numbers.length; i++) {
-        count += numbers[i];
-    }
-    // console.log(count);
-}
 
-add(1, 2, 3);
-add(4, 5, 6, 7, 8);
-add(9, 10, 11, 12, 13, 14, 15);
+// /*
+// SPREAD OPERTOR
+// =>when you want the element of the array individually use spread operator.
+// =>it takes all the element in an array, and does not create variables.
+// iterables are: arrays, maps, strings and set but not objects
+// */
 
-//using spread operator
-let xl = [3, 27, 97];
-add(...xl);
+// const arr = [7, 6, 8]
+// const badNewarray = [1, 2, 3, arr[0], arr[1], arr[2]];
+// // console.log(badNewarray);
+
+// const goodarr = [1, 2, 3, ...arr];
+// // console.log(goodarr);
+
+// const newMenu = [...restaurant.mainMenu, "Fried rice"];
+// // console.log(newMenu);
+
+// //shallow copy array
+// const mainMenuCopy = [...restaurant.mainMenu];
+
+// //joining 2 arrays
+// const CompleteMenu = [...restaurant.starterMenu, ...mainMenuCopy];
+// // console.log(CompleteMenu);
+
+// //expanding strings
+// let str1 = 'Samuel';
+// // console.log(...str1);
+
+// //spread operator operation
+// // const ingredients = [prompt(' let\'s make pasta! ingredient 1?'), prompt(' let\'s make pasta! ingredient 2?'),
+// // prompt(' let\'s make pasta! ingredient 3?')]
+// //method 1
+// // restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+// //spread method
+// // restaurant.orderPasta(...ingredients);
+
+// //spread operation on objects
+// const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
+// // console.log(newRestaurants);
+
+// //shallow copying
+// const restaurantCopy = { ...restaurant };
+// restaurantCopy.name = 'Sam Bol';
+// // console.log(restaurant.name);
+// // console.log(restaurantCopy.name);
 
 
-/*
-REST PATTERNS AND PARAMETERS
-=>it collect multiple elements and condensed them into an array.
-*/
-
-const [e, d, ...others] = [1, 2, 3, 4, 5]
-// console.log(e, d, others);
-
-//spread and rest pattern on array.
-const [pizza, , rissito, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
-// console.log(pizza, rissito, otherFood);
-
-//spread and rest pattern on object.
-const { sat, ...otherweekdays } = restaurant.openingHour;
-// console.log(sat, otherweekdays);
-
-//functions
+// //next
 // const add = function (...numbers) {
-//     console.log(numbers);
+//     let count = 0
+//     for (let i = 0; i < numbers.length; i++) {
+//         count += numbers[i];
+//     }
+//     // console.log(count);
 // }
 
+// add(1, 2, 3);
+// add(4, 5, 6, 7, 8);
+// add(9, 10, 11, 12, 13, 14, 15);
 
-//rest parameter
-let user_1_Order = restaurant.orderPizza('Onions', 'Spinach', 'Broccolli', 'Cabbage');
+// //using spread operator
+// let xl = [3, 27, 97];
+// add(...xl);
 
 
-/*
-Short circuit
-=> This return the first truthy value when used with the or || logical operator
-*/
-// console.log(3 || 'Samu');
-// console.log('' || 'Samuel');
-// console.log(true || 0);
-// console.log(undefined || null);
-// console.log('' || 'Samuel');
+// /*
+// REST PATTERNS AND PARAMETERS
+// =>it collect multiple elements and condensed them into an array.
+// */
 
-// console.log(window);
+// const [e, d, ...others] = [1, 2, 3, 4, 5]
+// // console.log(e, d, others);
+
+// //spread and rest pattern on array.
+// const [pizza, , rissito, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// // console.log(pizza, rissito, otherFood);
+
+// //spread and rest pattern on object.
+// const { sat, ...otherweekdays } = restaurant.openingHour;
+// // console.log(sat, otherweekdays);
+
+// //functions
+// // const add = function (...numbers) {
+// //     console.log(numbers);
+// // }
+
+
+// //rest parameter
+// let user_1_Order = restaurant.orderPizza('Onions', 'Spinach', 'Broccolli', 'Cabbage');
+
+
+// /*
+// Short circuit
+// => This return the first truthy value when used with the or || logical operator
+// */
+// // console.log(3 || 'Samu');
+// // console.log('' || 'Samuel');
+// // console.log(true || 0);
+// // console.log(undefined || null);
+// // console.log('' || 'Samuel');
+
+// // console.log(window);
 
 
 
