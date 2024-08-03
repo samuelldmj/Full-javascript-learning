@@ -835,17 +835,17 @@ Destruction arrays
 since the order matters, we need to make spaces(if we want to unpack or assign more than one values to various variables)
 */
 
-const restaurant = {
-    name: "Classico Italiano",
-    location: "Via Angelino 23, Firenze italy ",
-    categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
-    starterMenu: ["Foccasia", "Brusheta", "Garlic-Bread", "Caprese salad"],
-    mainMenu: ['Pizza', "pasta", "Rissito"],
-    order: function (starterMenuIndex, mainMenuIndex) {
-        //return an array of the item selected from the both properties in the object
-        return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
-    }
-}
+// const restaurant = {
+//     name: "Classico Italiano",
+//     location: "Via Angelino 23, Firenze italy ",
+//     categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
+//     starterMenu: ["Foccasia", "Brusheta", "Garlic-Bread", "Caprese salad"],
+//     mainMenu: ['Pizza', "pasta", "Rissito"],
+//     order: function (starterMenuIndex, mainMenuIndex) {
+//         //return an array of the item selected from the both properties in the object
+//         return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
+//     }
+// }
 
 // const [first, second] = restaurant.categories
 // console.log(first, second);
@@ -890,47 +890,47 @@ the variable must match the property you want to unpack
 since the order does not matter, we don't need to skip by making spaces but we need the properties to unpack.
 */
 
-// const restaurant = {
-//     name: "Classico Italiano",
-//     location: "Via Angelino 23, Firenze italy ",
-//     categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
-//     starterMenu: ["Foccasia", "Brusheta", "Garlic Bread", "Caprese salad"],
-//     mainMenu: ['Pizza', "pasta", "Rissito"],
-//     order: function (starterMenuIndex, mainMenuIndex) {
-//         //return an array of the item selected from the both properties in the object
-//         return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
-//     },
-//     openingHour: {
-//         thu: {
-//             open: 12,
-//             close: 22
-//         },
+const restaurant = {
+    name: "Classico Italiano",
+    location: "Via Angelino 23, Firenze italy ",
+    categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
+    starterMenu: ["Foccasia", "Brusheta", "Garlic Bread", "Caprese salad"],
+    mainMenu: ['Pizza', "pasta", "Rissito"],
+    order: function (starterMenuIndex, mainMenuIndex) {
+        //return an array of the item selected from the both properties in the object
+        return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
+    },
+    openingHour: {
+        thu: {
+            open: 12,
+            close: 22
+        },
 
-//         fri: {
-//             open: 11,
-//             close: 23
-//         },
+        fri: {
+            open: 11,
+            close: 23
+        },
 
-//         sat: {
-//             open: 0,
-//             close: 24
-//         }
-//     },
+        sat: {
+            open: 0,
+            close: 24
+        }
+    },
 //     //parameter as objects, use curly brackets in the function to destructure.
 //     //destructuring inside the objects using functions
-//     orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = "00:00", address = 'Office' }) {
-//         // console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
-//     },
+    orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = "00:00", address = 'Office' }) {
+        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
+    },
 
-//     orderPasta: function (ing1, ing2, ing3) {
-//         // console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
-//     },
+    orderPasta: function (ing1, ing2, ing3) {
+        // console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
+    },
 
-//     orderPizza: function (mainIngredient, ...otherIngredients) {
-//         // console.log(mainIngredient, otherIngredients);
-//     }
+    orderPizza: function (mainIngredient, ...otherIngredients) {
+        // console.log(mainIngredient, otherIngredients);
+    }
 
-// };
+};
 
 
 // restaurant.orderDelivery({
@@ -968,10 +968,10 @@ since the order does not matter, we don't need to skip by making spaces but we n
 // // console.log(ab, ba);
 
 // //nested object
-// // const { fri } = openingHour;
-// // console.log(fri);
-// // const { fri: { open, close } } = openingHour;
-// // console.log(open, close);
+// const { fri } = openingHour;
+// console.log(fri);
+// const { fri: { open, close } } = openingHour;
+// console.log(open, close);
 // const { fri: { open: op, close: ce } } = openingHour;
 // // console.log(op, ce);
 
@@ -989,10 +989,10 @@ since the order does not matter, we don't need to skip by making spaces but we n
 // // console.log(badNewarray);
 
 // const goodarr = [1, 2, 3, ...arr];
-// // console.log(goodarr);
+// console.log(goodarr);
 
-// const newMenu = [...restaurant.mainMenu, "Fried rice"];
-// // console.log(newMenu);
+const newMenu = [...restaurant.mainMenu, "Fried rice"];
+// console.log(newMenu);
 
 // //shallow copy array
 // const mainMenuCopy = [...restaurant.mainMenu];
@@ -1014,8 +1014,8 @@ since the order does not matter, we don't need to skip by making spaces but we n
 // // restaurant.orderPasta(...ingredients);
 
 // //spread operation on objects
-// const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
-// // console.log(newRestaurants);
+const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
+// console.log(newRestaurants);
 
 // //shallow copying
 // const restaurantCopy = { ...restaurant };
@@ -1030,33 +1030,35 @@ since the order does not matter, we don't need to skip by making spaces but we n
 //     for (let i = 0; i < numbers.length; i++) {
 //         count += numbers[i];
 //     }
-//     // console.log(count);
+//     console.log(count);
 // }
 
 // add(1, 2, 3);
 // add(4, 5, 6, 7, 8);
 // add(9, 10, 11, 12, 13, 14, 15);
 
-// //using spread operator
+// // //using spread operator
 // let xl = [3, 27, 97];
 // add(...xl);
 
 
-// /*
+ /*
 // REST PATTERNS AND PARAMETERS
 // =>it collect multiple elements and condensed them into an array.
-// */
+=>it must be the last element.
+=>it is used on the left side
+ */
 
 // const [e, d, ...others] = [1, 2, 3, 4, 5]
-// // console.log(e, d, others);
+// console.log(e, d, others);
 
 // //spread and rest pattern on array.
 // const [pizza, , rissito, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
-// // console.log(pizza, rissito, otherFood);
+// console.log(pizza, rissito, otherFood);
 
-// //spread and rest pattern on object.
+// //destructuring and rest pattern on object.
 // const { sat, ...otherweekdays } = restaurant.openingHour;
-// // console.log(sat, otherweekdays);
+// console.log(sat, otherweekdays);
 
 // //functions
 // // const add = function (...numbers) {
@@ -1072,14 +1074,77 @@ since the order does not matter, we don't need to skip by making spaces but we n
 // Short circuit
 // => This return the first truthy value when used with the or || logical operator
 // */
+
+console.log("===OR===");
+//will return the first truthy value of the operand
 // // console.log(3 || 'Samu');
 // // console.log('' || 'Samuel');
 // // console.log(true || 0);
 // // console.log(undefined || null);
 // // console.log('' || 'Samuel');
-
 // // console.log(window);
 
+console.log("===AND===");
+//=>if the evaluation is truth, it moves and run the next possible evaluation, if no evaluation exist it sticks with the value of  the recent evaluation.
+//if all are truthy it returns the last value.
+// console.log(0 && 'Jonas');
+// console.log(7 && "Samuel");
+// console.log('Hello' && 23 && null && 'samuel');
+
+/*
+THE NULLISH COALISCING OPERATOR
+=>the alternative evaluation run only when the first is null or undefined.
+*/
+
+restaurant.numguest = 0;
+const guest = restaurant.numguest || 0;
+// console.log(guest);
+
+const guestCorrect = restaurant.numguest ?? 0;
+// console.log(guestCorrect);
+
+
+/*
+LOGICAL aSSIGNMENT OPERATOR
+=>if the value of the first comparison is truthy, the "&&" assigns a value to a variable
+=>
+*/
+
+// const rest1 = {
+//     name: 'Capri',
+//     numGuest: 20
+// }
+
+const rest1 = {
+    name: 'Capri',
+    numGuest: 0
+}
+
+const rest2 = {
+    name: 'La Piazzi',
+    owner: "Giovanni Rossi"
+}
+
+// rest1.numGuest = rest1.numGuest || 10;
+// rest2.numGuest = rest2.numGuest || 10;
+// console.log(rest1);
+// console.log(rest2);
+
+rest1.numGuest ||= 10;
+rest2.numGuest ||= 10;
+console.log(rest1);
+console.log(rest2);
+
+// rest1.numGuest ??= 10;
+// rest2.numGuest ??= 10;
+// console.log(rest1);
+// console.log(rest2);
+
+
+rest1.owner = rest1.owner && "<ANONYMOUS>";
+rest2.owner = rest2.owner && "<ANONYMOUS>";
+console.log(rest1);
+console.log(rest2);
 
 
 
