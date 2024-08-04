@@ -927,7 +927,7 @@ const restaurant = {
     },
 
     orderPizza: function (mainIngredient, ...otherIngredients) {
-        // console.log(mainIngredient, otherIngredients);
+        console.log(mainIngredient, otherIngredients);
     }
 
 };
@@ -992,7 +992,7 @@ const restaurant = {
 // console.log(goodarr);
 
 const newMenu = [...restaurant.mainMenu, "Fried rice"];
-// console.log(newMenu);
+console.log(newMenu);
 
 // //shallow copy array
 // const mainMenuCopy = [...restaurant.mainMenu];
@@ -1025,17 +1025,17 @@ const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
 
 
 // //next
-// const add = function (...numbers) {
-//     let count = 0
-//     for (let i = 0; i < numbers.length; i++) {
-//         count += numbers[i];
-//     }
-//     console.log(count);
-// }
+const add = function (...numbers) {
+    let count = 0
+    for (let i = 0; i < numbers.length; i++) {
+        count += numbers[i];
+    }
+    console.log(count);
+}
 
-// add(1, 2, 3);
-// add(4, 5, 6, 7, 8);
-// add(9, 10, 11, 12, 13, 14, 15);
+add(1, 2, 3);
+add(4, 5, 6, 7, 8);
+add(9, 10, 11, 12, 13, 14, 15);
 
 // // //using spread operator
 // let xl = [3, 27, 97];
@@ -1053,8 +1053,8 @@ const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
 // console.log(e, d, others);
 
 // //spread and rest pattern on array.
-// const [pizza, , rissito, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
-// console.log(pizza, rissito, otherFood);
+const [pizza, , rissito, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(pizza, rissito, otherFood);
 
 // //destructuring and rest pattern on object.
 // const { sat, ...otherweekdays } = restaurant.openingHour;
@@ -1067,7 +1067,8 @@ const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
 
 
 // //rest parameter
-// let user_1_Order = restaurant.orderPizza('Onions', 'Spinach', 'Broccolli', 'Cabbage');
+let user_1_Order = restaurant.orderPizza('Onions', 'Spinach', 'Broccolli', 'Cabbage');
+console.log(user_1_Order);
 
 
 // /*
@@ -1078,17 +1079,17 @@ const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
 console.log("===OR===");
 //will return the first truthy value of the operand
 // // console.log(3 || 'Samu');
-// // console.log('' || 'Samuel');
-// // console.log(true || 0);
-// // console.log(undefined || null);
-// // console.log('' || 'Samuel');
-// // console.log(window);
+// console.log('' || 'Samuel');
+// console.log(true || 0);
+console.log(undefined || null || NaN);
+console.log('' || 'Samuel');
 
 console.log("===AND===");
+//will return the first falsy value of the operand
 //=>if the evaluation is truth, it moves and run the next possible evaluation, if no evaluation exist it sticks with the value of  the recent evaluation.
 //if all are truthy it returns the last value.
-// console.log(0 && 'Jonas');
-// console.log(7 && "Samuel");
+console.log(0 && 'Jonas');
+// console.log(7 && "Samuel"); 
 // console.log('Hello' && 23 && null && 'samuel');
 
 /*
@@ -1125,10 +1126,10 @@ const rest2 = {
     owner: "Giovanni Rossi"
 }
 
-// rest1.numGuest = rest1.numGuest || 10;
-// rest2.numGuest = rest2.numGuest || 10;
-// console.log(rest1);
-// console.log(rest2);
+rest1.numGuest = rest1.numGuest || 10;
+rest2.numGuest = rest2.numGuest || 10;
+console.log(rest1);
+console.log(rest2);
 
 rest1.numGuest ||= 10;
 rest2.numGuest ||= 10;
