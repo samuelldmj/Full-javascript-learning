@@ -54,3 +54,6 @@ JS engine[heap and call stack], c++ bindings, callback Queue(timer, data).
 ## * you use a curly bracket to destructure objects
 ## * the variable must match the property you want to unpack
 ## * since the order does not matter, we don't need to skip by making spaces but we need the properties to unpack.
+
+## Object:
+

@@ -890,47 +890,47 @@ the variable must match the property you want to unpack
 since the order does not matter, we don't need to skip by making spaces but we need the properties to unpack.
 */
 
-const restaurant = {
-    name: "Classico Italiano",
-    location: "Via Angelino 23, Firenze italy ",
-    categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
-    starterMenu: ["Foccasia", "Brusheta", "Garlic Bread", "Caprese salad"],
-    mainMenu: ['Pizza', "pasta", "Rissito"],
-    order: function (starterMenuIndex, mainMenuIndex) {
-        //return an array of the item selected from the both properties in the object
-        return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
-    },
-    openingHour: {
-        thu: {
-            open: 12,
-            close: 22
-        },
+// const restaurant = {
+//     name: "Classico Italiano",
+//     location: "Via Angelino 23, Firenze italy ",
+//     categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
+//     starterMenu: ["Foccasia", "Brusheta", "Garlic Bread", "Caprese salad"],
+//     mainMenu: ['Pizza', "pasta", "Rissito"],
+//     order: function (starterMenuIndex, mainMenuIndex) {
+//         //return an array of the item selected from the both properties in the object
+//         return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
+//     },
+//     openingHour: {
+//         thu: {
+//             open: 12,
+//             close: 22
+//         },
 
-        fri: {
-            open: 11,
-            close: 23
-        },
+//         fri: {
+//             open: 11,
+//             close: 23
+//         },
 
-        sat: {
-            open: 0,
-            close: 24
-        }
-    },
-//     //parameter as objects, use curly brackets in the function to destructure.
-//     //destructuring inside the objects using functions
-    orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = "00:00", address = 'Office' }) {
-        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
-    },
+//         sat: {
+//             open: 0,
+//             close: 24
+//         }
+//     },
+// //     //parameter as objects, use curly brackets in the function to destructure.
+// //     //destructuring inside the objects using functions
+//     orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = "00:00", address = 'Office' }) {
+//         console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
+//     },
 
-    orderPasta: function (ing1, ing2, ing3) {
-        // console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
-    },
+//     orderPasta: function (ing1, ing2, ing3) {
+//         // console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
+//     },
 
-    orderPizza: function (mainIngredient, ...otherIngredients) {
-        console.log(mainIngredient, otherIngredients);
-    }
+//     orderPizza: function (mainIngredient, ...otherIngredients) {
+//         console.log(mainIngredient, otherIngredients);
+//     }
 
-};
+// };
 
 
 // restaurant.orderDelivery({
@@ -991,8 +991,8 @@ const restaurant = {
 // const goodarr = [1, 2, 3, ...arr];
 // console.log(goodarr);
 
-const newMenu = [...restaurant.mainMenu, "Fried rice"];
-console.log(newMenu);
+// const newMenu = [...restaurant.mainMenu, "Fried rice"];
+// console.log(newMenu);
 
 // //shallow copy array
 // const mainMenuCopy = [...restaurant.mainMenu];
@@ -1014,7 +1014,7 @@ console.log(newMenu);
 // // restaurant.orderPasta(...ingredients);
 
 // //spread operation on objects
-const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
+// const newRestaurants = { founded: 2023, ...restaurant, founder: "Sam Mas" }
 // console.log(newRestaurants);
 
 // //shallow copying
@@ -1030,7 +1030,7 @@ const add = function (...numbers) {
     for (let i = 0; i < numbers.length; i++) {
         count += numbers[i];
     }
-    console.log(count);
+    // console.log(count);
 }
 
 add(1, 2, 3);
@@ -1053,8 +1053,8 @@ add(9, 10, 11, 12, 13, 14, 15);
 // console.log(e, d, others);
 
 // //spread and rest pattern on array.
-const [pizza, , rissito, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
-console.log(pizza, rissito, otherFood);
+// const [pizza, , rissito, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// console.log(pizza, rissito, otherFood);
 
 // //destructuring and rest pattern on object.
 // const { sat, ...otherweekdays } = restaurant.openingHour;
@@ -1067,8 +1067,8 @@ console.log(pizza, rissito, otherFood);
 
 
 // //rest parameter
-let user_1_Order = restaurant.orderPizza('Onions', 'Spinach', 'Broccolli', 'Cabbage');
-console.log(user_1_Order);
+// let user_1_Order = restaurant.orderPizza('Onions', 'Spinach', 'Broccolli', 'Cabbage');
+// console.log(user_1_Order);
 
 
 // /*
@@ -1082,14 +1082,14 @@ console.log("===OR===");
 // console.log('' || 'Samuel');
 // console.log(true || 0);
 console.log(undefined || null || NaN);
-console.log('' || 'Samuel');
+// console.log('' || 'Samuel');
 
 console.log("===AND===");
 //will return the first falsy value of the operand
 //=>if the evaluation is truth, it moves and run the next possible evaluation, if no evaluation exist it sticks with the value of  the recent evaluation.
 //if all are truthy it returns the last value.
-console.log(0 && 'Jonas');
-// console.log(7 && "Samuel"); 
+// console.log(0 && 'Jonas');
+// console.log(7 && "Samuel");
 // console.log('Hello' && 23 && null && 'samuel');
 
 /*
@@ -1097,11 +1097,11 @@ THE NULLISH COALISCING OPERATOR
 =>the alternative evaluation run only when the first is null or undefined.
 */
 
-restaurant.numguest = 0;
-const guest = restaurant.numguest || 0;
+// restaurant.numguest = 0;
+// const guest = restaurant.numguest || 0;
 // console.log(guest);
 
-const guestCorrect = restaurant.numguest ?? 0;
+// const guestCorrect = restaurant.numguest ?? 0;
 // console.log(guestCorrect);
 
 
@@ -1128,13 +1128,13 @@ const rest2 = {
 
 rest1.numGuest = rest1.numGuest || 10;
 rest2.numGuest = rest2.numGuest || 10;
-console.log(rest1);
-console.log(rest2);
+// console.log(rest1);
+// console.log(rest2);
 
 rest1.numGuest ||= 10;
 rest2.numGuest ||= 10;
-console.log(rest1);
-console.log(rest2);
+// console.log(rest1);
+// console.log(rest2);
 
 // rest1.numGuest ??= 10;
 // rest2.numGuest ??= 10;
@@ -1144,21 +1144,185 @@ console.log(rest2);
 
 rest1.owner = rest1.owner && "<ANONYMOUS>";
 rest2.owner = rest2.owner && "<ANONYMOUS>";
-console.log(rest1);
-console.log(rest2);
+// console.log(rest1);
+// console.log(rest2);
 
 
+/*
+The for-of loop
+
+*/
+
+// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// for (const item of menu) {
+//     // console.log(item);
+// }
+
+//indicating the index
+// for (const item of menu.entries()) {
+//     // console.log(item);
+// }
+
+//cleaner way
+// for (const item of menu.entries()) {
+//     // console.log(`${item[0] + 1}: ${item[1]}`);
+// }
+
+//using destructuring
+// for (const [i, el] of menu.entries()) {
+//     // console.log(`${i + 1}: ${el}`);
+// }
 
 
+/*
+OBJECT LITERALS
+=>different way to render objects
+=>if want to use variable name as property name you have to put it inside square bracket.
+*/
+
+// const openingHour = {
+//     thu: {
+//         open: 12,
+//         close: 22
+//     },
+
+//     fri: {
+//         open: 11,
+//         close: 23
+//     },
+
+//     sat: {
+//         open: 0,
+//         close: 24
+//     }
+// };
+
+let weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+const openingHour = {
+    [weekdays[3]]: {
+        open: 12,
+        close: 22
+    },
+
+    fri: {
+        open: 11,
+        close: 23
+    },
+
+    // [`day-${2 + 4}`]: {
+    //     open: 0,
+    //     close: 24
+    // },
+    [weekdays[6]]: {
+        open: 0,
+        close: 24
+    }
+};
 
 
+const restaurant = {
+    name: "Classico Italiano",
+    location: "Via Angelino 23, Firenze italy ",
+    categories: ['italians', 'Pizzeria', 'Vegetarian', "Organic"],
+    starterMenu: ["Foccasia", "Brusheta", "Garlic Bread", "Caprese salad"],
+    mainMenu: ['Pizza', "pasta", "Rissito"],
+    //using Es6 enhanced objects literals
+    order(starterMenuIndex, mainMenuIndex) {
+        //return an array of the item selected from the both properties in the object
+        return [this.starterMenu[starterMenuIndex], this.mainMenu[mainMenuIndex]];
+    },
+    // openingHour: openingHour,
+
+    //using Es6 enhanced objects literals
+    openingHour,
+
+    //     //parameter as objects, use curly brackets in the function to destructure.
+    //     //destructuring inside the objects using functions
+    orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = "00:00", address = 'Office' }) {
+        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
+    },
+    //using Es6 enhanced objects literals
+    orderPasta(ing1, ing2, ing3) {
+        // console.log(`Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}.`);
+    },
+
+    orderPizza: function (mainIngredient, ...otherIngredients) {
+        console.log(mainIngredient, otherIngredients);
+    }
+
+};
+
+// console.log(restaurant);
 
 
+/*
+optional chaining
+*/
+
+//using the if to catch errors
+if (restaurant.openingHour) {
+    // console.log(restaurant.openingHour.mon.open);
+}
+
+//short circuiting
+if (restaurant.openingHour && restaurant.openingHour.mon) {
+    // console.log(restaurant.openingHour.mon.open);
+}
+
+//optional chaining
+// console.log(restaurant.openingHour.mon?.open);
+
+//more examples
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+for (const day of days) {
+    const open = restaurant.openingHour[day]?.open ?? 'closed';
+    // console.log(open);
+}
+
+//with methods
+// console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+
+//with Arrays
+const user = [{ name: 'Sam Bolu', email: 'samuelldmj@mail.com' }];
+// console.log(user[0]?.name ?? 'User does not exist');
+
+//without optional chaining
+if (user.length > 0) {
+    // console.log(user[0].name);
+} else {
+    'User is empty';
+}
 
 
+/*
+Looping Objects: Object Keys, Values, and Entries
+*/
+
+//object keys
+const properties = Object.keys(openingHour);
+// console.log(properties);
+
+// console.log(`We are open ${properties} a week`);
+let openDays = `We are open ${properties.length} days a week: `;
+for (const day of properties) {
+    openDays += `${day} `;
+}
+// console.log(openDays);
 
 
+//object keys
+const values = Object.values(openingHour);
+// console.log(values);
 
+//entire object using entries method
+const entries = Object.entries(openingHour);
+console.log(entries);
+
+//using for of loop
+for (const [key, { open, close }] of entries) {
+    console.log(`on ${key} we open at ${open} and close at ${close}`);
+}
 
 
 
