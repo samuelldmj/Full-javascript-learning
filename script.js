@@ -523,11 +523,10 @@ let dataVal = [];
 let years = [1990, 1995, 1997, 2000, 2005, 2007];
 let ages5 = [];
 
-// for( let item = 0; item < years.length; item++)
-// {
-//     ages5.push(2037 - years[item]);
-// }
-// console.log(ages5);
+for (let item = 0; item < years.length; item++) {
+    ages5.push(2037 - years[item]);
+}
+console.log(ages5);
 
 
 //continue and break
@@ -1210,6 +1209,7 @@ const openingHour = {
         close: 23
     },
 
+    //any property value can be used here.
     // [`day-${2 + 4}`]: {
     //     open: 0,
     //     close: 24
@@ -1240,7 +1240,7 @@ const restaurant = {
     //     //parameter as objects, use curly brackets in the function to destructure.
     //     //destructuring inside the objects using functions
     orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time = "00:00", address = 'Office' }) {
-        console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
+        // console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} at ${time}, to ${address}`);
     },
     //using Es6 enhanced objects literals
     orderPasta(ing1, ing2, ing3) {
@@ -1248,7 +1248,7 @@ const restaurant = {
     },
 
     orderPizza: function (mainIngredient, ...otherIngredients) {
-        console.log(mainIngredient, otherIngredients);
+        // console.log(mainIngredient, otherIngredients);
     }
 
 };
@@ -1317,16 +1317,51 @@ const values = Object.values(openingHour);
 
 //entire object using entries method
 const entries = Object.entries(openingHour);
-console.log(entries);
+// console.log(entries);
 
 //using for of loop
 for (const [key, { open, close }] of entries) {
-    console.log(`on ${key} we open at ${open} and close at ${close}`);
+    // console.log(`on ${key} we open at ${open} and close at ${close}`);
 }
 
 
+/*
+SETS
+=> you can not retrieve value from a set
+*/
 
+const orderSet = new Set(['pizza', 'pasta', 'pizza', 'macaroni', 'pasta']);
+//duplicate values are reduced to one.
+// console.log(orderSet);
+//size
+// console.log(orderSet.size);
+//check what element is available
+// console.log(orderSet.has('bread'));
+// console.log(orderSet.has('pasta'));
 
+//adding elements
+orderSet.add('slim pasta');
+console.log(orderSet);
+
+//deleting elements
+// orderSet.delete('pasta');
+// console.log(orderSet);
+// console.log(orderSet.has('pasta'));
+
+//deleting all elements from a set
+// orderSet.clear();
+// console.log(orderSet);
+
+//looping set
+// for (let el of orderSet) console.log(el);
+
+//more examples
+const staff = new Set(['chef', 'cleaner', 'messenger', 'chef', 'bar-man', 'cleaner'])
+console.log(staff);
+
+//using spread operator
+let new_staff_array = [...staff];
+console.log(new_staff_array);
 
 
 
