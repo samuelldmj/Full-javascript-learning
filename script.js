@@ -1,5 +1,5 @@
-'use strict';
-const prompt = require('prompt-sync')();
+// 'use strict';
+// const prompt = require('prompt-sync')();
 
 //the console was built to execute small pieces of code
 //we can run javascript on a page by linking it to the HTML file with the script tag
@@ -270,7 +270,7 @@ SECTION 2
 //FUNCTIONS
 //===============
 function logger() {
-    console.log("My name is Samuel")
+    // console.log("My name is Samuel")
 }
 
 //calling===inovking===running
@@ -1416,21 +1416,167 @@ for (let [key, val] of question) {
 // console.log(result1);
 
 //map to array
-console.log([...question]);
-console.log([...question.keys()]);
-console.log([...question.values()]);
+// console.log([...question]);
+// console.log([...question.keys()]);
+// console.log([...question.values()]);
 
 
 
+/*
+WORKING WITH STRING
+=>they are immutable
+*/
+
+const airplane = "SAM AIRLINE NIGERIA";
+const plane = "A320kc";
+// console.log(airplane[0]);
+// console.log(plane[2]);
+// console.log("B427"[3]);
+// console.log(airplane.length);
+// console.log(plane.length);
+
+//these methods are case sensitive it returns [-1] if exact character not found
+//they return the last occurrence of a string in the case of character occuring more than ones
+// console.log(airplane.indexOf('a'));
+// console.log(airplane.lastIndexOf('i'));
+
+// console.log(airplane.indexOf('A'));
+// console.log(airplane.lastIndexOf('I'));
+
+//index count based on first character S
+// console.log(airplane.indexOf('SAM'));
+
+//slicing
+// console.log(airplane.slice(4));
+// console.log(airplane.slice(4, 7));
+
+// console.log(airplane.slice(0, airplane.indexOf(' ')));
+// console.log(airplane.slice(airplane.lastIndexOf(' ')));
+
+//negative slicing: from the back
+// console.log(airplane.slice(-3));
+// console.log(airplane.slice(1, -3));
+
+// console.log(airplane.toLowerCase());
+// console.log(plane.toUpperCase());
+
+//make passenger sAmuEL to Samuel
+let passenger = "sAmuEL";
+let passengerLower = passenger.toLowerCase();
+let passengerCorrect = passengerLower[0].toUpperCase() + passengerLower.slice(1)
+// console.log(passengerCorrect);
 
 
+//comparing email
+let emailFormat = 'hello@mail.io';
+let user1InputtedEmail = ' Hello@mail.Io';
+
+if (user1InputtedEmail === emailFormat) {
+    console.log('login');
+} else {
+    // console.log("Invalid Email");
+}
+
+let user_1_trim = user1InputtedEmail.trim();
+let user_1_corrected = user_1_trim.toLowerCase();
+//oneline
+let oneLine_user_1_correction = user1InputtedEmail.toLowerCase().trim();
 
 
+// console.log(user_1_corrected);
+// console.log(user1InputtedEmail);
+// console.log(oneLine_user_1_correction);
 
 
+//replacing
+let priceNG = '289,58#';
+let priceUS = priceNG.replace(',', '.').replace('#', '$')
+// console.log(priceUS);
+
+let info2 = "All passenger should come to boarding door 27. Boarding door 27!!!";
+let infoReplaced = info2.replace('door', 'gate');
+// console.log(infoReplaced);
+//using reexp
+let infoRegex = info2.replace(/door/g, 'gate');
+// console.log(infoRegex);
+
+//boolean
+const plane2 = 'A352bc';
+// console.log(plane2.includes('352'));
+// console.log(plane2.includes('Air'));
+// console.log(plane2.startsWith('Airbus'));
+
+//practise
+const checkBaggage = function (items) {
+    let searchBaggage = items.toLowerCase();
+
+    if (searchBaggage.includes('knife') || searchBaggage.includes('guns')) {
+        return 'You are not allowed onboard the plane';
+    } else {
+        return 'Welcome aboard!';
+    }
+}
+
+let passenger_1 = checkBaggage('clothes, socks and books');
+let passenger_2 = checkBaggage('knife, phones and book');
+let passenger_3 = checkBaggage('guns, and a coffee');
+let passenger_4 = checkBaggage('clothes and Laptop')
+
+// console.log(passenger_1);
+// console.log(passenger_2);
+// console.log(passenger_3);
+// console.log(passenger_4);
 
 
+//split strings
+console.log('a+very+nice+string'.split('+'));
+console.log('Samuel Boluwatife'.split(' '));
+let [firstName2, lastName2] = 'samuel Boluwatife'.split(' ')
 
+let fullName1 = ['Mr.', firstName2, lastName2.toUpperCase()].join(' ');
+// console.log(fullName1);
+
+
+//capitalizing first character using custon function
+
+const firstCharacterToUpper = function (character) {
+    let names = [];
+    let ele = character.toLowerCase().split(' ')
+    for (let n of ele) {
+
+        names.push(n[0].toUpperCase() + n.slice(1));
+    }
+    return names.join(' ');
+}
+
+// console.log(firstCharacterToUpper('SaMuEL boluwatife oluwadamilare'));
+// console.log(firstCharacterToUpper('SaMuEL moyin'));
+// console.log(firstCharacterToUpper('SaMuEL ngozi'));
+
+
+//string padding
+const info3 = 'Go to gate 23!'
+// console.log(info3.padStart(25, '#'));
+let info3a = info3.padStart(20, '#').padEnd(30, '#')
+// console.log(info3a);
+
+//masking creditCard
+
+const maskingCreditCard = function (val) {
+    const valTostring = val.toString();
+    const lastFourDigit = valTostring.slice(-4);
+    return lastFourDigit.padStart(valTostring.length, '*');
+}
+
+//first call got approximated due to largeness
+// console.log(maskingCreditCard(646564654464647545));
+// console.log(maskingCreditCard('456746764646564654464646854'));
+// console.log(maskingCreditCard(64676545674));
+
+
+//repeat method
+const info4 = "Bad Weather... all passengers would need to be patient \n ";
+// console.log(info4.repeat(5));
 
 
 
