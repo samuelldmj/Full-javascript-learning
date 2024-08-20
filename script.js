@@ -1529,12 +1529,12 @@ let passenger_4 = checkBaggage('clothes and Laptop')
 
 
 //split strings
-console.log('a+very+nice+string'.split('+'));
-console.log('Samuel Boluwatife'.split(' '));
+// console.log('a+very+nice+string'.split('+'));
+// console.log('Samuel Boluwatife'.split(' '));
 let [firstName2, lastName2] = 'samuel Boluwatife'.split(' ')
 
 let fullName1 = ['Mr.', firstName2, lastName2.toUpperCase()].join(' ');
-// console.log(fullName1);
+// console.log(fullName1);  
 
 
 //capitalizing first character using custon function
@@ -1558,7 +1558,7 @@ const firstCharacterToUpper = function (character) {
 const info3 = 'Go to gate 23!'
 // console.log(info3.padStart(25, '#'));
 let info3a = info3.padStart(20, '#').padEnd(30, '#')
-// console.log(info3a);
+console.log(info3a);
 
 //masking creditCard
 
@@ -1575,12 +1575,50 @@ const maskingCreditCard = function (val) {
 
 
 //repeat method
-const info4 = "Bad Weather... all passengers would need to be patient \n ";
+const info4 = "Bad Weather... all passengers would need to be patient\n ";
 // console.log(info4.repeat(5));
 
+//working with string practise
+
+const flights =
+    `_Delayed_Departure;fao9366109;txl2133158440;11:25
+    +_Arrival; bru0943384722; fao937666109;11:45
+    +_Delayed_Arrival;hel7439299980;fao93766109;12:05
+    +_Departure;fao9366109;txl23236399855;12:30
+     `;
 
 
+// const getCode = str => str.slice(0, 3).toUpperCase();
 
+// for (const flight of flights.split('+')) {
+//     const [type, from, to, time] = flight.split(';');
+//     let output2 =
+//         `${type.startsWith('_Delayed') ? "🔴" : ''}${type.replace(/_/g, ' ')} from ${getCode(from)} to ${getCode(to)} (${time.replace(/:/g, 'h')})`.padStart(15)
+//     console.log(output2);
+// }
+
+
+/*
+MORE FUNCTION
+*/
+
+let bookings = [];
+
+const createBooking = function (flight1, numPassengers = 1, price = 199 * numPassengers) {
+
+    let booking = {
+        flight1,
+        numPassengers,
+        price
+    };
+    bookings.push(booking)
+    return booking;
+}
+
+console.log(createBooking('LH42', 5));
+console.log(createBooking('NY77', 20));
+console.log(createBooking('TX54', 10));
+console.log(createBooking('FR22', 24));
 
 
 
