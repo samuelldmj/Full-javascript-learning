@@ -1615,20 +1615,81 @@ const createBooking = function (flight1, numPassengers = 1, price = 199 * numPas
     return booking;
 }
 
-console.log(createBooking('LH42', 5));
-console.log(createBooking('NY77', 20));
-console.log(createBooking('TX54', 10));
-console.log(createBooking('FR22', 24));
+// console.log(createBooking('LH42', 5));
+// console.log(createBooking('NY77', 20));
+// console.log(createBooking('TX54', 10));
+// console.log(createBooking('FR22', 24));
+
+const oneWord = function (str) {
+    return str.replace(/ /g, '').toLowerCase();
+}
+
+const upperFirstWord = function (str) {
+
+    const [first, ...other] = str.split(' ');
+    return [first.toUpperCase(), ...other].join(' ');
+}
+
+const transformer = function (wor, fn) {
+    console.log(`Original String: ${wor}`);
+    console.log(`Transformed String: ${fn(wor)}`);
+    console.log(`Transformed by: ${fn.name} `);
+}
+
+// transformer('JavaScript is the best ', upperFirstWord);
+// transformer('JavaScript is the best ', oneWord);
 
 
 
+const greet = function (greeting) {
+    return function (name) {
+        console.log(`${greeting} ${name}`);
+    };
+
+}
+
+// const greeterHey = greet('Hey')
+// greeterHey('Sam');
+
+//arrow function
+const greet2 = (greeting) => (name) => {
+    console.log(`${greeting} ${name}`);
+}
+
+// let greetHey2 = greet2('Hello');
+// greetHey2('Bolu');
+
+const lufthansa = {
+    airline: 'lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    book(flightNum, names) {
+        console.log(`${names} books a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
+        this.bookings.push({ flight: `${this.airline} flight ${this.iataCode}${flightNum}`, names })
+    }
+
+}
 
 
+// lufthansa.book(239, 'Samuel Boluwatife');
+// console.log(lufthansa.bookings);
+// lufthansa.book(635, 'Samuel Mercy');
 
+//USING EXTERNAL FUNCTION TO GET THE BOOK METHOD FROM THE LUFTHANSA OBJECT
+const book = lufthansa.book
 
+const eurowings = {
+    airline: 'eurowings',
+    iataCode: 'EW',
+    bookings: [],
+}
 
+//using call method to distinguish which book methods that should be called as result of the this keyword in lufthansa object
+book.call(eurowings, 424, 'Daniel koko')
+console.log(eurowings);
 
-
+const flightData = [583, 'Sam Mas']
+book.call(eurowings, ...flightData)
 
 
 
