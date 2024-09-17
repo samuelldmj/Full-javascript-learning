@@ -1640,21 +1640,31 @@ const transformer = function (wor, fn) {
 // transformer('JavaScript is the best ', oneWord);
 
 
+//function returning function
+// const greet = function (greeting) {
+//     return function (name) {
+//         console.log(`${greeting} ${name}`);
+//     };
 
-const greet = function (greeting) {
-    return function (name) {
-        console.log(`${greeting} ${name}`);
-    };
-
-}
+// }
 
 // const greeterHey = greet('Hey')
 // greeterHey('Sam');
 
 //arrow function
-const greet2 = (greeting) => (name) => {
-    console.log(`${greeting} ${name}`);
+// const greet2 = (greeting) => (name) => {
+//     console.log(`${greeting} ${name}`);
+// }
+
+const addTax = (rate) => (val) => {
+    rate += rate * val;
+    return `Your Tax rate is ${rate}, on an income of ${val} dollar(s)`;
 }
+
+let taxable = addTax(0.1);
+// console.log(taxable(1000));
+
+
 
 // let greetHey2 = greet2('Hello');
 // greetHey2('Bolu');
@@ -1676,6 +1686,7 @@ const lufthansa = {
 // lufthansa.book(635, 'Samuel Mercy');
 
 //USING EXTERNAL FUNCTION TO GET THE BOOK METHOD FROM THE LUFTHANSA OBJECT
+/*This book constant is now a function representing the method book from the object. This will return an error because the method refered to the object by the this keyword. You can not use this keyword in traditional function except in method of an object.*/
 const book = lufthansa.book
 
 const eurowings = {
@@ -1684,22 +1695,153 @@ const eurowings = {
     bookings: [],
 }
 
-//using call method to distinguish which book methods that should be called as result of the this keyword in lufthansa object
-book.call(eurowings, 424, 'Daniel koko')
-console.log(eurowings);
+//using call method to distinguish which book methods that should be called as result of the THIS keyword in lufthansa object
+book.call(eurowings, 424, 'Daniel koko');
+// console.log(eurowings);
 
-const flightData = [583, 'Sam Mas']
-book.call(eurowings, ...flightData)
+const flightData = [583, 'Sam Mas'];
+// book.call(eurowings, ...flightData)
+
+//bind method
+//this binds a function to a method in an object
+const bookEw = book.bind(eurowings);
+const bookLf = book.bind(lufthansa);
+// bookEw(235, "Dan San");
+// bookLf(424, "San Dan");
+
+//more binding
+let bookEw24 = book.bind(eurowings, 254);
+bookEw24('Adewole Clement');
 
 
+//eventlistner
+lufthansa.planes = 300;
+lufthansa.buyplanes = function () {
+    console.log(this);
+
+    this.planes++;
+    // console.log(this.planes);
+}
+
+// let buyPlaneBtn = document.querySelector('.buy');
+
+// buyPlaneBtn.addEventListener('click', lufthansa.buyplanes.bind(lufthansa));
 
 
+/*
+Closure
+*/
+
+const secureBooking = function () {
+    let passengerCount = 0;
+
+    return () => {
+        passengerCount++;
+        console.log(`${passengerCount} passengers`);
+    }
+}
+
+const booker = secureBooking()
+// booker()
+// console.dir(booker);
 
 
+let f;
+let g = function () {
+    const a = 23;
+
+    f = function () {
+        console.log(a * 2);
+    }
+}
+
+const h = function () {
+    const b = 777;
+
+    f = function () {
+        console.log(b * 2);
+    }
+}
 
 
+// g();
+// f();
+// h();
+// f();
 
 
+/*
+ARRAY AND ARRAY METHODS;
+*/
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+//SLICE
+// console.log(arr.slice(2));
+// console.log(arr.slice(1, -2));
+
+//SPLICE
+// console.log(arr.splice(2));
+// console.log(arr.splice(1, 2));
+// console.log(arr);
+
+//REVERSE
+let arr2 = ['f', 'g', 'h', 'i'];
+// console.log(arr2.reverse());
+// console.log(arr2);
+
+//CONCAT
+let letters = arr.concat(arr2);
+// console.log([...arr, ...arr2]);
+// console.log(letters);
+
+//index based selection
+// console.log(arr[0]);
+// console.log(arr.at(0));
+
+//GETTING THE LAST ELEMENT OF AN ARRAY
+// console.log(arr.slice(-1)[0]);
+// console.log(arr[arr.length - 1]);
+// console.log(arr.at(-1));
+
+//ForEach loop on array
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// for (let [i, movement] of movements.entries()) {
+//     if (movement > 0) {
+//         console.log(`Transaction ${i + 1}, You deposited: ${movement}`);
+//     } else {
+//         console.log(`Transaction ${i + 1}, You withdraw: ${Math.abs(movement)}`);
+//     }
+// }
+
+//using FOREACH LOOP
+// movements.forEach((el) => {
+//     if (el > 0) {
+//         console.log(`You deposited ${el}`);
+//     } else {
+//         console.log(`You withdraw ${Math.abs(el)}`);
+//     }
+// })
+
+//el = element, i = index, arr = all the element of the array.
+// movements.forEach((el, i, arr) => {
+//     if (el > 0) {
+//         console.log(`Transaction ${i + 1}, You deposited: ${el}`);
+//     } else {
+//         console.log(`Transaction ${i + 1}, You withdraw: ${Math.abs(el)}`);
+//     }
+// })
+
+//ForEach loop on MAP AND SET
+const currencies = new Map([
+    ['USD', 'United States dollar'],
+    ['EUR', 'Euro'],
+    ['GBP', 'Pound sterling'],
+]);
+
+
+currencies.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
+})
 
 
 
