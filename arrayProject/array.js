@@ -61,7 +61,7 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-
+//populatng the movement card with deposits and withdrawals
 const displayMovement = function (movements) {
   movements.forEach((el, i) => {
     let type = el > 0 ? 'deposit' : 'withdrawal';
@@ -78,8 +78,22 @@ const displayMovement = function (movements) {
   });
 
 }
-console.log(containerMovements.innerHTML);
+// console.log(containerMovements.innerHTML);
 displayMovement(account1.movements);
+
+//looped through the accounts and add a username based on their fullname(which in this case is accounts.owner)
+const userNameGenerator = function (accs) {
+  accs.forEach((acc) => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(param => param[0])
+      .join('')
+  })
+}
+
+userNameGenerator(accounts)
+console.log(accounts);
 
 
 
