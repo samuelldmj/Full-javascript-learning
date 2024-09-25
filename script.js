@@ -1438,7 +1438,7 @@ const plane = "A320kc";
 //these methods are case sensitive it returns [-1] if exact character not found
 //they return the last occurrence of a string in the case of character occuring more than ones
 // console.log(airplane.indexOf('a'));
-// console.log(airplane.lastIndexOf('i'));
+console.log("lastindexof", airplane.lastIndexOf('i'));
 
 // console.log(airplane.indexOf('A'));
 // console.log(airplane.lastIndexOf('I'));
@@ -1839,24 +1839,56 @@ const currencies = new Map([
 ]);
 
 
+
 currencies.forEach((value, key) => {
-    console.log(`${key}: ${value}`);
+    // console.log(`${key}: ${value}`);
 })
 
 
+//ARRAY MAP FOREACH
+const euroToUsd = 1.1;
+
+const movementToUsd = movements.map((mov) => Math.trunc(mov * euroToUsd));
+// console.log(movements);
+// console.log(movementToUsd);
+
+//FOR-OF LOOP
+const movementToUsdFor = [];
+for (const mov of movements) {
+    movementToUsdFor.push(mov * euroToUsd);
+}
+// console.log(movementToUsdFor);
+
+//MAP working like forEach loop
+const movementsDescription = movements.map((mov, i) =>
+
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`
+);
+// console.log(movementsDescription);
 
 
+//computing usernmame using Array map and foreach
+const user4 = 'Steven Thomas Williams';
+// const username2 = user4.toLowerCase().split(' ')
+//     .map(function (params) {
+//         return params[0][0];
+//     }).join();
 
+// console.log(username2);
 
+//using arrow function
+// const username2 = user4.toLowerCase().split(' ')
+//     .map(params => params[0][0]).join('_');
+// console.log(username2);
 
-
-
-
-
-
-
-
-
+//using map
+// const userNameGenerator = function (fullName) {
+//     let username = fullName.toLowerCase().split(' ').map(params => params[0][0]).join('_');
+//     return username;
+// }
+// let user5 = 'Oluwadamilare Boluwatife Samuel'
+// console.log(userNameGenerator(user4));
+// console.log(userNameGenerator(user5));
 
 
 
