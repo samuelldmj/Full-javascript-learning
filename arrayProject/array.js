@@ -81,6 +81,17 @@ const displayMovement = function (movements) {
 // console.log(containerMovements.innerHTML);
 displayMovement(account1.movements);
 
+//displaying the bank balance
+let calCulatedBal = function (movements) {
+  const balance = movements.reduce(function (acc, el, i) {
+    return acc + el;
+  }, 0)
+
+  labelBalance.textContent = `${balance} EUR`;
+}
+
+calCulatedBal(account1.movements);
+
 //looped through the accounts and add a username based on their fullname(which in this case is accounts.owner)
 const userNameGenerator = function (accs) {
   accs.forEach((acc) => {
