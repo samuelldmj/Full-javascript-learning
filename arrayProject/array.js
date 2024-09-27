@@ -70,7 +70,7 @@ const displayMovement = function (movements) {
       `
      <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-          <div class="movements__value">${el}</div>
+          <div class="movements__value">${el}€</div>
       </div>
     `
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -87,10 +87,39 @@ let calCulatedBal = function (movements) {
     return acc + el;
   }, 0)
 
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance} €`;
 }
 
 calCulatedBal(account1.movements);
+
+//calculating the total income and expenses from movements
+let totalTransaction = function (movements) {
+  const totalIncome = movements.filter(mov => mov > 0).reduce(function (acc, el) {
+    return acc + el;
+  }, movements[0])
+
+  labelSumIn.textContent = `${totalIncome}€`;
+
+  //expenditure
+  const totalExp = movements.filter(mov => mov < 0).reduce((acc, el) => {
+    return acc + Math.abs(el);
+  }, movements[0]);
+
+  labelSumOut.textContent = `${totalExp}€`;
+
+  //interest
+  const totalInterest = movements.filter(mov => mov > 0).map(deposit => (deposit * 1.2) / 100).reduce((acc, el) => {
+    return acc + el;
+  }, movements[0]);
+
+  labelSumInterest.textContent = `${totalInterest}€`;
+
+
+}
+console.log(totalTransaction(account1.movements));
+
+
+
 
 //looped through the accounts and add a username based on their fullname(which in this case is accounts.owner)
 const userNameGenerator = function (accs) {
