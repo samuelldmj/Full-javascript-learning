@@ -6,7 +6,7 @@
 
 // Data
 const account1 = {
-  owner: 'Jonas Schmedtmann',
+  owner: 'Samuel Boluwatife',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
@@ -63,6 +63,9 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 //populatng the movement card with deposits and withdrawals
 const displayMovement = function (movements) {
+  //emptying the HTML class container then populate it.
+  containerMovements.innerHTML = '';
+
   movements.forEach((el, i) => {
     let type = el > 0 ? 'deposit' : 'withdrawal';
 
@@ -79,46 +82,43 @@ const displayMovement = function (movements) {
 
 }
 // console.log(containerMovements.innerHTML);
-displayMovement(account1.movements);
+// displayMovement(account1.movements);
 
 //displaying the bank balance
 let calCulatedBal = function (movements) {
   const balance = movements.reduce(function (acc, el, i) {
     return acc + el;
-  }, 0)
+  }, 0);
 
   labelBalance.textContent = `${balance} €`;
 }
 
-calCulatedBal(account1.movements);
+// calCulatedBal(account1.movements);
 
 //calculating the total income and expenses from movements
-let totalTransaction = function (movements) {
-  const totalIncome = movements.filter(mov => mov > 0).reduce(function (acc, el) {
+let totalTransaction = function (param) {
+  const totalIncome = param.movements.filter(mov => mov > 0).reduce(function (acc, el) {
     return acc + el;
-  }, movements[0])
+  }, param.movements[0])
 
   labelSumIn.textContent = `${totalIncome}€`;
 
   //expenditure
-  const totalExp = movements.filter(mov => mov < 0).reduce((acc, el) => {
+  const totalExp = param.movements.filter(mov => mov < 0).reduce((acc, el) => {
     return acc + Math.abs(el);
-  }, movements[0]);
+  }, param.movements[0]);
 
   labelSumOut.textContent = `${totalExp}€`;
 
   //interest
-  const totalInterest = movements.filter(mov => mov > 0).map(deposit => (deposit * 1.2) / 100).reduce((acc, el) => {
+  const totalInterest = param.movements.filter(mov => mov > 0).map(deposit => (deposit * param.interestRate) / 100).reduce((acc, el) => {
     return acc + el;
-  }, movements[0]);
+  }, param.movements[0]);
 
   labelSumInterest.textContent = `${totalInterest}€`;
 
-
 }
-console.log(totalTransaction(account1.movements));
-
-
+// totalTransaction(account1.movements);
 
 
 //looped through the accounts and add a username based on their fullname(which in this case is accounts.owner)
@@ -131,9 +131,39 @@ const userNameGenerator = function (accs) {
       .join('')
   })
 }
-
 userNameGenerator(accounts)
-console.log(accounts);
+// console.log(accounts);
+
+//Event handler for login
+let currentAccount;
+btnLogin.addEventListener('click', function (e) {
+  //prevent form from submitting
+  e.preventDefault();
+
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //Display UI and message
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`
+    // make the main app come alive 
+    containerApp.style.opacity = 100;
+
+    //clearing the input field after log in
+    inputLoginUsername.value = inputLoginPin.value = " ";
+
+    //blurring the pin field
+    // inputLoginPin.blur()
+
+
+    //display movement.
+    displayMovement(currentAccount.movements);
+    //display balance
+    calCulatedBal(currentAccount.movements);
+    //display summary
+    totalTransaction(currentAccount);
+  }
+});
 
 
 
