@@ -1285,7 +1285,7 @@ for (const day of days) {
 
 //with Arrays
 const user = [{ name: 'Sam Bolu', email: 'samuelldmj@mail.com' }];
-// console.log(user[0]?.name ?? 'User does not exist');
+// console.log('with arrays', user[0]?.name ?? 'User does not exist');
 
 //without optional chaining
 if (user.length > 0) {
@@ -1871,7 +1871,7 @@ const movementsDescription = movements.map((mov, i) =>
 const user4 = 'Steven Thomas Williams';
 // const username2 = user4.toLowerCase().split(' ')
 //     .map(function (params) {
-//         return params[0][0];
+//         return params[0];
 //     }).join();
 
 // console.log(username2);
@@ -1882,18 +1882,103 @@ const user4 = 'Steven Thomas Williams';
 // console.log(username2);
 
 //using map
-// const userNameGenerator = function (fullName) {
-//     let username = fullName.toLowerCase().split(' ').map(params => params[0][0]).join('_');
-//     return username;
+const userNameGenerator = function (fullName) {
+    let username = fullName.toLowerCase().split(' ').map(params => params[0][0]).join('_');
+    return username;
+}
+let user5 = 'Oluwadamilare Boluwatife Samuel'
+console.log(userNameGenerator(user4));
+console.log(userNameGenerator(user5));
+
+
+//ARRAY FILTER movements to deposit 
+const deposits = movements.filter(mov => mov > 0)
+// console.log(movements, 'deposits', deposits);
+
+//using fir-of loop
+// let filteredDeposits = [];
+// for (let mov of movements) {
+//     if (mov > 0) filteredDeposits.push(mov)
+
 // }
-// let user5 = 'Oluwadamilare Boluwatife Samuel'
-// console.log(userNameGenerator(user4));
-// console.log(userNameGenerator(user5));
+// console.log(filteredDeposits);
 
 
+//ARRAY FILTER movements to withdrawals
+const withdrawals = movements.filter(mov => mov < 0)
+// console.log('Withdrawals', withdrawals);
+
+// ARRAY REDUCE METHOD
+const balance = movements.reduce(function (acc, el, i) {
+    // console.log(`Iteration ${i}: ${el}: ${acc}`);
+    return acc + el;
+}, 0)
+
+// console.log(movements, balance);
+
+//using for of loop
+let sumBalance = 0;
+for (let mov of movements) {
+    sumBalance += mov;
+}
+
+// console.log(sumBalance);
+
+//maximum value
+const max = movements.reduce((pre, cur, i) => {
+    if (pre > cur) {
+        return pre
+    } else {
+        return cur;
+    }
+}, movements[0])
+console.log(max);
+
+//using foreach loop
+let maxFor = movements[0];
+movements.forEach(el => {
+    if (el > maxFor) {
+        maxFor = el;
+    }
+})
+
+// console.log(maxFor);
 
 
+/*
+METHOD CHAINING
+*/
 
+const euroToPd = 1.1;
+const totalDepositPd = movements.filter(mov => mov > 0)
+    .map(mov => mov * euroToPd).reduce((acc, mov) => acc + mov, 0);
+// console.log(totalDepositPd);
+
+
+/*
+FIND METHODS
+ */
+
+const firstWithdrawal = movements.find(mov => mov < 0)
+console.log(firstWithdrawal);
+
+const accounts = {
+    owner: 'Jessica Davis',
+    movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+    interestRate: 1.5,
+    pin: 2222,
+};
+
+// for (const [key, { open, close }] of entries) {
+//     console.log(`on ${key} we open at ${open} and close at ${close}`);
+// }
+
+// for (let [k, v] of Object.entries(accounts)) {
+//     if (k === 'owner' && v === "Jessica Davis") {
+//         console.log(k, v);
+
+//     }
+// }
 
 
 

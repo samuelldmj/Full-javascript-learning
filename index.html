@@ -5,13 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <script defer src="challenges/challenge14.js"></script>
+  <script defer src="challenges/challenge16.js"></script>
   <title>JavaScript Fundamentals – Part 1</title>
   <style>
     body {
       background: linear-gradient(to top left, #28b487, #7dd56f);
     }
-    
 
     h1 {
       font-family: sans-serif;
@@ -39,29 +38,39 @@
       border-radius: 5px;
       border: 1px solid #ccc;
       padding: 10px;
-      
     }
 
     .card button {
-      background-color: #007bff;
-      color: #fff;
+      background-color: #9fbcdb;
+      color: #110101;
       border: none;
-      border-radius: 5px;
       padding: 10px 20px;
       cursor: pointer;
+      width: 100px;
+      cursor: pointer;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
     }
   </style>
-  </head>
+</head>
+
 <body>
-<div>
+  <div>
     <h1>JavaScript Fundamentals – Part 1</h1>
   </div>
-  
+
   <div class="card">
     <form id="myForm">
       <textarea placeholder="Enter your text here"></textarea> <br />
-      <button type="submit" id="submit">Submit</button>
     </form>
+<div class="button-container">
+  <!-- <button type="button" class="buy">Buy New Plane</button> -->
+  <button type="button" class="poll">Answer Poll</button>
+</div>
   </div>
 </body>
 
