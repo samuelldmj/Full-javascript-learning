@@ -1960,14 +1960,7 @@ FIND METHODS
  */
 
 const firstWithdrawal = movements.find(mov => mov < 0)
-console.log(firstWithdrawal);
-
-const accounts = {
-    owner: 'Jessica Davis',
-    movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-    interestRate: 1.5,
-    pin: 2222,
-};
+// console.log(firstWithdrawal);
 
 // for (const [key, { open, close }] of entries) {
 //     console.log(`on ${key} we open at ${open} and close at ${close}`);
@@ -1979,8 +1972,81 @@ const accounts = {
 //     }
 // }
 
+/*
+================
+some and every methods
+*/
+console.log(movements); 
+//includes return true when it finds similar element in the array. checks for equality
+// console.log(movements.includes(-130));
 
+const anyDeposits = movements.some(mov => mov > 0);
+const anyDepositsAbove500 = movements.some(mov => mov > 500);
+// console.log(anyDeposits);
 
+//every returns true, if all of the elements meet the conditions in our call back function
+// console.log(movements.every(mov => mov > 0));
+
+//separate call back
+const deposit = mov => mov > 0;
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+
+/*
+===================
+flat and map
+*/
+const arr3 = [[1,2,3], [4,5,6], 7, 8 ];
+// console.log(arr3.flat());
+//it does not flattened nested array.
+//to flatten nested array you have to specify the depth argument
+const arr4 = [[1,2,["a","b"]], [4,5,6,["c","d","e"]], 7, 8 ];
+// console.log(arr4.flat(2));
+
+// Data
+const account1 = {
+    owner: 'Samuel Boluwatife',
+    movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+    interestRate: 1.2, // %
+    pin: 1111,
+  };
+  
+  const account2 = {
+    owner: 'Jessica Davis',
+    movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+    interestRate: 1.5,
+    pin: 2222,
+  };
+  
+  const account3 = {
+    owner: 'Steven Thomas Williams',
+    movements: [200, -200, 340, -300, -20, 50, 400, -460],
+    interestRate: 0.7,
+    pin: 3333,
+  };
+  
+  const account4 = {
+    owner: 'Sarah Smith',
+    movements: [430, 1000, 700, 50, 90],
+    interestRate: 1,
+    pin: 4444,
+  };
+  
+const accounts = [account1, account2, account3, account4];
+
+const allAccountMovement = accounts.map(mov => mov.movements);
+// console.log(allAccountMovement);
+
+let allMovementsIntoArray = allAccountMovement.flat()
+console.log(allMovementsIntoArray);
+
+let overAllBal = allMovementsIntoArray.reduce((acc, el)=> acc + el)
+console.log(overAllBal);
+
+//flatMap
+let overAllBal2 = accounts.flatMap(acc => acc.movements).reduce((acc, el) => acc + el);
+console.log(overAllBal2);
 
 
 

@@ -286,6 +286,35 @@ END OF close acct FEATURES LOGIC
 ================================================
 */
 
+/* 
+================================================
+loan FEATURES LOGIC
+================================================
+*/
+//Loan Condition is granted if there have been a 10% deposit of the loan requested.
+//that is, if you are requesting 30000, you must have deposited about 3000 for your loan to be granted
+
+btnLoan.addEventListener('click', function(e){
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+  if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1) ){
+    // logic
+    currentAccount.movements.push(amount);
+
+    //update transaction
+    updateTransaction(currentAccount);    
+  }
+
+   //clear input field
+   inputLoanAmount.value = '';
+})
+
+/* 
+================================================
+end of loan FEATURES LOGIC
+================================================
+*/
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
