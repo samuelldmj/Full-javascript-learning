@@ -1976,9 +1976,12 @@ const accounts = {
 // for (let [k, v] of Object.entries(accounts)) {
 //     if (k === 'owner' && v === "Jessica Davis") {
 //         console.log(k, v);
-
 //     }
 // }
+
+
+
+
 
 
 

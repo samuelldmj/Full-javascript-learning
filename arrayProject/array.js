@@ -85,12 +85,14 @@ const displayMovement = function (movements) {
 // displayMovement(account1.movements);
 
 //displaying the bank balance
-let calCulatedBal = function (movements) {
-  const balance = movements.reduce(function (acc, el, i) {
+let calCulatedBal = function (params) {
+  //created a balance property dynamically in the logged in currentAccount.
+  //params, now represents currentAccount,
+  params.balance = params.movements.reduce(function (acc, el, i) {
     return acc + el;
   }, 0);
 
-  labelBalance.textContent = `${balance} €`;
+  labelBalance.textContent = `${params.balance}€`;
 }
 
 // calCulatedBal(account1.movements);
@@ -120,7 +122,11 @@ let totalTransaction = function (param) {
 }
 // totalTransaction(account1.movements);
 
-
+/* 
+================================================
+USERNAME GENERATOR
+==========================================
+*/
 //looped through the accounts and add a username based on their fullname(which in this case is accounts.owner)
 const userNameGenerator = function (accs) {
   accs.forEach((acc) => {
@@ -133,9 +139,44 @@ const userNameGenerator = function (accs) {
 }
 userNameGenerator(accounts)
 // console.log(accounts);
+/* 
+================================================
+END USERNAME GENERATOR
+==========================================
+*/
 
+
+/* 
+================================================
+FUNCTION THAT CALLS THE BALANCE, TOTAL TRANSACTION nd movements
+==========================================
+*/
+
+function updateTransaction(trans){
+  //display movement.
+  displayMovement(trans.movements);
+  //display balance
+  calCulatedBal(trans);
+  //display summary
+  totalTransaction(trans);
+
+}
+/* 
+================================================
+end of FUNCTION THAT CALLS THE BALANCE, TOTAL TRANSACTION nd movements
+==========================================
+*/
+
+/* 
+================================================
+LOGIN FEATURES
+==========================================
+*/
 //Event handler for login
 let currentAccount;
+//current account keeps track of each users that is signed in or logged .
+//if it is displayed on the console, it shows the data of the user in object format.
+//it was defined globally so that we can use it anywhere in our code.
 btnLogin.addEventListener('click', function (e) {
   //prevent form from submitting
   e.preventDefault();
@@ -150,21 +191,58 @@ btnLogin.addEventListener('click', function (e) {
     containerApp.style.opacity = 100;
 
     //clearing the input field after log in
-    inputLoginUsername.value = inputLoginPin.value = " ";
+    inputLoginUsername.value = inputLoginPin.value = "";
 
     //blurring the pin field
     // inputLoginPin.blur()
 
-
-    //display movement.
-    displayMovement(currentAccount.movements);
-    //display balance
-    calCulatedBal(currentAccount.movements);
-    //display summary
-    totalTransaction(currentAccount);
+//update transaction
+    updateTransaction(currentAccount)
+    
   }
 });
+/* 
+================================================
+END OF LOGIN FEATURES LOGIC
+==========================================
+*/
 
+
+
+/* 
+================================================
+TRANSFER FEATURES LOGIC
+================================================
+*/
+btnTransfer.addEventListener('click', function(e){
+  e.preventDefault();
+  let receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
+  let amount = Number(inputTransferAmount.value);
+
+  //testing the variable above
+  console.log(amount, receiverAcc);
+
+  //check that the user is not sending a negative amount
+  //check that the amount the user is sending is not above what is in the user bank balance (amount <= currentAccount.balance)
+  //check that the user is not transfering to himself
+  if(amount > 0 && receiverAcc && currentAccount.balance >= amount && receiverAcc.username !== currentAccount.username){
+    // console.log('transfer');
+
+    //similar to etc account1.movemnts.push(-amount);
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    //update transaction
+    updateTransaction(currentAccount)
+  }
+
+  inputTransferTo.value = inputTransferAmount.value = "";
+});
+/* 
+================================================
+END OF TRANSFER FEATURES LOGIC
+================================================
+*/
 
 
 
