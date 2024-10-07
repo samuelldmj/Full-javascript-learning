@@ -236,6 +236,7 @@ btnTransfer.addEventListener('click', function(e){
     updateTransaction(currentAccount)
   }
 
+  //clean the input field
   inputTransferTo.value = inputTransferAmount.value = "";
 });
 /* 
@@ -245,6 +246,45 @@ END OF TRANSFER FEATURES LOGIC
 */
 
 
+/* 
+================================================
+close acct FEATURES LOGIC
+================================================
+*/
+
+btnClose.addEventListener('click', function(e){
+  e.preventDefault();
+
+  //testing
+  // console.log('Delete')
+  let closingUsername = inputCloseUsername.value;
+  let closingPin = Number(inputClosePin.value);
+
+  if(currentAccount.username === closingUsername && currentAccount.pin === closingPin){
+    //testing
+    // console.log('Delete')
+
+    const accountsIndex = accounts.findIndex(acc => acc.username === currentAccount.username)
+    //testing
+    // console.log(accountsIndex);
+
+    //removing the user
+    accounts.splice(accountsIndex, 1)
+
+    // //hide ui
+    containerApp.style.opacity = 0; 
+  }
+
+    //clean the input field
+    inputCloseUsername.value = inputClosePin.value = ""; 
+
+})
+
+/* 
+================================================
+END OF close acct FEATURES LOGIC
+================================================
+*/
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
