@@ -61,17 +61,23 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-//populatng the movement card with deposits and withdrawals
-const displayMovement = function (movements) {
+/* 
+================================================
+populatng the movement card with deposits and withdrawals
+==========================================
+*/
+const displayMovement = function (movements, sort = false) {
   //emptying the HTML class container then populate it.
   containerMovements.innerHTML = '';
 
-  movements.forEach((el, i) => {
+  const movs = sort ? movements.slice().sort((a,b) => a -b) : movements;
+
+  movs.forEach((el, i) => {
     let type = el > 0 ? 'deposit' : 'withdrawal';
 
     let html =
-      `
-     <div class="movements__row">
+    `
+      <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
           <div class="movements__value">${el}€</div>
       </div>
@@ -84,7 +90,21 @@ const displayMovement = function (movements) {
 // console.log(containerMovements.innerHTML);
 // displayMovement(account1.movements);
 
-//displaying the bank balance
+/* 
+================================================
+end of populatng the movement card with deposits and withdrawals
+==========================================
+*/
+
+
+
+
+
+/* 
+================================================
+//displaying the bank balance and saving it dynamically to the object.
+==========================================
+*/
 let calCulatedBal = function (params) {
   //created a balance property dynamically in the logged in currentAccount.
   //params, now represents currentAccount,
@@ -96,8 +116,19 @@ let calCulatedBal = function (params) {
 }
 
 // calCulatedBal(account1.movements);
+/* 
+================================================
+end of displaying the bank balance and saving it dynamically to the object.
+==========================================
+*/
 
+
+
+/* 
+================================================
 //calculating the total income and expenses from movements
+==========================================
+*/
 let totalTransaction = function (param) {
   const totalIncome = param.movements.filter(mov => mov > 0).reduce(function (acc, el) {
     return acc + el;
@@ -121,6 +152,12 @@ let totalTransaction = function (param) {
 
 }
 // totalTransaction(account1.movements);
+/* 
+================================================
+end of calculating the total income and expenses from movements
+==========================================
+*/
+
 
 /* 
 ================================================
@@ -146,6 +183,9 @@ END USERNAME GENERATOR
 */
 
 
+
+
+
 /* 
 ================================================
 FUNCTION THAT CALLS THE BALANCE, TOTAL TRANSACTION nd movements
@@ -166,6 +206,8 @@ function updateTransaction(trans){
 end of FUNCTION THAT CALLS THE BALANCE, TOTAL TRANSACTION nd movements
 ==========================================
 */
+
+
 
 /* 
 ================================================
@@ -233,7 +275,7 @@ btnTransfer.addEventListener('click', function(e){
     receiverAcc.movements.push(amount);
 
     //update transaction
-    updateTransaction(currentAccount)
+    updateTransaction(currentAccount);
   }
 
   //clean the input field
@@ -313,6 +355,26 @@ btnLoan.addEventListener('click', function(e){
 ================================================
 end of loan FEATURES LOGIC
 ================================================
+*/
+
+
+/* 
+==========================================
+SORTING LOGIC
+==========================================
+*/
+let sorted = false;
+btnSort.addEventListener('click', function(e){
+  e.preventDefault();
+
+  displayMovement(currentAccount.movements, !sorted);
+  sorted = !sorted;
+})
+
+/* 
+==========================================
+END OF SORTING LOGIC
+==========================================
 */
 
 /////////////////////////////////////////////////

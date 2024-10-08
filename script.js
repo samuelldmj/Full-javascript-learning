@@ -1895,7 +1895,7 @@ console.log(userNameGenerator(user5));
 const deposits = movements.filter(mov => mov > 0)
 // console.log(movements, 'deposits', deposits);
 
-//using fir-of loop
+//using for-of loop
 // let filteredDeposits = [];
 // for (let mov of movements) {
 //     if (mov > 0) filteredDeposits.push(mov)
@@ -1976,7 +1976,7 @@ const firstWithdrawal = movements.find(mov => mov < 0)
 ================
 some and every methods
 */
-console.log(movements); 
+// console.log(movements); 
 //includes return true when it finds similar element in the array. checks for equality
 // console.log(movements.includes(-130));
 
@@ -2039,18 +2039,48 @@ const allAccountMovement = accounts.map(mov => mov.movements);
 // console.log(allAccountMovement);
 
 let allMovementsIntoArray = allAccountMovement.flat()
-console.log(allMovementsIntoArray);
+// console.log(allMovementsIntoArray);
 
 let overAllBal = allMovementsIntoArray.reduce((acc, el)=> acc + el)
-console.log(overAllBal);
+// console.log(overAllBal);
 
 //flatMap
 let overAllBal2 = accounts.flatMap(acc => acc.movements).reduce((acc, el) => acc + el);
-console.log(overAllBal2);
+// console.log(overAllBal2);
 
+/*
+SORTING ARRAY
+*/
+//sorting strings
+const owners = ['Sam', 'Tokunbo', 'Elon', 'Biodun'];
+// console.log(owners.sort());
+//it will mutate the original array.
+// console.log(owners);
 
+//sorting number
+//the result does not sort as expected, because it uses string to sort the digit.(that is, it convert to string and then sort)
+const bal = [200, -200, 340, -300, -20, 50, 400, -460]
+// console.log(bal.sort())
 
+//proper sorting
+//it uses sorting by comparison, it compares 2 argument
+//ascending sorting
+// let ascSorted = bal.sort((a,b) => {
+//     if(a > b) return 1;
+//     if(a < b) return -1;
+// })
 
+let ascSorted = bal.sort((a, b) => a - b )
+console.log(ascSorted);
+
+//descending sorting
+// let dscSorted = bal.sort((a,b) => {
+//     if(a > b) return -1;
+//     if(a < b) return 1;
+// })
+
+let dscSorted = bal.sort((a, b) => b - a )
+console.log(dscSorted);
 
 
 
