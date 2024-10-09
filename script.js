@@ -1982,10 +1982,10 @@ some and every methods
 
 const anyDeposits = movements.some(mov => mov > 0);
 const anyDepositsAbove500 = movements.some(mov => mov > 500);
-// console.log(anyDeposits);
+console.log(anyDepositsAbove500);
 
 //every returns true, if all of the elements meet the conditions in our call back function
-// console.log(movements.every(mov => mov > 0));
+console.log(movements.every(mov => mov > 0));
 
 //separate call back
 const deposit = mov => mov > 0;
@@ -2071,7 +2071,7 @@ const bal = [200, -200, 340, -300, -20, 50, 400, -460]
 // })
 
 let ascSorted = bal.sort((a, b) => a - b )
-console.log(ascSorted);
+// console.log(ascSorted);
 
 //descending sorting
 // let dscSorted = bal.sort((a,b) => {
@@ -2080,20 +2080,90 @@ console.log(ascSorted);
 // })
 
 let dscSorted = bal.sort((a, b) => b - a )
-console.log(dscSorted);
+// console.log(dscSorted);
+
+//more ways of creating and filling arrays.
+
+//constructor function
+const arr5 = new Array(7);  
+// console.log(arr5);
+
+//filling arrays
+// arr5.fill(1);
+arr5.fill(1, 3, 5);
+// console.log(arr5);
+
+//using array from method on the array constructor object.
+let dice100 = Array.from({length : 100}, () => Math.trunc(Math.random() * 100) + 1 );
+// console.log(dice100);
 
 
+//ArrayMethod revision
+
+//exercise 1
+//extracting array from an array of objects, then summing them all
+// let bankDeposit = accounts.flatMap(acc => acc.movements)
+// .filter(acc => acc > 0)
+// .reduce((acc, el) => acc + el)
+// console.log(bankDeposit);
+
+//exercise 2
+//counting all deposits greater than 1000
+// const numOfDeposit1000 = accounts.flatMap(acc => acc.movements)
+// .filter(mov => mov >= 1000).length
+// console.log(numOfDeposit1000); 
+
+//increment revision
+// let num = 10;
+// console.log(num++);
+
+//using reduce methods
+let numOfDeposit1000Reduce = accounts
+.flatMap(acc => acc.movements)
+.reduce((pre, cur) => (cur >= 1000 ? ++pre : pre), 0);
+// console.log(numOfDeposit1000Reduce);
+
+//exercise 3
+//calculating the sum of deposits and withdrawal at the same time.
+// let sum2 = accounts.flatMap(acc => acc.movements)
+// .reduce((pre, cur)=> {
+//     cur > 0 ? pre.deposits += cur : pre.withdrawals += cur
+//     return pre;
+// }, {deposits : 0, withdrawals: 0})
+// console.log(sum2);
+
+//alternatively
+let sum3 = accounts.flatMap(acc => acc.movements)
+.reduce((pre, cur)=> {
+    pre[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+    return pre;
+}, {deposits : 0, withdrawals: 0}) 
+// console.log(sum3);
+
+//exercise 4
+//capitalizing the first letter with some exceptions
+
+const convertTitleCase = function(sentence){
+    const exceptions = ['a','am','is', 'an', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+    let titleCase = sentence.toLowerCase().split(" ").map( word => 
+        exceptions.includes(word) ?
+         word :
+         word[0].toUpperCase() + word.slice(1)).join(" ");
+    return titleCase;
+}
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('i am a backend developer'));
+console.log(convertTitleCase('coding is very very hard'));
+console.log(convertTitleCase('this is a nice title'));
 
 
-
-
-
-
-
-
-
-
-
+/*
+============================================
+WORKING WITH NUMBEERS, DATES AND TIMEOUTS
+============================================
+*/
 
 
 
