@@ -2165,24 +2165,116 @@ WORKING WITH NUMBEERS, DATES AND TIMEOUTS
 ============================================
 */
 
+//numbers are represented internally as floating point numbers, that is why we have only one data type as number
+//base 10 are from 0-9, binary are base 2. 0 and 1.
+
+//javascript does type coersion when (+) is attached to a numerical string.
+console.log(3/10);
+
+//conversion
+// console.log(Number('23')); 
+// console.log(typeof +'23');
+// console.log(typeof '23');
+
+//parsing
+// console.log(Number.parseInt('30px'));
+// console.log(Number.parseInt('e23'));
+let flo = Number.parseFloat('2.5');
+console.log(typeof flo);
+
+// console.log(Number.isFinite('e23'));
+// console.log(Number.isFinite(23));
+// console.log(Number.isNaN('23'));
 
 
+//Math Operation
+// console.log(Math.sqrt(25));
+// console.log(25 ** (1/2));
 
+// console.log(Math.max(5,2,4,7,9));
+// console.log(Math.max(5,2,40,7,9));
+// console.log(Math.max(5,2,'40',7,9));
+// console.log(Math.max(5,2,'40px',7,9));
 
+// console.log(Math.min(5,2,40,7,9));
+//random is between 0 and 1s
+// console.log(Math.trunc(Math.random() * 6) + 1);
 
+const randomInt = (min, max) => 
+Math.trunc(Math.random() * (max - min) + 1) + min;
+// console.log(randomInt(10, 20));
 
+//Rounding Integer
+// console.log(Math.trunc(23.3))
+// console.log(Math.ceil(23.3))
+// console.log(Math.round(23.8))
+// console.log(Math.floor(23.3))
 
+// console.log(Math.trunc(-23))
+// console.log(Math.floor(-23.5))
 
+//decimal places
+console.log(+(23.4564).toFixed(2));
 
+//Remainder operator
+console.log(5 % 2); //integer times the denominator plus the remainder.
+// console.log(10 % 11);
+// console.log(11 % 10); 
 
+//numeric separator
+//use when you are writing only literal number.
+const diameter = 287_460_000_000;
+// console.log(diameter);
 
+const price = 345_99; 
+// console.log(price);
 
+//won't work -Nan
+// console.log(Number('230_000'))
 
+//BIG INT. 
+//numbers are stored in 64bits, that is, there are 64 1's or 0's to represent any given number.
+//of the 64bits only 53bits are used to store the digit themseleves
+//the rest are used to store position and signs
+//This means, there is a limit to how much a number can be.
+//any number bigger than that, may not be accurately represented.
+//calculation
+//it is two, because digit are read in base 2. 0's and 1's.
+// console.log(2**53-1);
+// console.log(Number.MAX_SAFE_INTEGER)
 
+//CONVERTING TO BIGINT.
+//use the letter n to convert to bigINT.
+//you can also use the bigint function.
+// console.log(45789564589755522225568779563215456565n);
 
+//operation with bigint
+// console.log(100000n + 120000n);
+// console.log(100000344665659599886633125687545115454551444n * 120000n);
 
+// console.log(20n > 15);
+// console.log(20n == 20);
+// console.log(20n === '20');
 
+//Working with date
+//date constructor
+const now2 = new Date();
+// console.log(now2);
 
+const dateNow = new Date('dec 10 2024 3:13:54');
+// console.log(dateNow);
+
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getFullYear());
+console.log(future.getHours());
+console.log(future.getSeconds());
+console.log(future.getTimezoneOffset);
+console.log(future.getTime());
+
+console.log(new Date(2142253380000));
+console.log(Date.now());
 
 
 
