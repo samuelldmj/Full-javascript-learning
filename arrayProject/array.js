@@ -12,16 +12,16 @@ const account1 = {
   pin: 1111,
   movementsDates: [
     '2019-11-18T21:31:17.178Z',
-    '2019-12-23T07:42:02.383Z',
-    '2020-01-28T09:15:04.904Z',
-    '2020-04-01T10:17:24.185Z',
-    '2020-05-08T14:11:59.604Z',
-    '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2023-12-23T07:42:02.383Z',
+    '2024-03-27T09:15:04.904Z',
+    '2024-04-01T10:17:24.185Z',
+    '2024-05-08T14:11:59.604Z',
+    '2024-10-01T17:01:17.194Z',
+    '2024-10-06T23:36:17.929Z',
+    '2024-10-09T10:51:36.790Z',
   ],
   currency: 'EUR',
-  locale: 'pt-PT', // de-DE
+  locale: 'en-GB', // de-DE
 };
 
 const account2 = {
@@ -90,19 +90,50 @@ const inputClosePin = document.querySelector('.form__input--pin');
 populatng the movement card with deposits and withdrawals
 ==========================================
 */
-const displayMovement = function (movements, sort = false) {
+
+//Implementing date to the web app
+const formatDateMovement = function (date, locale){
+  const calDaysPassed = (date1, date2) =>
+    Math.round(Math.abs((date1 - date2)
+   / (1000 * 60 * 60 * 24)));
+
+   const daysPassed = calDaysPassed(new Date(), date);
+  if( daysPassed === 0) return 'Today';
+  if(daysPassed === 1) return 'Yesterday';
+  if(daysPassed <= 7) 
+  {
+    return `${daysPassed} days ago` ;
+  } else 
+  {
+  //  const day = `${date.getDate()}`.padStart(2, 0);
+  //  const month = `${date.getMonth() + 1}`.padStart(2, 0);
+  //  const year = date.getFullYear();
+  //  return `${day}-${month}-${year}`;
+
+  //using internationalization api
+  return new Intl.DateTimeFormat(locale).format(date);
+  }
+
+}
+
+
+
+const displayMovement = function (acc, sort = false) {
   //emptying the HTML class container then populate it.
   containerMovements.innerHTML = '';
 
-  const movs = sort ? movements.slice().sort((a,b) => a -b) : movements;
+  const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
 
   movs.forEach((el, i) => {
     let type = el > 0 ? 'deposit' : 'withdrawal';
+    let date = new Date(acc.movementsDates[i]);
+    const displayDate = formatDateMovement(date, acc.locale); 
 
     let html =
     `
       <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+          <div class="movements__date">${displayDate}</div>
           <div class="movements__value">${el}€</div>
       </div>
     `
@@ -116,10 +147,10 @@ const displayMovement = function (movements, sort = false) {
 
 
 //styling the row
-labelBalance.addEventListener('click', function(){
+labelBalance.addEventListener('click', function () {
   [...document.querySelectorAll('.movements__row')]
-  .forEach((el, i) => i % 2 === 0 
-  ? el.style.backgroundColor = 'gold' : el.style.backgroundColor = 'white' );
+    .forEach((el, i) => i % 2 === 0
+      ? el.style.backgroundColor = 'gold' : el.style.backgroundColor = 'white');
 })
 
 /* 
@@ -224,9 +255,9 @@ FUNCTION THAT CALLS THE BALANCE, TOTAL TRANSACTION nd movements
 ==========================================
 */
 
-function updateTransaction(trans){
+function updateTransaction(trans) {
   //display movement.
-  displayMovement(trans.movements);
+  displayMovement(trans);
   //display balance
   calCulatedBal(trans);
   //display summary
@@ -264,15 +295,36 @@ btnLogin.addEventListener('click', function (e) {
     // make the main app come alive 
     containerApp.style.opacity = 100;
 
+    //update the date and time
+    let now = new Date();
+    // const day = `${now.getDate()}`.padStart(2, 0);
+    // const month = `${now.getMonth() + 1}`.padStart(2, 0);
+    // const year = now.getFullYear();
+    // const hour = `${now.getHours()}`.padStart(2, 0);
+    // const min = `${now.getMinutes()}`.padStart(2, 0);
+    // labelDate.textContent  = `${day}-${month}-${year}, ${hour}:${min}`;
+    const options = {
+      hour : 'numeric',
+      minute : 'numeric',
+      day : 'numeric',
+      month : 'long',
+      year : 'numeric',
+    }
+
+    //to detect the local via browser
+    // const locale = navigator.language;
+
+    labelDate.textContent  = new Intl.DateTimeFormat(currentAccount.locale, options).format(now)
+
     //clearing the input field after log in
     inputLoginUsername.value = inputLoginPin.value = "";
 
     //blurring the pin field
     // inputLoginPin.blur()
 
-//update transaction
+    //update transaction
     updateTransaction(currentAccount)
-    
+
   }
 });
 /* 
@@ -288,7 +340,7 @@ END OF LOGIN FEATURES LOGIC
 TRANSFER FEATURES LOGIC
 ================================================
 */
-btnTransfer.addEventListener('click', function(e){
+btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   let receiverAcc = accounts.find(acc => acc.username === inputTransferTo.value);
   let amount = Number(inputTransferAmount.value);
@@ -299,12 +351,16 @@ btnTransfer.addEventListener('click', function(e){
   //check that the user is not sending a negative amount
   //check that the amount the user is sending is not above what is in the user bank balance (amount <= currentAccount.balance)
   //check that the user is not transfering to himself
-  if(amount > 0 && receiverAcc && currentAccount.balance >= amount && receiverAcc.username !== currentAccount.username){
+  if (amount > 0 && receiverAcc && currentAccount.balance >= amount && receiverAcc.username !== currentAccount.username) {
     // console.log('transfer');
 
     //similar to etc account1.movemnts.push(-amount);
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
+
+    //adding date
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
 
     //update transaction
     updateTransaction(currentAccount);
@@ -326,7 +382,7 @@ close acct FEATURES LOGIC
 ================================================
 */
 
-btnClose.addEventListener('click', function(e){
+btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
   //testing
@@ -334,7 +390,7 @@ btnClose.addEventListener('click', function(e){
   let closingUsername = inputCloseUsername.value;
   let closingPin = Number(inputClosePin.value);
 
-  if(currentAccount.username === closingUsername && currentAccount.pin === closingPin){
+  if (currentAccount.username === closingUsername && currentAccount.pin === closingPin) {
     //testing
     // console.log('Delete')
 
@@ -346,11 +402,11 @@ btnClose.addEventListener('click', function(e){
     accounts.splice(accountsIndex, 1)
 
     // //hide ui
-    containerApp.style.opacity = 0; 
+    containerApp.style.opacity = 0;
   }
 
-    //clean the input field
-    inputCloseUsername.value = inputClosePin.value = ""; 
+  //clean the input field
+  inputCloseUsername.value = inputClosePin.value = "";
 
 })
 
@@ -368,19 +424,22 @@ loan FEATURES LOGIC
 //Loan Condition is granted if there have been a 10% deposit of the loan requested.
 //that is, if you are requesting 30000, you must have deposited about 3000 for your loan to be granted
 
-btnLoan.addEventListener('click', function(e){
+btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputLoanAmount.value);
-  if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1) ){
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // logic
     currentAccount.movements.push(amount);
 
+    //adding date
+    currentAccount.movementsDates.push(new Date().toISOString());
+
     //update transaction
-    updateTransaction(currentAccount);    
+    updateTransaction(currentAccount);
   }
 
-   //clear input field
-   inputLoanAmount.value = '';
+  //clear input field
+  inputLoanAmount.value = '';
 })
 
 /* 
@@ -396,14 +455,14 @@ SORTING LOGIC
 ==========================================
 */
 let sorted = false;
-btnSort.addEventListener('click', function(e){
+btnSort.addEventListener('click', function (e) {
   e.preventDefault();
 
   displayMovement(currentAccount.movements, !sorted);
   sorted = !sorted;
 })
 
-/* 
+/*
 ==========================================
 END OF SORTING LOGIC
 ==========================================

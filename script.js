@@ -2259,22 +2259,33 @@ const price = 345_99;
 //Working with date
 //date constructor
 const now2 = new Date();
-// console.log(now2);
+console.log(now2);
 
 const dateNow = new Date('dec 10 2024 3:13:54');
 // console.log(dateNow);
 
 const future = new Date(2037, 10, 19, 15, 23);
-console.log(future.getDate());
-console.log(future.getDay());
-console.log(future.getFullYear());
-console.log(future.getHours());
-console.log(future.getSeconds());
-console.log(future.getTimezoneOffset);
-console.log(future.getTime());
+// console.log(future.getDate());
+// console.log(future.getDay());
+// console.log(future.getFullYear());
+// console.log(future.getHours());
+// console.log(future.getSeconds());
+// console.log(future.getTimezoneOffset);
+// console.log(future.getTime());
 
-console.log(new Date(2142253380000));
-console.log(Date.now());
+// console.log(new Date(2142253380000));
+// console.log(Date.now());
+
+//operation on date
+// console.log(future);
+// console.log(+future);
+
+const calDaysPassed = (date1, date2) => (date1 - date2) / (1000 * 60 * 60 * 24);
+
+const day1 = calDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 25));
+const day2 = calDaysPassed(new Date(2037, 3, 14), new Date(2024, 10, 11));
+console.log(day1);
+
 
 
 
