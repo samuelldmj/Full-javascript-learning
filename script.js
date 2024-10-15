@@ -2161,7 +2161,7 @@ console.log(convertTitleCase('this is a nice title'));
 
 /*
 ============================================
-WORKING WITH NUMBEERS, DATES AND TIMEOUTS
+WORKING WITH NUMBERS, DATES AND TIMEOUTS
 ============================================
 */
 
@@ -2205,19 +2205,19 @@ Math.trunc(Math.random() * (max - min) + 1) + min;
 // console.log(randomInt(10, 20));
 
 //Rounding Integer
-// console.log(Math.trunc(23.3))
-// console.log(Math.ceil(23.3))
-// console.log(Math.round(23.8))
-// console.log(Math.floor(23.3))
+console.log(Math.trunc(23.3))
+console.log(Math.ceil(23.3))
+console.log(Math.round(23.4))
+console.log(Math.floor(23.3))
 
 // console.log(Math.trunc(-23))
 // console.log(Math.floor(-23.5))
 
 //decimal places
-console.log(+(23.4564).toFixed(2));
+// console.log(+(23.4564).toFixed(2));
 
 //Remainder operator
-console.log(5 % 2); //integer times the denominator plus the remainder.
+// console.log(5 % 2); //integer times the denominator plus the remainder.
 // console.log(10 % 11);
 // console.log(11 % 10); 
 
@@ -2284,19 +2284,50 @@ const calDaysPassed = (date1, date2) => (date1 - date2) / (1000 * 60 * 60 * 24);
 
 const day1 = calDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 25));
 const day2 = calDaysPassed(new Date(2037, 3, 14), new Date(2024, 10, 11));
-console.log(day1);
+// console.log(day2);
 
 
+//INTERNATIONALIZING numbers 
+const num = 3884764.23;
+
+let options = {
+    style : 'currency',
+    // unit:'mile-per-hour',
+    currency : 'USD',
+    // currencyDisplay:"code"
+
+}
+
+// console.log("US: ", new Intl.NumberFormat('en-US', options).format(num));
+// console.log("Germany: ", new Intl.NumberFormat('de-DE', options).format(num));
+// console.log("Syria: ", new Intl.NumberFormat('ar-SY', options).format(num));
+
+//getting locale from browser
+// console.log("Browser: ",navigator.language, new Intl.NumberFormat(navigator.language).format(num));
 
 
+//SET TIMEOUT
+//it is used to schedule an event or operation or function to a specyfied time
+//other execution of codes does not stop, but the setTimeout will be scheduled to run at the specified time.
+//it only runs ones
+const ingredients1 = ['pepper snacks', 'Brocolli'];
+const pizzaTimer =  setTimeout((ing1, ing2) =>
+console.log(`Here is a pizza with ${ing1} and ${ing2}`), 3000, ...ingredients1); 
+console.log('Waiting...');
 
+//CLEAR TIMEOUT IS USED TO REMOVE THE SET TIMEOUT.
+if(ingredients1.includes('pepper snack')){
+    clearTimeout(pizzaTimer);
+}
 
+//implement timeout on the loan feature.
 
-
-
-
-
-
+//SET INTERVAL
+//this allow call back function to run or to be called at a set interval.
+setInterval(function(){
+    const now = new Date();
+    console.log(now);
+}, 1000);
 
 
 

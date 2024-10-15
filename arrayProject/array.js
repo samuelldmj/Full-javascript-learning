@@ -21,7 +21,7 @@ const account1 = {
     '2024-10-09T10:51:36.790Z',
   ],
   currency: 'EUR',
-  locale: 'en-GB', // de-DE
+  locale: 'de-DE', // de-DE
 };
 
 const account2 = {
@@ -98,7 +98,7 @@ const formatDateMovement = function (date, locale){
    / (1000 * 60 * 60 * 24)));
 
    const daysPassed = calDaysPassed(new Date(), date);
-  if( daysPassed === 0) return 'Today';
+  if(daysPassed === 0) return 'Today';
   if(daysPassed === 1) return 'Yesterday';
   if(daysPassed <= 7) 
   {
@@ -117,6 +117,69 @@ const formatDateMovement = function (date, locale){
 }
 
 
+/* 
+================================================
+LogoutTimer function
+==========================================
+*/
+
+const startLogOutTimer = function(){
+  //set timer
+  let logTime = 120;
+  
+  let timer = function(){
+    const min = String(Math.trunc(logTime / 60)).padStart(2, 0); 
+    const sec = String(logTime % 60).padStart(2, 0);
+    //in each call, print the remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    //when 0 seconds, stop timer and log out user.
+    if(logTime === 0){
+      clearInterval(intTimer);
+      //Display UI and message
+      labelWelcome.textContent = 'Log in to get started' ;
+      // make the main app come alive 
+      containerApp.style.opacity = 0;
+    }
+    
+    //decrease one  from  logTimes
+      logTime--;
+  }
+  
+  //call timer every seconds
+  timer();
+  const intTimer =  setInterval(timer, 1000);  
+
+  return intTimer;
+}
+
+/* 
+================================================
+end of LogoutTimer
+==========================================
+*/
+
+
+
+/* 
+================================================
+formating the currency
+==========================================
+*/
+const formattedCur = function (value, locale, currency){
+  return new Intl.NumberFormat(locale, {
+    style : 'currency', 
+    currency : currency
+  }).format(value);
+
+}
+
+/* 
+================================================
+end of formating the currency
+==========================================
+*/
+
 
 const displayMovement = function (acc, sort = false) {
   //emptying the HTML class container then populate it.
@@ -129,12 +192,14 @@ const displayMovement = function (acc, sort = false) {
     let date = new Date(acc.movementsDates[i]);
     const displayDate = formatDateMovement(date, acc.locale); 
 
+    const formattedMovs = formattedCur(el, acc.locale, acc.currency);
+
     let html =
     `
       <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
           <div class="movements__date">${displayDate}</div>
-          <div class="movements__value">${el}€</div>
+          <div class="movements__value">${formattedMovs}</div>
       </div>
     `
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -175,7 +240,8 @@ let calCulatedBal = function (params) {
     return acc + el;
   }, 0);
 
-  labelBalance.textContent = `${params.balance}€`;
+
+  labelBalance.textContent = formattedCur(params.balance, params.locale, params.currency);
 }
 
 // calCulatedBal(account1.movements);
@@ -247,8 +313,6 @@ END USERNAME GENERATOR
 
 
 
-
-
 /* 
 ================================================
 FUNCTION THAT CALLS THE BALANCE, TOTAL TRANSACTION nd movements
@@ -278,7 +342,7 @@ LOGIN FEATURES
 ==========================================
 */
 //Event handler for login
-let currentAccount;
+let currentAccount, intTimer;
 //current account keeps track of each users that is signed in or logged .
 //if it is displayed on the console, it shows the data of the user in object format.
 //it was defined globally so that we can use it anywhere in our code.
@@ -311,7 +375,7 @@ btnLogin.addEventListener('click', function (e) {
       year : 'numeric',
     }
 
-    //to detect the local via browser
+    //to detect the locale via browser
     // const locale = navigator.language;
 
     labelDate.textContent  = new Intl.DateTimeFormat(currentAccount.locale, options).format(now)
@@ -324,6 +388,11 @@ btnLogin.addEventListener('click', function (e) {
 
     //update transaction
     updateTransaction(currentAccount)
+
+    //removing any existing timer
+    if(intTimer) clearInterval(intTimer);
+    //LogOut Timer
+    intTimer = startLogOutTimer();
 
   }
 });
@@ -364,6 +433,10 @@ btnTransfer.addEventListener('click', function (e) {
 
     //update transaction
     updateTransaction(currentAccount);
+
+    //Reset timer
+    clearInterval(intTimer);
+    intTimer = startLogOutTimer;
   }
 
   //clean the input field
@@ -440,6 +513,10 @@ btnLoan.addEventListener('click', function (e) {
 
   //clear input field
   inputLoanAmount.value = '';
+
+  //Reset timer
+  clearInterval(intTimer);
+  intTimer = startLogOutTimer;
 })
 
 /* 
