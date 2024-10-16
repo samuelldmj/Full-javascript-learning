@@ -2310,24 +2310,35 @@ let options = {
 //it is used to schedule an event or operation or function to a specyfied time
 //other execution of codes does not stop, but the setTimeout will be scheduled to run at the specified time.
 //it only runs ones
-const ingredients1 = ['pepper snacks', 'Brocolli'];
-const pizzaTimer =  setTimeout((ing1, ing2) =>
-console.log(`Here is a pizza with ${ing1} and ${ing2}`), 3000, ...ingredients1); 
-console.log('Waiting...');
+// const ingredients1 = ['pepper snacks', 'Brocolli'];
+// const pizzaTimer =  setTimeout((ing1, ing2) =>
+// console.log(`Here is a pizza with ${ing1} and ${ing2}`), 3000, ...ingredients1); 
+// console.log('Waiting...');
 
 //CLEAR TIMEOUT IS USED TO REMOVE THE SET TIMEOUT.
-if(ingredients1.includes('pepper snack')){
-    clearTimeout(pizzaTimer);
-}
+// if(ingredients1.includes('pepper snack')){
+//     clearTimeout(pizzaTimer);
+// }
 
 //implement timeout on the loan feature.
 
 //SET INTERVAL
 //this allow call back function to run or to be called at a set interval.
-setInterval(function(){
-    const now = new Date();
-    console.log(now);
-}, 1000);
+// setInterval(function(){
+//     const now = new Date();
+//     console.log(now);
+// }, 1000);
+
+
+//minute to seconds
+let time2 = 100;
+let min  = Math.trunc(time2 / 60).toString().padStart(2,0);
+let sec = String(time2 % 60).padStart(2,0);
+
+let body = `${min}:${sec}`;
+console.log(body);
+
+
 
 
 
