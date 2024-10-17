@@ -2331,12 +2331,14 @@ let options = {
 
 
 //minute to seconds
-let time2 = 100;
-let min  = Math.trunc(time2 / 60).toString().padStart(2,0);
-let sec = String(time2 % 60).padStart(2,0);
+// let time2 = 100;
+// let min  = Math.trunc(time2 / 60).toString().padStart(2,0);
+// let sec = String(time2 % 60).padStart(2,0);
 
-let body = `${min}:${sec}`;
-console.log(body);
+// let body = `${min}:${sec}`;
+// console.log(body);
+
+
 
 
 

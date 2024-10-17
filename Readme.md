@@ -58,3 +58,7 @@ JS engine[heap and call stack], c++ bindings, callback Queue(timer, data).
 ## Object:
 ## * 
 
+
+## * DOM
+## when the page loads
+
