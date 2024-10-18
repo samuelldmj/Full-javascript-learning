@@ -61,4 +61,6 @@ JS engine[heap and call stack], c++ bindings, callback Queue(timer, data).
 
 ## * DOM
 ## when the page loads
+## DOM Traversing means working through the DOM.
+## (Traversing) we can not select element based on another element
 

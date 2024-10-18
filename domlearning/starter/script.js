@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const openModal = function (e) {
   e.preventDefault()
@@ -34,8 +36,7 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
+
 
 btnScrollTo.addEventListener('click', function(e){
   const s1cords = section1.getBoundingClientRect();
@@ -55,6 +56,48 @@ btnScrollTo.addEventListener('click', function(e){
 })
 
 
+//page navigation
+// document.querySelectorAll('.nav__link').forEach(function(el){
+//   el.addEventListener('click', function(e){
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({behavior:'smooth'});
+//   })
+// })
+
+//event delegations
+// add event listener to common parent element
+//determin what element originated the event
+
+document.querySelector('.nav__links')
+.addEventListener('click', function(e){
+  console.log(e.target);
+
+  if(e.target.classList.contains('nav__link')){
+    e.preventDefault();
+        const id = e.target.getAttribute('href');
+        document.querySelector(id).scrollIntoView({behavior:'smooth'});
+  }
+})
+
+
+//Tranversing
+const h1 = document.querySelector('h1');
+
+//going downwards: to the child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);
+h1.firstElementChild.style.color = 'tomato';
+
+//going upward
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+
+
+
 //Event
 // const h1 = document.querySelector('h1');
 // const alerth1 = function(e){
@@ -69,29 +112,29 @@ btnScrollTo.addEventListener('click', function(e){
 
 
 //Event Propagations
-const randInt = (min, max) => 
-  Math.floor(Math.random() * (max - min * 1) + min);
+// const randInt = (min, max) => 
+//   Math.floor(Math.random() * (max - min * 1) + min);
 
- const randIntColor =  () => `rgb(${randInt(0,255)}, ${randInt(0, 255)}, ${randInt(0, 255)})`;
+//  const randIntColor =  () => `rgb(${randInt(0,255)}, ${randInt(0, 255)}, ${randInt(0, 255)})`;
 // console.log(randIntColor());
 
-document.querySelector(".nav__link")
-.addEventListener('mouseover', function(e){
-  this.style.backgroundColor = randIntColor();
-  console.log('nav link', e.target, );
-})
+// document.querySelector(".nav__link")
+// .addEventListener('mouseover', function(e){
+//   this.style.backgroundColor = randIntColor();
+//   console.log('nav link', e.target, );
+// })
 
-document.querySelector(".nav__links")
-.addEventListener('mouseover', function(e){
-  this.style.backgroundColor = randIntColor();
-  console.log('nav links', e.target, e.currentTarget);
-})
+// document.querySelector(".nav__links")
+// .addEventListener('mouseover', function(e){
+//   this.style.backgroundColor = randIntColor();
+//   console.log('nav links', e.target, e.currentTarget);
+// })
 
-document.querySelector(".nav")
-.addEventListener('mouseover', function(e){
-  this.style.backgroundColor = randIntColor();
-  console.log('nav', e.target, e.currentTarget);
-})
+// document.querySelector(".nav")
+// .addEventListener('mouseover', function(e){
+//   this.style.backgroundColor = randIntColor();
+//   console.log('nav', e.target, e.currentTarget);
+// })
 
  
 
