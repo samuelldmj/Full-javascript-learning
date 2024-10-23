@@ -42,15 +42,39 @@ console.log(Person.prototype);
 Person.prototype.calAge = function(){
     console.log(2037 - this.user_year);
 }
-john.calAge();
-sam.calAge();
+// john.calAge();
+// sam.calAge();
 
 Person.prototype.species = 'Homo Sapiens';
 // console.log(john.species, sam.species);
 
-//__proto__ points to  prototype property of the constructor function you created
-console.log(john.__proto__);
+/*
+__proto__ is a way to access an object's prototype, which is essentially a template object from which other objects inherit methods and properties
+You
+what are object's prototype
+In JavaScript, an object's prototype is the mechanism by which objects inherit features from one another.
+Each object has a __proto__ property that points to its prototype,
+forming a chain that enables inheritance. Here's a breakdown:
+
+Prototype Chain: When you access a property or method on an object,
+JavaScript first looks at the object itself. If it doesn't find the property,
+it looks at the object's prototype, and then at the prototype's prototype, and so on,
+until it reaches the end of the chain (usually Object.prototype).
+
+Creating Prototypes: You can create objects with specific prototypes using constructors or Object.create().
+
+Modifying Prototypes: You can add or change properties on an object's prototype,
+and all objects inheriting from that prototype will reflect those changes.
+*/
+//__proto__ will points to this prototype object
+//it will also display the methods and properties that are on the prototype that can be inherited.
+// console.log(john.__proto__);
+// console.log('Double');
+//this will go one step higher in the chain.
+// console.log(john.__proto__.__proto__);
 // console.log(sam.__proto__.__proto__);
+
+// console.log(john.hasOwnProperty('full_name'));
 
 //this point to the person constructor function
 // console.log(Person.prototype.constructor);
@@ -59,24 +83,98 @@ console.log(john.__proto__);
 
 //arr prototypes
 const arr = [3, 6, 4, 5, 8, 9,3,3,6, 2, 1];
-console.log(arr.__proto__)
+// console.log(arr.__proto__)
 
 Array.prototype.unique = function(){
     return [...new Set(this)];
 }
 
-console.log(arr.unique());
+// console.log(arr.unique());
 
 
+//classes with es6
+//class expression
+//const PersonCl = class{}
+
+//class declaration
+class PersonCl {
+  constructor(fName, year){
+    this.full_name = fName;
+    this.birthYear = year;
+  }
+
+  calAge(){
+    console.log(2037 - this.birthYear);
+  }
+
+  //to avoid clash in properties name with constructor when using the setter keyword, attach underscore to newly defined property in the setter block
+  //important for properties that already exist, use underscore.
+  set full_name(name){
+    if(name.includes(' ')){
+      console.log(name);
+     return this._full_name = name;
+    }else {
+      alert(`${name} is not full name`);
+    }
+  }
+
+  //to correct the clash or conflict in the property name use getter
+  get full_name(){
+    return this._full_name;
+  }
+
+  static hey(){
+    console.log("Hey from class!");
+  }
+}
+
+// let brad = new PersonCl('Brad', 1940)
+// console.log(brad);
+
+let bob =  new PersonCl('Alex Bob', 1999);
+// bob.calAge();
+// console.log(bob);
+
+// PersonCl.prototype.greet = function(){
+//   console.log(`Hey ${this.full_name}`);
+// }
+
+// bob.greet();
+
+//getters and setters
+//they are called accessors properties
+//they get and set values.
+const  account = {
+  owner: 'Sam',
+  movements : [200, 530, 120, 300 ],
+
+  get latest(){
+      return this.movements.slice(-1).pop();
+  },
+
+  set latest(mov){
+    return this.movements.push(mov);
+  }
+}
+
+//use it as a property
+// console.log(account.latest) 
+
+//setter
+account.latest = 50;
+// console.log(account.movements)
 
 
+//STATIC METHOD
+//constructor function
+Person.hey = function(){
+  console.log('Hey Static!');
+}
 
+Person.hey();
 
-
-
-
-
-
+//class declaration
+PersonCl.hey();
 
 
 
