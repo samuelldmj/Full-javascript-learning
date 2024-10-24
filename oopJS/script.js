@@ -21,6 +21,7 @@
 let john = new Person('John D', 25, 1999);
 let sam = new Person('Samuel', 27, 1997);
 
+
 // john.calAge();
 // sam.calAge();
 // console.log(john instanceof Person);
@@ -28,8 +29,8 @@ let sam = new Person('Samuel', 27, 1997);
 /*
 what happens when a constructor function is called using the new keyword.
 1. New {object} is created.
-2. this refers or would be set to the object created.
-3. the object is linked to a prototype
+2. this refers to or would be set to the object created.
+3. the object is linked to a prototype property
 */
 
  //Prototypes
@@ -38,6 +39,7 @@ what happens when a constructor function is called using the new keyword.
  //prototype is mechanism for reusing code, creating methods and properties
  //it is an object where methods and properties not defined in the constructor function are stored or made available
 
+ /*person.prototype is not the prototype of person, but the prototype of the objects created from person*/
 console.log(Person.prototype);
 Person.prototype.calAge = function(){
     console.log(2037 - this.user_year);
@@ -68,10 +70,12 @@ and all objects inheriting from that prototype will reflect those changes.
 */
 //__proto__ will points to this prototype object
 //it will also display the methods and properties that are on the prototype that can be inherited.
-// console.log(john.__proto__);
+//john prototype property is the person.prototype
+console.log(john.__proto__);
+// console.log(john.__proto__ === Person.prototype);
 // console.log('Double');
 //this will go one step higher in the chain.
-// console.log(john.__proto__.__proto__);
+console.log(john.__proto__.__proto__);
 // console.log(sam.__proto__.__proto__);
 
 // console.log(john.hasOwnProperty('full_name'));
@@ -80,7 +84,7 @@ and all objects inheriting from that prototype will reflect those changes.
 // console.log(Person.prototype.constructor);
 // console.dir(Person.prototype.constructor);
 
-
+let h1  = document.querySelector('h1');
 //arr prototypes
 const arr = [3, 6, 4, 5, 8, 9,3,3,6, 2, 1];
 // console.log(arr.__proto__)
@@ -149,11 +153,11 @@ const  account = {
   movements : [200, 530, 120, 300 ],
 
   get latest(){
-      return this.movements.slice(-1).pop();
+      this.movements.slice(-1).pop();
   },
 
   set latest(mov){
-    return this.movements.push(mov);
+    this.movements.push(mov);
   }
 }
 
@@ -176,7 +180,23 @@ Person.hey();
 //class declaration
 PersonCl.hey();
 
+//OBJECT CREATE
+//the prototype is the object pass through the Object.create function                                                                                       
+const PersonProto = {
+  calAge(){
+    console.log(2037 - this.birthYear);
+  }
+}
 
+const steven = Object.create(PersonProto)
+console.log(steven);
+
+steven.name = "Steve Maddison";
+steven.birthYear = 2024;
+
+steven.calAge();
+
+console.log(steven.__proto__ === PersonProto);
 
 
 
