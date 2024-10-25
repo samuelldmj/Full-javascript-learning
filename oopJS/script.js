@@ -2,24 +2,24 @@
 
 //constructor function
 //they are just like regular functions, but they are called using the new keyword.
- function  Person(fname, age, year) {
+//  function  Person(fname, age, year) {
 
-    //properties
-    this.full_name = fname,
-    this.user_age = age, 
-    this.user_year = year
+//     //properties
+//     this.full_name = fname,
+//     this.user_age = age, 
+//     this.user_year = year
 
-    //methods
-    //not advisable to have methods inside constructor function.
-    // this.calAge = function(){
-    //     console.log(2037 - this.user_year);
-    // }
+//     //methods
+//     //not advisable to have methods inside constructor function.
+//     // this.calAge = function(){
+//     //     console.log(2037 - this.user_year);
+//     // }
 
-    // console.log(this);
-}
+//     // console.log(this);
+// }
 
-let john = new Person('John D', 25, 1999);
-let sam = new Person('Samuel', 27, 1997);
+// let john = new Person('John D', 25, 1999);
+// let sam = new Person('Samuel', 27, 1997);
 
 
 // john.calAge();
@@ -40,14 +40,14 @@ what happens when a constructor function is called using the new keyword.
  //it is an object where methods and properties not defined in the constructor function are stored or made available
 
  /*person.prototype is not the prototype of person, but the prototype of the objects created from person*/
-console.log(Person.prototype);
-Person.prototype.calAge = function(){
-    console.log(2037 - this.user_year);
-}
+// console.log(Person.prototype);
+// Person.prototype.calAge = function(){
+//     console.log(2037 - this.user_year);
+// }
 // john.calAge();
 // sam.calAge();
 
-Person.prototype.species = 'Homo Sapiens';
+// Person.prototype.species = 'Homo Sapiens';
 // console.log(john.species, sam.species);
 
 /*
@@ -71,11 +71,11 @@ and all objects inheriting from that prototype will reflect those changes.
 //__proto__ will points to this prototype object
 //it will also display the methods and properties that are on the prototype that can be inherited.
 //john prototype property is the person.prototype
-console.log(john.__proto__);
+// console.log(john.__proto__);
 // console.log(john.__proto__ === Person.prototype);
 // console.log('Double');
-//this will go one step higher in the chain.
-console.log(john.__proto__.__proto__);
+// //this will go one step higher in the chain.
+// console.log(john.__proto__.__proto__);
 // console.log(sam.__proto__.__proto__);
 
 // console.log(john.hasOwnProperty('full_name'));
@@ -101,41 +101,41 @@ Array.prototype.unique = function(){
 //const PersonCl = class{}
 
 //class declaration
-class PersonCl {
-  constructor(fName, year){
-    this.full_name = fName;
-    this.birthYear = year;
-  }
+// class PersonCl {
+//   constructor(fName, year){
+//     this.full_name = fName;
+//     this.birthYear = year;
+//   }
 
-  calAge(){
-    console.log(2037 - this.birthYear);
-  }
+//   calAge(){
+//     console.log(2037 - this.birthYear);
+//   }
 
-  //to avoid clash in properties name with constructor when using the setter keyword, attach underscore to newly defined property in the setter block
-  //important for properties that already exist, use underscore.
-  set full_name(name){
-    if(name.includes(' ')){
-      console.log(name);
-     return this._full_name = name;
-    }else {
-      alert(`${name} is not full name`);
-    }
-  }
+//   //to avoid clash in properties name with constructor when using the setter keyword, attach underscore to newly defined property in the setter block
+//   //important for properties that already exist, use underscore.
+//   set full_name(name){
+//     if(name.includes(' ')){
+//       console.log(name);
+//      return this._full_name = name;
+//     }else {
+//       alert(`${name} is not full name`);
+//     }
+//   }
 
-  //to correct the clash or conflict in the property name use getter
-  get full_name(){
-    return this._full_name;
-  }
+//   //to correct the clash or conflict in the property name use getter
+//   get full_name(){
+//     return this._full_name;
+//   }
 
-  static hey(){
-    console.log("Hey from class!");
-  }
-}
+//   static hey(){
+//     console.log("Hey from class!");
+//   }
+// }
 
 // let brad = new PersonCl('Brad', 1940)
 // console.log(brad);
 
-let bob =  new PersonCl('Alex Bob', 1999);
+// let bob =  new PersonCl('Alex Bob', 1999);
 // bob.calAge();
 // console.log(bob);
 
@@ -171,32 +171,573 @@ account.latest = 50;
 
 //STATIC METHOD
 //constructor function
-Person.hey = function(){
-  console.log('Hey Static!');
-}
+// Person.hey = function(){
+//   console.log('Hey Static!');
+// }
 
-Person.hey();
+// Person.hey();
 
 //class declaration
-PersonCl.hey();
+// PersonCl.hey();
 
 //OBJECT CREATE
 //the prototype is the object pass through the Object.create function                                                                                       
-const PersonProto = {
-  calAge(){
-    console.log(2037 - this.birthYear);
+// const PersonProto = {
+//   calAge(){
+//     console.log(2037 - this.birthYear);
+//   }
+// }
+
+// const steven = Object.create(PersonProto)
+// console.log(steven);
+
+// steven.name = "Steve Maddison";
+// steven.birthYear = 2024;
+
+// steven.calAge();
+
+// console.log(steven.__proto__ === PersonProto);
+
+/*=================================================== 
+INHERITANCE BETWEEN CLASSES
+===================================================
+*/
+// //CONSTRUTOR FUNCTION
+// const Person = function (fName, year){
+//   this.firstName = fName;
+//   this.birthYear = year;
+// }
+
+// Person.prototype.calAge = function(){
+//   console.log(2037 - this.birthYear);
+// }
+
+// const Student = function(fName, year, course){
+//   Person.call(this, fName, year);
+//   this.field = course;
+// }
+
+//linking prototypes;
+// Student.prototype = Object.create(Person.prototype);
+// Reset constructor for Student
+// Student.prototype.constructor = Student;
+
+// Student.prototype.introduce = function(){
+//   console.log(`My name is ${this.firstName} and I study ${this.field}`)
+// }
+// let dan = new Student('Dan', 2021, 'Econonmics')
+// console.log(dan);
+// console.log(dan instanceof Student);
+// console.log(dan instanceof Person);
+// console.log(dan instanceof Object);
+// console.log(dan.__proto__);
+// console.log(dan.__proto__.__proto__);
+// console.dir(Student.prototype.constructor)
+// dan.introduce();
+// dan.calAge();
+
+
+/*
+===========================================
+===========================================
+*/
+//ES6 INHERITANCE
+// class PersonCl {
+//   constructor(fName, year){
+//     this.full_name = fName;
+//     this.birthYear = year;
+//   }
+
+//   calAge(){
+//     console.log(2037 - this.birthYear);
+//   }
+
+//   //to avoid clash in properties name with constructor when using the setter keyword, attach underscore to newly defined property in the setter block
+//   //important for properties that already exist, use underscore.
+//   set full_name(name){
+//     if(name.includes(' ')){
+//       // console.log(name);
+//      return this._full_name = name;
+//     }else {
+//       alert(`${name} is not full name`);
+//     }
+//   }
+
+//   //to correct the clash or conflict in the property name use getter
+//   get full_name(){
+//     return this._full_name;
+//   }
+
+//   static hey(){
+//     console.log("Hey from class!");
+//   }
+// }
+
+// class StudentCl extends PersonCl
+// {
+//   constructor(fName, year, course){
+//   //   //super function, the constructor function of the parent class.
+//     //this always need to happen first.
+//     super(fName, year);
+//     this.field = course;
+//   }
+
+//   introduce(){
+//     console.log(`My name is ${this.full_name}, and i am currently studying ${this.field}`)
+//   }
+
+//   //overriding the parent class methods
+//   calAge(){
+//     console.log(`I'm ${2037 - this.birthYear} years old, but I am Student.  `);
+//   }
+// }
+
+//if you don't need new properties. i kept the constructor in the Student class commented out to make this work.
+// let martha = new StudentCl('Martha Jade', 2003);
+// console.log(martha);
+
+//i uncommented the constructor in the student class
+// let martha = new StudentCl('Martha Jade', 2003, 'Business Admin');
+// console.log(martha.__proto__);
+// martha.introduce();
+// martha.calAge();
+
+
+//more on classes
+class Account {
+  constructor(owner, currency, pin){
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+  }
+
+  //public interface of our object
+  deposit(mov){
+    this.movements.push(mov);
+  }
+
+  withdrawal(mov){
+    this.deposit(-mov);
+  }
+
+  approveLoan(mov){
+    return true
+  }
+  
+  requestLoan(mov){
+    if(this.approveLoan(mov)){
+      this.deposit(mov);
+      console.log('Loan Approved');
+    }
   }
 }
 
-const steven = Object.create(PersonProto)
-console.log(steven);
+const acc1 = new Account('Samuel', 'Pounds', 2525);
+// console.log(acc1);
 
-steven.name = "Steve Maddison";
-steven.birthYear = 2024;
+//wrong way interacting with properties
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+// console.log(acc1);
 
-steven.calAge();
+acc1.deposit(200);
+acc1.withdrawal(200);
+acc1.requestLoan(500);
+console.log(acc1);
 
-console.log(steven.__proto__ === PersonProto);
+
+
+/*
+===========================================
+===========================================
+*/
+
+
+//INHERITANCE WITH OBJECT.CREATE
+//OBJECT CREATE
+//the prototype is the object pass through the Object.create function                                                                                       
+// const PersonProto = {
+//   calAge(){
+//     console.log(2037 - this.birthYear);
+//   },
+
+//   init(firstName, birthYear){
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   }
+// }
+
+// const steven = Object.create(PersonProto);
+// const StudentProto = Object.create(PersonProto); 
+// StudentProto.init = function(firstName, birthYear, course) {
+//   PersonProto.init.call(this, firstName, birthYear);
+//   this.field = course;
+// }
+
+// StudentProto.introduce = function(){
+//  console.log(`My name is ${this.firstName}, and i am currently studying ${this.field}`)
+//     }
+// let abig = Object.create(StudentProto);
+// abig.init('Abigail Snap', 2010, 'Agricultural Science');
+// abig.introduce();
+// abig.calAge();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
