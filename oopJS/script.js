@@ -385,7 +385,9 @@ console.log(acc1);
 // abig.calAge();
 
 
-
+/*
+ENCAPSULATION
+*/
 
 
 
