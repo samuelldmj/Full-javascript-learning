@@ -304,37 +304,38 @@ INHERITANCE BETWEEN CLASSES
 
 
 //more on classes
-class Account {
-  constructor(owner, currency, pin){
-    this.owner = owner;
-    this.currency = currency;
-    this.pin = pin;
-    this.movements = [];
-    this.locale = navigator.language;
-  }
+// class Account {
+//   constructor(owner, currency, pin){
+//     this.owner = owner;
+//     this.currency = currency;
+//     this.pin = pin;
+//     //protected property {property can still be used externally}
+//     this._movements = [];
+//     this.locale = navigator.language;
+//   }
 
-  //public interface of our object
-  deposit(mov){
-    this.movements.push(mov);
-  }
+//   //public interface of our object
+//   deposit(mov){
+//     this._movements.push(mov);
+//   }
 
-  withdrawal(mov){
-    this.deposit(-mov);
-  }
+//   withdrawal(mov){
+//     this.deposit(-mov);
+//   }
 
-  approveLoan(mov){
-    return true
-  }
+//   approveLoan(mov){
+//     return true
+//   }
   
-  requestLoan(mov){
-    if(this.approveLoan(mov)){
-      this.deposit(mov);
-      console.log('Loan Approved');
-    }
-  }
-}
+//   requestLoan(mov){
+//     if(this.approveLoan(mov)){
+//       this.deposit(mov);
+//       console.log('Loan Approved');
+//     }
+//   }
+// }
 
-const acc1 = new Account('Samuel', 'Pounds', 2525);
+// const acc1 = new Account('Samuel', 'Pounds', 2525);
 // console.log(acc1);
 
 //wrong way interacting with properties
@@ -342,10 +343,10 @@ const acc1 = new Account('Samuel', 'Pounds', 2525);
 // acc1.movements.push(-140);
 // console.log(acc1);
 
-acc1.deposit(200);
-acc1.withdrawal(200);
-acc1.requestLoan(500);
-console.log(acc1);
+// acc1.deposit(200);
+// acc1.withdrawal(200);
+// acc1.requestLoan(500);
+// console.log(acc1);
 
 
 
@@ -386,12 +387,99 @@ console.log(acc1);
 
 
 /*
-ENCAPSULATION
+ENCAPSULATION:
+involves bundling data (properties) and methods (functions) that operate on that data within a single unit,
+typically an object. 
+This practice promotes data privacy and code organization.
+
+class fields proposal are used to protect properties and methods in JS
+We have, but not limited to
+Public firlds => see fields as properties that can be used on instances
+Private firlds
+Public methods
+Private methods
+
 */
+class Account {
+  //public fields;
+  //they are going to be present in all the instances not on the prototype property
+  locale = navigator.language;
+  // _movements = [];
+
+  //private fields -> use the # symbol to make the field private.
+  //can only be accessed within a class not via instance.
+  #movements = [];
+  #pin;
 
 
 
+  constructor(owner, currency, pin){
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+    //protected property {property can still be used externally}
+    // this._movements = [];
+    // this.locale = navigator.language;
+  }
 
+  //public interface of our object
+  deposit(mov){
+    this.#movements.push(mov);
+    return this;
+  }
+
+  getMovements(){
+    return this.#movements
+    
+  }
+
+  withdrawal(mov){
+    this.deposit(-mov);
+    return this;
+  }
+  
+  requestLoan(mov){
+    if(this.#approveLoan(mov)){
+      this.deposit(mov);
+      console.log('Loan Approved');
+      return this;
+    }
+  }
+
+  //private methods
+  #approveLoan(mov){
+    return true
+  }
+}
+
+const acc1 = new Account('Samuel', 'Pounds', 2525);
+// console.log(acc1);
+
+//wrong way interacting with properties
+// acc1.movements.push(250);
+// acc1.movements.push(-140);
+// console.log(acc1);
+
+acc1.deposit(200);
+acc1.withdrawal(200);
+acc1.requestLoan(500);
+
+//not accessible outside the Account class.
+// acc1.#approveLoan(100);
+
+console.log(acc1);
+
+//this will throw an error
+// console.log(acc1.#movements);
+
+//retrieve movements
+// console.log(acc1.getMovements());
+
+//methods chaining
+acc1.deposit(100).deposit(200).withdrawal(150);
+
+
+//enquire why the methods are on the prototypes;
 
 
 
