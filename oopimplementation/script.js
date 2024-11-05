@@ -79,6 +79,7 @@ REFACTORING CODE: USINNG OOP PATTERN
 class Workout{
     date = new Date();
     id = (Date.now() + '').slice(-10);
+    clicks = 0;
 
     constructor(coords, distance, duration){
         this.coords = coords; //[lat, lng]
@@ -92,9 +93,13 @@ class Workout{
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
              'September', 'October', 'November', 'December'];
         this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]} ${this.date.getDate()} `;
+    }
 
+    click(){
+        this.clicks++;
     }
 }
+
 
 
 class Running extends Workout {
@@ -127,9 +132,9 @@ class Cycling extends Workout {
     }
 }
 
-const run1 = new Running([7.4124, 3.345], 5.5, 24, 178);
-const cycling1 = new Cycling([7.4124, 3.345], 30, 13, 300);
-console.log(run1, cycling1);
+// const run1 = new Running([7.4124, 3.345], 5.5, 24, 178);
+// const cycling1 = new Cycling([7.4124, 3.345], 30, 13, 300);
+// console.log(run1, cycling1);
 
 
 ////////////////////////////////////////
@@ -138,14 +143,22 @@ class App {
     #map;
     #mapEvent;
     #workout = [];
+    #mapZoomLevel = 13; 
 
  /*
 Constructor: The Constructor get called immediately when an object or instance is created from the class.
 */
     constructor() {
+        //get user position
         this._getPosition();
+
+        //retrieving data from localstorage
+        this._getLocalStorage();
+
+        //attaching events to run the app
         form.addEventListener('submit', this._newWorkout.bind(this));
         inputType.addEventListener('change', this._toggleElevationField);
+        containerWorkouts.addEventListener('click', this._moveToPopup.bind(this))
     }
 
     _getPosition() {
@@ -168,7 +181,7 @@ Constructor: The Constructor get called immediately when an object or instance i
         console.log(`https://www.google.com/maps/dir/@${latitude}, ${longitude}`);
 
         let coords = [latitude, longitude];
-        this.#map = L.map('map').setView(coords, 11);
+        this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
         // console.dir(L);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -180,6 +193,11 @@ Constructor: The Constructor get called immediately when an object or instance i
 
         //handling clicks on map
         this.#map.on('click', this._showForm.bind(this));
+
+        //rendering maker after the map has been loaded.
+        this.#workout.forEach(work => {
+            this._renderWorkoutMarker(work);
+          });
     }
 
     _showForm(mapE) {
@@ -192,8 +210,8 @@ Constructor: The Constructor get called immediately when an object or instance i
     _hideAndClearFormInput(){
 
         inputCadence.value = inputDistance.value = inputElevation.value = inputDuration.value = '';
-        form.classList.add('hidden');
         form.style.display = 'none';
+        form.classList.add('hidden');
         setTimeout(() => (form.style.display = 'grid'), 1000);
 
     }
@@ -252,17 +270,23 @@ Constructor: The Constructor get called immediately when an object or instance i
         
         //add new object to workout array
         this.#workout.push(workout);
-        console.log(workout);
+        // console.log(workout);
 
         //render workout on map as marker
-       this._renderWorkerMarker(workout);
+       this._renderWorkoutMarker(workout);
 
        //render workout list
        this._renderWorkout(workout);
+
+       //click
+       workout.click();
+
+       //set local storage of all workouts
+        this._setLocalStorage();
     }
 
 
-    _renderWorkerMarker(workout){
+    _renderWorkoutMarker(workout){
         L.marker(workout.coords).addTo(this.#map)
         .bindPopup(L.popup({
             maxWidth: 250,
@@ -311,7 +335,7 @@ Constructor: The Constructor get called immediately when an object or instance i
       html += `
         <div class="workout__details">
           <span class="workout__icon">⚡️</span>
-          <span class="workout__value">${workout.calcSpeed().toFixed(1)}</span>
+          <span class="workout__value">${workout.speed.toFixed(1)}</span>
           <span class="workout__unit">km/h</span>
         </div>
         <div class="workout__details">
@@ -323,6 +347,47 @@ Constructor: The Constructor get called immediately when an object or instance i
       `;
         form.insertAdjacentHTML('afterend', html);
     }
+
+    _moveToPopup(e){
+        const workOutEl = e.target.closest('.workout');
+        // console.log(workOutEl);
+        if(!workOutEl) return;
+
+        const workout = this..find( work => work.id === workOutEl.dataset.id);
+        // console.log(workout);
+
+        this.#map.setView(workout.coords, this.#mapZoomLevel, {
+            animate: true,
+            pan: {
+                duration: l
+            },
+        }) 
+    }
+
+    // setting localStorage
+    _setLocalStorage(){
+        localStorage.setItem('workoutStorage', JSON.stringify(this.#workout) )
+    }
+
+    //getting localstorage
+    //map has not yet been loaded.
+    //object coming from local storage will not inherit the methods they did before.
+    _getLocalStorage(){
+        const data = JSON.parse(localStorage.getItem('workoutStorage'));
+        // console.log(data); 
+
+        if(!data) return;
+        this.#workout = data;
+        this.#workout.forEach(work => {
+            this._renderWorkout(work);
+        })
+    }
+
+    reset(){
+        localStorage.removeItem('workoutStorage');
+        location.reload();
+    }
+  
 }
 
 
