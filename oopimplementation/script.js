@@ -353,7 +353,7 @@ Constructor: The Constructor get called immediately when an object or instance i
         // console.log(workOutEl);
         if(!workOutEl) return;
 
-        const workout = this..find( work => work.id === workOutEl.dataset.id);
+        const workout = this.#workout.find( work => work.id === workOutEl.dataset.id);
         // console.log(workout);
 
         this.#map.setView(workout.coords, this.#mapZoomLevel, {
