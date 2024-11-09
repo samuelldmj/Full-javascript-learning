@@ -14,10 +14,10 @@ body {
   color: #555;
   background-color: #f7f7f7;
   min-height: 100vh;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .container {
@@ -27,12 +27,13 @@ body {
 }
 
 .countries {
-  /* margin-bottom: 8rem; */
   display: flex;
-
+  flex-wrap: wrap; /* Allow items to wrap onto the next line when space is constrained */
+  justify-content: center; /* Center the items horizontally */
   font-size: 2rem;
   opacity: 0;
   transition: opacity 1s;
+  gap: 3rem; /* Add gap between items for better spacing */
 }
 
 .country {
@@ -42,7 +43,9 @@ body {
   width: 30rem;
   border-radius: 0.7rem;
   margin: 0 3rem;
-  /* overflow: hidden; */
+  /* Adjust width for responsiveness */
+  flex: 1 1 30rem; /* Allow country items to grow and shrink but start at 30rem */
+  max-width: 30rem; /* Limit maximum width */
 }
 
 .neighbour::before {
@@ -64,7 +67,7 @@ body {
 }
 
 .country__img {
-  width: 30rem;
+  width: 100%; /* Ensure images take up the full width of their parent */
   height: 17rem;
   object-fit: cover;
   background-color: #eee;
@@ -110,6 +113,7 @@ body {
 
 .images {
   display: flex;
+  flex-wrap: wrap; /* Ensure images can wrap onto the next line */
 }
 
 .images img {
@@ -123,4 +127,27 @@ body {
   margin: 2rem;
   border: 3rem solid white;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1200px) {
+  .country {
+    width: 25rem; /* Decrease country width on smaller screens */
+  }
+}
+
+@media (max-width: 900px) {
+  .country {
+    width: 20rem; /* Further decrease width */
+  }
+
+  .country__name {
+    font-size: 2.2rem; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .country {
+    width: 100%; /* Make country take full width on very small screens */
+    margin: 1rem 0; /* Adjust margins */
+  }
 }
