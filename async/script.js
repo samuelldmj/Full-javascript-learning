@@ -191,6 +191,8 @@ function generateCountryHTML(countryData, className = '') {
 /*
 ====================================================================
 PROMISE AND FETCH API
+The modern way for AJAX call is using the fetch API. 
+the fetch api works asynchronously.
 ===================================================================
 ===================================================================
 */
@@ -220,20 +222,102 @@ PROMISE AND FETCH API
 
 
 //refactored using arrow function
-const getCountryData = function(country){
+// const getCountryData = function(country){
 
-  fetch(`https://restcountries.com/v3.1/name/${country}`).then(response =>response.json()).then(countryData => { 
-    let data  = countryData[0];
-        const countryHTML = generateCountryHTML(data);
-        countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
-         // Make sure the container is visible
-        countriesContainer.style.opacity = 1;
-  })
-}
+//   fetch(`https://restcountries.com/v3.1/name/${country}`).then(response =>response.json()).then(countryData => { 
+//     let data  = countryData[0];
+//         const countryHTML = generateCountryHTML(data);
+//         countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
+//          // Make sure the container is visible
+//         countriesContainer.style.opacity = 1;
+//   })
+// }
 
 
-getCountryData('nigeria');
-getCountryData('canada');
+const getCountryData = function(country) {
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(response => response.json())
+    .then(countryData => {
+      const data = countryData[0];
+      // Generate and display the country HTML
+      const countryHTML = generateCountryHTML(data);
+      countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
+      
+      // Make sure the container is visible after adding country data
+      countriesContainer.style.opacity = 1;
+
+      // If there are neighboring countries, fetch them
+      const neighbourCountryCodes = data.borders;
+      if (!neighbourCountryCodes || neighbourCountryCodes.length === 0) return;
+
+      // Fetch each neighboring country
+      neighbourCountryCodes.forEach(code => {
+        fetch(`https://restcountries.com/v3.1/alpha/${code}`)
+          .then(neighbourResponse => neighbourResponse.json())
+          .then(neighbourCountryData => {
+            const neighbourHTML = generateCountryHTML(neighbourCountryData[0], 'neighbour');
+            countriesContainer.insertAdjacentHTML('beforeend', neighbourHTML);
+            countriesContainer.style.opacity = 1;
+          });
+      });
+    })
+    .catch(err => {
+      console.error('Error fetching country data:', err);
+    });
+};
+
+
+
+
+
+
+getCountryData('Nigeria');
+// getCountryData('Ethiopia');
+// getCountryData('Egypt');
+// getCountryData('DR Congo')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+// getCountryData('')
+
+
 
 
 
