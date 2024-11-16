@@ -217,7 +217,7 @@ INHERITANCE BETWEEN CLASSES
 //   this.field = course;
 // }
 
-//linking prototypes;
+//linking prototypes; so that we can inherit Person properties and methods
 // Student.prototype = Object.create(Person.prototype);
 // Reset constructor for Student
 // Student.prototype.constructor = Student;
