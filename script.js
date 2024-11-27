@@ -2180,6 +2180,7 @@ console.log(3/10);
 // console.log(Number.parseInt('30px'));
 // console.log(Number.parseInt('e23'));
 let flo = Number.parseFloat('2.5');
+console.log(flo);
 console.log(typeof flo);
 
 // console.log(Number.isFinite('e23'));

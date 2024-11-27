@@ -233,16 +233,62 @@ the fetch api works asynchronously.
 //   })
 // }
 
+const renderError = function(msg){
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  countriesContainer.style.opacity = 1; 
+}
+
+//Dependency Chaining with fetch
+// const getCountryData = function(country) {
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(response => response.json(), err => alert(err))
+//     .then(countryData => {
+//       const data = countryData[0];
+//       // Generate and display the country HTML
+//       const countryHTML = generateCountryHTML(data);
+//       countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
+      
+//       // Make sure the container is visible after adding country data
+//       countriesContainer.style.opacity = 1;
+
+//       // If there are neighboring countries, fetch them
+//       const neighbourCountryCodes = data.borders;
+//       if (!neighbourCountryCodes || neighbourCountryCodes.length === 0) return;
+
+//       // Fetch each neighboring country
+//       neighbourCountryCodes.forEach(code => {
+//         fetch(`https://restcountries.com/v3.1/alpha/${code}`)
+//           .then(neighbourResponse => neighbourResponse.json())
+//           .then(neighbourCountryData => {
+//             const neighbourHTML = generateCountryHTML(neighbourCountryData[0], 'neighbour');
+//             countriesContainer.insertAdjacentHTML('beforeend', neighbourHTML);
+//             countriesContainer.style.opacity = 1;
+//           });
+//       });
+//     })
+//     .catch(err => {
+//       console.error('Error fetching country data:', err);
+//       renderError(`Something went wrong 🧨🧨🧨 ${err.message}`);
+//     }); 
+// };
+
+
 
 const getCountryData = function(country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(response => response.json())
+    .then(response => {
+      console.log(response.status);  // Log the status code to help debug
+      if (!response.ok) {
+        throw new Error(`Country Not Found (${response.status})`);
+      }
+      return response.json();  // Added return to correctly pass the data to the next .then
+    })
     .then(countryData => {
       const data = countryData[0];
       // Generate and display the country HTML
       const countryHTML = generateCountryHTML(data);
       countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
-      
+
       // Make sure the container is visible after adding country data
       countriesContainer.style.opacity = 1;
 
@@ -263,15 +309,18 @@ const getCountryData = function(country) {
     })
     .catch(err => {
       console.error('Error fetching country data:', err);
+      renderError(`Something went wrong 🧨🧨🧨 ${err.message}`);
     });
 };
 
+btn.addEventListener('click', function(){ 
+  getCountryData(whereAmI(52.508,13.381));
+});
 
 
 
 
-
-getCountryData('Nigeria');
+// getCountryData('Nigeria');
 // getCountryData('Ethiopia');
 // getCountryData('Egypt');
 // getCountryData('DR Congo')
@@ -317,6 +366,66 @@ getCountryData('Nigeria');
 // getCountryData('')
 // getCountryData('')
 
+
+
+//BUILDING PROMISE
+// const lotteryPromise = new Promise(function(resolve, reject){
+//   if(Math.random() >= 0.5){
+//     resolve('You win the 🎇');
+//   }else {
+//     reject('Your money is gone'); 
+//   }
+// })
+
+// lotteryPromise.then(res => console.log(res))
+// .catch(err => console.log(err))
+
+//making it asynchronous
+// const lotteryPromise = new Promise(function(resolve, reject){
+//   console.log('Lottery draw is happening!')
+//   setTimeout(() => {
+//     if(Math.random() >= 0.5){
+//       resolve('You win the 🎇');
+//     }else {
+//       reject(new Error('Your money is gone')); 
+//     }
+//   },2000);
+ 
+// })
+// //consuming the promise
+// lotteryPromise.then(res => console.log(res))
+// .catch(err => console.log(err))
+
+//testing asynchronously
+// navigator.geolocation.getCurrentPosition(position => console.log(position), err => console.log(err));
+// console.log('This get displayed firsts');
+
+//promisifying
+// const getPosition = function(){
+//     return new Promise( (resolve, reject) => {
+//       // navigator.geolocation.getCurrentPosition(position => resolve(position), 
+//       // err => reject(err));
+
+//       //alternatively
+//       navigator.geolocation.getCurrentPosition(resolve, reject);
+//     })
+// }
+// getPosition().then(pos => console.log(pos)).catch( err => Error(err));
+
+
+/* ===========================
+//async and await
+========================== */
+const getPosition = function(){
+  return new Promise( (resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  })
+}
+console.log(getPosition());
+
+const whereAmI = async function(){
+  const {} = await getPosition();
+}
 
 
 

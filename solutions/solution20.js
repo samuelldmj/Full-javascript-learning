@@ -17,10 +17,10 @@ Car.prototype.brake = function(){
  car1.accelerate();
  car1.brake();
 
- const car2 = new Car('Mercedes',  95)
- car2.accelerate();
- car2.accelerate();
- car2.accelerate();
- car2.accelerate();
- car2.accelerate();
- car2.brake();
+//  const car2 = new Car('Mercedes',  95)
+//  car2.accelerate();
+//  car2.accelerate();
+//  car2.accelerate();
+//  car2.accelerate();
+//  car2.accelerate();
+//  car2.brake();
