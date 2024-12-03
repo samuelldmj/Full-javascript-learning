@@ -485,27 +485,29 @@ btn.addEventListener('click', function(){
 
 /* ===========================
 //async and await
+Getting my current location using async and await
 ========================== */
 const getPosition = function(){
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   })
 }
-console.log(getPosition());
+// console.log(getPosition());
 
 //async fucntion return a promise by default
 const myLocation = async function(){
 const pos = await getPosition();
+//console.log(pos);
 const {latitude: lat, longitude: lng} = pos.coords
 //   //await waits for the result of the promise until the promise is fulfilled or failed.
 const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=72631702809930655279x80638`);
 const jsonResGeo = await resGeo.json()
-// console.log(jsonResGeo)
+console.log(jsonResGeo)
 
 const con = await fetch(`https://restcountries.com/v3.1/name/${jsonResGeo.standard.countryname}`)
 console.log(con);
 const data = await con.json()
-// console.log(data[0]);
+console.log(data[0]);
 
 const countryHTML = generateCountryHTML(data[0]);
 countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
