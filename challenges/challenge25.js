@@ -30,6 +30,72 @@ Test data: Images in the img folder. Test the error handler by passing a wrong
 image path. Set the network speed to “Fast 3G” in the dev tools Network tab,
 otherwise images load too fast
 GOOD LUCK 😀
-
-
 */
+
+//solution
+// const createImage = function (imgPath) {
+//     return new Promise(resolve => {
+//         const newImg = document.createElement('img');
+//         newImg.src = imgPath;
+//         const imgClass = newImg.classList.add('images');
+//         resolve( img => img);
+//     }, reject => {
+//         console.error('Image not loading')
+//     });
+
+
+// }
+const imgContianer = document.querySelector('.images')
+
+const createImage = function(imgPath){
+    return new Promise( function(resolve, reject){
+        const newImg = document.createElement('img');
+        newImg.src = imgPath;
+
+        newImg.addEventListener('load', function(){
+            imgContianer.append(newImg);
+            resolve(newImg);
+        });
+
+        newImg.addEventListener('error', function(){
+            reject(new Error('Image loading fails'))
+        });
+       
+    })
+}
+
+let currentImg;
+// createImage('img/img-1.jpg').then( img => {
+//     currentImg = img;
+//     console.log('Image one');
+//       //from the learning script file created wait promise fucntion
+//   return wait(1)
+//   }).then( img => {
+//     console.log('Image two');
+//     wait(2);
+//     return createImage('img/img-2.jpg')
+//   }).then( img => {
+//     console.log('Image three');
+//     wait(3)
+//     createImage('img/img-3.jpg')
+//   })
+//   .catch( err => console.log(err));
+
+createImage('img/img-1.jpg').then( img => {
+    currentImg = img;
+    console.log('Image one');
+      //from the learning script file created wait promise fucntion
+  return wait(2)
+  }).then( () => {
+    currentImg.style.display = 'none';
+    return createImage('img/img-2.jpg')
+  }).then( img =>  {
+    currentImg = img;
+    console.log('Image two');
+    return wait(2)
+  }).then( ()=> {
+    currentImg.style.display = 'none';
+  })
+  .catch( err => console.log(err));
+
+

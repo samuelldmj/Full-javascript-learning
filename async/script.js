@@ -274,48 +274,50 @@ const renderError = function(msg){
 
 
 
-const getCountryData = function(country) {
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(response => {
-      console.log(response.status);  // Log the status code to help debug
-      if (!response.ok) {
-        throw new Error(`Country Not Found (${response.status})`);
-      }
-      return response.json();  // Added return to correctly pass the data to the next .then
-    })
-    .then(countryData => {
-      const data = countryData[0];
-      // Generate and display the country HTML
-      const countryHTML = generateCountryHTML(data);
-      countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
+// const getCountryData = function(country) {
+//   fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(response => {
+//       console.log(response.status);  // Log the status code to help debug
+//       if (!response.ok) {
+//         throw new Error(`Country Not Found (${response.status})`);
+//       }
+//       return response.json();  // Added return to correctly pass the data to the next .then
+//     })
+//     .then(countryData => {
+//       const data = countryData[0];
+//       // Generate and display the country HTML
+//       const countryHTML = generateCountryHTML(data);
+//       countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
 
-      // Make sure the container is visible after adding country data
-      countriesContainer.style.opacity = 1;
+//       // Make sure the container is visible after adding country data
+//       countriesContainer.style.opacity = 1;
 
-      // If there are neighboring countries, fetch them
-      const neighbourCountryCodes = data.borders;
-      if (!neighbourCountryCodes || neighbourCountryCodes.length === 0) return;
+//       // If there are neighboring countries, fetch them
+//       const neighbourCountryCodes = data.borders;
+//       if (!neighbourCountryCodes || neighbourCountryCodes.length === 0) return;
 
-      // Fetch each neighboring country
-      neighbourCountryCodes.forEach(code => {
-        fetch(`https://restcountries.com/v3.1/alpha/${code}`)
-          .then(neighbourResponse => neighbourResponse.json())
-          .then(neighbourCountryData => {
-            const neighbourHTML = generateCountryHTML(neighbourCountryData[0], 'neighbour');
-            countriesContainer.insertAdjacentHTML('beforeend', neighbourHTML);
-            countriesContainer.style.opacity = 1;
-          });
-      });
-    })
-    .catch(err => {
-      console.error('Error fetching country data:', err);
-      renderError(`Something went wrong 🧨🧨🧨 ${err.message}`);
-    });
-};
+//       // Fetch each neighboring country
+//       neighbourCountryCodes.forEach(code => {
+//         fetch(`https://restcountries.com/v3.1/alpha/${code}`)
+//           .then(neighbourResponse =>  {
+//             return neighbourResponse.json();
+//           })
+//           .then(neighbourCountryData => {
+//             const neighbourHTML = generateCountryHTML(neighbourCountryData[0], 'neighbour');
+//             countriesContainer.insertAdjacentHTML('beforeend', neighbourHTML);
+//             countriesContainer.style.opacity = 1;
+//           });
+//       });
+//     })
+//     .catch(err => {
+//       console.error('Error fetching country data:', err);
+//       renderError(`Something went wrong 🧨🧨🧨 ${err.message}`);
+//     });
+// };
 
-btn.addEventListener('click', function(){ 
-  getCountryData(whereAmI(52.508,13.381));
-});
+// btn.addEventListener('click', function(){ 
+//   getCountryData('Nigeria');
+// });
 
 
 
@@ -412,20 +414,106 @@ btn.addEventListener('click', function(){
 // }
 // getPosition().then(pos => console.log(pos)).catch( err => Error(err));
 
+const wait = function(seconds){
+  return new Promise(function(resove){
+    setTimeout(resove, seconds * 1000);
+  })
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////from challenge24 using then methods
+//===================================
+const whereAmI = function(lat, lng) {
+  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=72631702809930655279x80638`)
+      .then(res => {
+          if (!res.ok) {
+              throw new Error(`Failed to fetch data: ${res.statusText}`);
+          }
+          return res.json();
+      })
+      .then(data => {
+          // console.log(data);
+          if (data.error) {
+              throw new Error(`Geocode error: ${data.error.description}`);
+          }
+          let str = `You are in ${data.city}, ${data.country}`;
+          console.log(str);
+          //this is now returns a promise. i can use the then method on it.
+          //this endpoint contains info about countries and there borders.
+          const country= fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+          return country.then( res => res.json())
+      }).then(countryData => {
+          const data = countryData[0];
+          console.log(data);
+          // Generate and display the country HTML
+          const countryHTML = generateCountryHTML(data);
+          countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
+    
+          // Make sure the container is visible after adding country data
+          countriesContainer.style.opacity = 1;
+
+            // If there are neighboring countries, fetch them
+      const neighbourCountryCodes = data.borders;
+      if (!neighbourCountryCodes || neighbourCountryCodes.length === 0) return;
+
+      // Fetch each neighboring country
+      neighbourCountryCodes.forEach(code => {
+        fetch(`https://restcountries.com/v3.1/alpha/${code}`)
+          .then(neighbourResponse =>  {
+            return neighbourResponse.json();
+          })
+          .then(neighbourCountryData => {
+            const neighbourHTML = generateCountryHTML(neighbourCountryData[0], 'neighbour');
+            countriesContainer.insertAdjacentHTML('beforeend', neighbourHTML);
+            countriesContainer.style.opacity = 1;
+          });
+      });
+
+
+      })
+      .catch(err => {
+          console.error(`Error: ${err.message}`);
+      });
+};
+
+btn.addEventListener('click', function(){ 
+  whereAmI(52.508,13.381);
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /* ===========================
 //async and await
 ========================== */
 const getPosition = function(){
-  return new Promise( (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   })
 }
 console.log(getPosition());
 
-const whereAmI = async function(){
-  const {} = await getPosition();
+//async fucntion return a promise by default
+const myLocation = async function(){
+const pos = await getPosition();
+const {latitude: lat, longitude: lng} = pos.coords
+//   //await waits for the result of the promise until the promise is fulfilled or failed.
+const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=72631702809930655279x80638`);
+const jsonResGeo = await resGeo.json()
+// console.log(jsonResGeo)
+
+const con = await fetch(`https://restcountries.com/v3.1/name/${jsonResGeo.standard.countryname}`)
+console.log(con);
+const data = await con.json()
+// console.log(data[0]);
+
+const countryHTML = generateCountryHTML(data[0]);
+countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
+
+// Make sure the container is visible after adding country data
+countriesContainer.style.opacity = 1;
 }
+myLocation();
 
 
 

@@ -60,40 +60,45 @@ GOOD LUCK 😀
 //     }
 
 
-const whereAmI = function(lat, lng) {
-    fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=72631702809930655279x80638`)
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(`Failed to fetch data: ${res.statusText}`);
-            }
-            return res.json();
-        })
-        .then(data => {
-            if (data.error) {
-                throw new Error(`Geocode error: ${data.error.description}`);
-            }
-            let str = `You are in ${data.city}, ${data.country}`;
-            console.log(str);
-            const country= fetch(`https://restcountries.com/v3.1/name/${data.country}`);
-            return country.then( res => res.json())
-        }).then(countryData => {
-            const data = countryData[0];
-            // Generate and display the country HTML
-            const countryHTML = generateCountryHTML(data);
-            countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
+// const whereAmI = function(lat, lng) {
+//     fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=72631702809930655279x80638`)
+//         .then(res => {
+//             if (!res.ok) {
+//                 throw new Error(`Failed to fetch data: ${res.statusText}`);
+//             }
+//             return res.json();
+//         })
+//         .then(data => {
+//             console.log(data);
+//             if (data.error) {
+//                 throw new Error(`Geocode error: ${data.error.description}`);
+//             }
+//             let str = `You are in ${data.city}, ${data.country}`;
+//             console.log(str);
+//             //this is now returns a promise. i can use the then method on it.
+//             const country= fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+//             return country.then( res => res.json())
+//         }).then(countryData => {
+//             const data = countryData[0];
+//             // Generate and display the country HTML
+//             const countryHTML = generateCountryHTML(data);
+//             countriesContainer.insertAdjacentHTML('beforeend', countryHTML);
       
-            // Make sure the container is visible after adding country data
-            countriesContainer.style.opacity = 1;
-        })
-        .catch(err => {
-            console.error(`Error: ${err.message}`);
-        });
-};
+//             // Make sure the container is visible after adding country data
+//             countriesContainer.style.opacity = 1;
+//         })
+//         .catch(err => {
+//             console.error(`Error: ${err.message}`);
+//         });
+// };
 
 
-whereAmI(52.508,13.381);
-whereAmI(19.037,72.873);
-whereAmI(-33.933,18.474);
+
+
+
+// whereAmI(52.508,13.381);
+// whereAmI(19.037,72.873);
+// whereAmI(-33.933,18.474);
 
 
 
